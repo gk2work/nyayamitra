@@ -64,6 +64,10 @@ async def lifespan(app: FastAPI):
     )
 
     # TODO (Sprint 2): Initialize PostgreSQL connection pool
+    from app.database import init_db, engine
+
+    await init_db()
+
     # TODO (Sprint 3): Initialize Qdrant client
     # TODO (Sprint 3): Initialize Elasticsearch client
     # TODO (Sprint 5): Initialize Neo4j driver
@@ -76,7 +80,8 @@ async def lifespan(app: FastAPI):
     # ── Shutdown ──
     logger.info("nyayamitra_shutting_down")
 
-    # TODO: Close all database connections gracefully
+    # Close database connection pool
+    await engine.dispose()
 
 
 # ─── Create FastAPI Application ──────────────────────────────────────────────
