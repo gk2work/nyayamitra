@@ -1,0 +1,58 @@
+# ─── Environment & Secrets ───
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# ─── Python ──────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+htmlcov/
+.coverage
+.coverage.*
+*.egg-info/
+
+# ─── Node.js / Next.js ──────
+node_modules/
+.next/
+out/
+
+# ─── IDE ─────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# ─── Data (large files) ─────
+data/raw/
+data/processed/
+data/cache/
+
+# ─── Model Weights ──────────
+models/checkpoints/
+models/weights/
+*.bin
+*.safetensors
+*.gguf
+*.pt
+*.onnx
+
+# ─── Logs ────────────────────
+logs/
+*.log
+
+# ─── Docker Volumes ─────────
+volumes/
+
+# ─── Terraform ───────────────
+.terraform/
+terraform.tfstate*
