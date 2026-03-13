@@ -243,13 +243,15 @@ async def _generate_response(
     session_id: str,
 ) -> QueryResponse:
     """
-    Stage 3: Generate a structured legal response from retrieved context.
+    Stage 3: Generate a structured legal response using LLM + retrieved context.
 
-    Sprint 3: Builds response directly from retrieval results (no LLM yet).
-    Sprint 4: Will use vLLM with Llama 3.1 8B + retrieved context.
-    Sprint 9: Will use fine-tuned Llama 3.1 70B + domain LoRA adapters.
+    Sprint 4: Uses LLM (vLLM/OpenAI) to synthesize natural language answer.
+    Falls back to context-only formatting if no LLM is available.
     """
-    # Build applicable_law from retrieved sections
+    from app.services.retrieval import get_retrieval_service
+    from app.services.llm_service import get_llm_service
+
+    # Build applicable_law and precedents from retrieved context (for structured fields)
     applicable_laws = []
     for result in context:
         if result.source_type == "act" and result.section_number:
@@ -262,7 +264,6 @@ async def _generate_response(
                 )
             )
 
-    # Build precedents from retrieved judgments
     precedents = []
     seen_cases = set()
     for result in context:
@@ -280,29 +281,28 @@ async def _generate_response(
                 )
             )
 
-    # Build answer from context
-    if applicable_laws or precedents:
-        answer_parts = [f"Based on the retrieved legal provisions and precedents relevant to your query:"]
+    # Format context for the LLM
+    retrieval_service = await get_retrieval_service()
+    formatted_context = retrieval_service.format_context_for_llm(context)
 
-        if applicable_laws:
-            answer_parts.append("\n\nApplicable Legal Provisions:")
-            for law in applicable_laws:
-                answer_parts.append(f"\n- {law.act}, Section {law.section}: {law.text[:200]}")
+    # Generate answer using LLM
+    llm_service = await get_llm_service()
+    llm_result = await llm_service.generate_legal_response(
+        query=request.query,
+        context=formatted_context,
+        jurisdiction=classification.jurisdiction,
+    )
 
-        if precedents:
-            answer_parts.append("\n\nRelevant Judicial Precedents:")
-            for prec in precedents:
-                answer_parts.append(f"\n- {prec.case} ({prec.year}), {prec.court}: {prec.relevance[:200]}")
+    answer = llm_result.get("answer", "")
+    llm_used = llm_result.get("llm_used", False)
 
-        answer = "".join(answer_parts)
-        confidence = Confidence.MEDIUM
-    else:
-        answer = (
-            "I could not find specific legal provisions directly matching your query "
-            "in the current database. Please try rephrasing your question or specifying "
-            "the legal domain (criminal, property, family, etc.)."
-        )
+    # Determine confidence
+    if not applicable_laws and not precedents:
         confidence = Confidence.LOW
+    elif llm_used:
+        confidence = Confidence.HIGH
+    else:
+        confidence = Confidence.MEDIUM
 
     return QueryResponse(
         answer=answer,

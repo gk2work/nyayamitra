@@ -143,6 +143,14 @@ class Settings(BaseSettings):
     CITATION_VERIFICATION_ENABLED: bool = True
     CITATION_FAILURE_THRESHOLD: float = 0.3
 
+    # ─── LLM Provider ───────────────────────────────────────────────────────
+    OPENAI_API_KEY: str = ""
+    OPENAI_MODEL: str = "gpt-4o-mini"
+    # Generic OpenAI-compatible endpoint (Groq, Together, etc.)
+    LLM_API_URL: str = ""
+    LLM_API_KEY: str = ""
+    LLM_MODEL_NAME: str = ""
+
     # ─── Data Ingestion ──────────────────────────────────────────────────────
     INDIAN_KANOON_API_URL: str = "https://api.indiankanoon.org"
     INDIAN_KANOON_API_TOKEN: str = ""
