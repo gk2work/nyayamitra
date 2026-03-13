@@ -215,90 +215,105 @@ async def _classify_query(request: QueryRequest) -> RouterClassification:
 async def _retrieve_context(
     request: QueryRequest,
     classification: RouterClassification,
-) -> list[dict]:
+) -> list:
     """
-    Stage 2: Retrieve relevant legal context from all sources.
+    Stage 2: Retrieve relevant legal context from Qdrant.
 
-    Sprint 1: Returns empty list (no retrieval yet).
-    Sprint 3: Will query Qdrant (dense) + Elasticsearch (sparse) + Neo4j (graph).
+    Sprint 3: Dense retrieval via Qdrant.
+    Sprint 3+: Will add Elasticsearch BM25 + RRF fusion.
+    Sprint 5: Will add Neo4j knowledge graph traversal.
     """
-    # TODO (Sprint 3): Implement hybrid retrieval
-    # - Dense search via Qdrant
-    # - Sparse search via Elasticsearch
-    # - Graph traversal via Neo4j
-    # - RRF fusion
-    # - Cross-encoder re-ranking
-    return []
+    from app.services.retrieval import get_retrieval_service
+
+    service = await get_retrieval_service()
+
+    results = await service.search(
+        query=request.query,
+        domain=classification.domain.value if classification.domain.value != "general" else None,
+        jurisdiction=classification.jurisdiction,
+    )
+
+    return results
 
 
 async def _generate_response(
     request: QueryRequest,
     classification: RouterClassification,
-    context: list[dict],
+    context: list,
     session_id: str,
 ) -> QueryResponse:
     """
-    Stage 3: Generate a structured legal response.
+    Stage 3: Generate a structured legal response from retrieved context.
 
-    Sprint 1: Returns a mock response demonstrating the full response schema.
+    Sprint 3: Builds response directly from retrieval results (no LLM yet).
     Sprint 4: Will use vLLM with Llama 3.1 8B + retrieved context.
     Sprint 9: Will use fine-tuned Llama 3.1 70B + domain LoRA adapters.
     """
-    # TODO (Sprint 4): Replace with actual LLM generation via vLLM
+    # Build applicable_law from retrieved sections
+    applicable_laws = []
+    for result in context:
+        if result.source_type == "act" and result.section_number:
+            applicable_laws.append(
+                ApplicableLaw(
+                    act=result.act_name or "Unknown Act",
+                    section=result.section_number,
+                    text=result.text[:500] if result.text else "",
+                    status=LegalStatus(result.status) if result.status in ["active", "repealed", "amended"] else LegalStatus.ACTIVE,
+                )
+            )
 
-    # For now, return a well-structured mock response to demonstrate the schema
-    # and allow frontend development to proceed in parallel.
+    # Build precedents from retrieved judgments
+    precedents = []
+    seen_cases = set()
+    for result in context:
+        if result.source_type == "judgment" and result.case_name:
+            if result.case_name in seen_cases:
+                continue
+            seen_cases.add(result.case_name)
+            precedents.append(
+                Precedent(
+                    case=result.case_name,
+                    year=result.year or 2024,
+                    court=result.court or "Supreme Court",
+                    citation=result.citation or "",
+                    relevance=result.text[:300] if result.text else "",
+                )
+            )
+
+    # Build answer from context
+    if applicable_laws or precedents:
+        answer_parts = [f"Based on the retrieved legal provisions and precedents relevant to your query:"]
+
+        if applicable_laws:
+            answer_parts.append("\n\nApplicable Legal Provisions:")
+            for law in applicable_laws:
+                answer_parts.append(f"\n- {law.act}, Section {law.section}: {law.text[:200]}")
+
+        if precedents:
+            answer_parts.append("\n\nRelevant Judicial Precedents:")
+            for prec in precedents:
+                answer_parts.append(f"\n- {prec.case} ({prec.year}), {prec.court}: {prec.relevance[:200]}")
+
+        answer = "".join(answer_parts)
+        confidence = Confidence.MEDIUM
+    else:
+        answer = (
+            "I could not find specific legal provisions directly matching your query "
+            "in the current database. Please try rephrasing your question or specifying "
+            "the legal domain (criminal, property, family, etc.)."
+        )
+        confidence = Confidence.LOW
+
     return QueryResponse(
-        answer=(
-            "Based on the Indian legal framework, here is the information "
-            "relevant to your query. Please note that this is a development "
-            "placeholder response. The actual system will provide specific "
-            "legal citations, relevant case law, and step-by-step procedural "
-            "guidance tailored to your jurisdiction."
-        ),
-        applicable_law=[
-            ApplicableLaw(
-                act="[Placeholder] Relevant Act Name",
-                section="[X]",
-                text=(
-                    "This section will contain the actual text of the "
-                    "applicable legal provision once the retrieval pipeline "
-                    "is connected in Sprint 3."
-                ),
-                status=LegalStatus.ACTIVE,
-            ),
-        ],
-        precedents=[
-            Precedent(
-                case="[Placeholder] Relevant Case Name",
-                year=2024,
-                court="Supreme Court",
-                citation="(2024) X SCC XXX",
-                relevance=(
-                    "This will contain the relevance of the cited case "
-                    "to the user's query once the retrieval pipeline "
-                    "is connected."
-                ),
-            ),
-        ],
-        procedure=[
-            ProcedureStep(
-                step=1,
-                action="[Placeholder] First procedural step",
-                details=(
-                    "Detailed instructions will be generated by the LLM "
-                    "once it is connected in Sprint 4."
-                ),
-                forms=[],
-                court=None,
-            ),
-        ],
+        answer=answer,
+        applicable_law=applicable_laws,
+        precedents=precedents,
+        procedure=[],
         jurisdiction_notes=(
             f"Jurisdiction: {classification.jurisdiction or 'Central Law (state not specified)'}. "
-            "State-specific variations will be identified once the full "
-            "corpus is indexed."
+            "For state-specific variations, please specify your state."
         ),
-        confidence=Confidence.LOW,
+        confidence=confidence,
         sources_verified=False,
         language=request.language,
         session_id=session_id,
