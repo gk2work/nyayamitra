@@ -7,8 +7,9 @@ Indian Kanoon is the largest free repository of Indian legal documents.
 This client:
 1. Searches for judgments by court, date range, and keyword
 2. Fetches individual judgment documents
-3. Extracts metadata (case name, date, bench, citations, sections interpreted)
-4. Stores judgments in PostgreSQL with deduplication
+3. Extracts metadata using JudgmentParser
+4. Validates data using DataValidator
+5. Stores judgments in PostgreSQL with deduplication
 
 Usage:
     # Seed curated landmark judgments (no API key needed)
@@ -42,7 +43,11 @@ sys.path.insert(0, str(PROJECT_ROOT / "backend"))
 
 from app.config import settings
 from app.database import async_session
+from app.exceptions import FetchError, ParseError, ScraperError
 from app.models.legal import Judgment, IngestionLog
+
+from data.processors.judgment_parser import JudgmentParser
+from data.processors.validator import DataValidator
 
 logger = structlog.get_logger()
 
@@ -50,8 +55,6 @@ logger = structlog.get_logger()
 # ═══════════════════════════════════════════════════════════════════════════════
 # Seed Data — Landmark SC Judgments
 # ═══════════════════════════════════════════════════════════════════════════════
-# Manually curated landmark judgments with accurate metadata.
-# These are the most important cases that NyayaMitra must know about.
 
 LANDMARK_JUDGMENTS = [
     {
@@ -110,7 +113,6 @@ LANDMARK_JUDGMENTS = [
         "case_number": "Writ Petition No. 231 of 1977",
         "court": "Supreme Court",
         "court_type": "SC",
-        "bench": "Justice M.H. Beg, Justice Y.V. Chandrachud, Justice P.N. Bhagwati, Justice V.R. Krishna Iyer, Justice N.L. Untwalia, Justice S. Murtaza Fazal Ali, Justice P.S. Kailasam",
         "bench_size": 7,
         "judgment_date": "1978-01-25",
         "year": 1978,
@@ -127,7 +129,6 @@ LANDMARK_JUDGMENTS = [
         "case_number": "Writ Petition (Crl.) No. 666-70 of 1992",
         "court": "Supreme Court",
         "court_type": "SC",
-        "bench": "Justice J.S. Verma, Justice Sujata V. Manohar, Justice B.N. Kirpal",
         "bench_size": 3,
         "judgment_date": "1997-08-13",
         "year": 1997,
@@ -144,7 +145,6 @@ LANDMARK_JUDGMENTS = [
         "case_number": "Writ Petition (Civil) No. 494 of 2012",
         "court": "Supreme Court",
         "court_type": "SC",
-        "bench": "Justice J.S. Khehar, Justice J. Chelameswar, Justice S.A. Bobde, Justice R.K. Agrawal, Justice R.F. Nariman, Justice A.M. Sapre, Justice D.Y. Chandrachud, Justice S.K. Kaul, Justice S. Abdul Nazeer",
         "bench_size": 9,
         "judgment_date": "2017-08-24",
         "year": 2017,
@@ -161,7 +161,6 @@ LANDMARK_JUDGMENTS = [
         "case_number": "Writ Petition (Criminal) No. 76 of 2016",
         "court": "Supreme Court",
         "court_type": "SC",
-        "bench": "Justice Dipak Misra, Justice R.F. Nariman, Justice A.M. Khanwilkar, Justice D.Y. Chandrachud, Justice Indu Malhotra",
         "bench_size": 5,
         "judgment_date": "2018-09-06",
         "year": 2018,
@@ -178,7 +177,6 @@ LANDMARK_JUDGMENTS = [
         "case_number": "Writ Petition (Criminal) No. 194 of 2017",
         "court": "Supreme Court",
         "court_type": "SC",
-        "bench": "Justice Dipak Misra, Justice R.F. Nariman, Justice A.M. Khanwilkar, Justice D.Y. Chandrachud, Justice Indu Malhotra",
         "bench_size": 5,
         "judgment_date": "2018-09-27",
         "year": 2018,
@@ -204,6 +202,9 @@ class IndianKanoonClient:
 
     API docs: https://api.indiankanoon.org/doc/
     Requires an API token for search and document retrieval.
+
+    Uses JudgmentParser for structured extraction and DataValidator
+    for pre-insert quality checks.
     """
 
     BASE_URL = "https://api.indiankanoon.org"
@@ -211,10 +212,13 @@ class IndianKanoonClient:
     def __init__(self):
         self.token = settings.INDIAN_KANOON_API_TOKEN
         self.client: httpx.AsyncClient | None = None
+        self.parser = JudgmentParser()
+        self.validator = DataValidator()
         self.stats = {
             "judgments_fetched": 0,
             "judgments_new": 0,
             "judgments_updated": 0,
+            "validation_skipped": 0,
             "errors": 0,
         }
 
@@ -273,15 +277,7 @@ class IndianKanoonClient:
             return None
 
     async def get_document(self, doc_id: str) -> dict | None:
-        """
-        Fetch a specific document by Indian Kanoon doc ID.
-
-        Args:
-            doc_id: Indian Kanoon document ID (numeric string)
-
-        Returns:
-            Document dict or None on failure.
-        """
+        """Fetch a specific document by Indian Kanoon doc ID."""
         if not self.token:
             return None
 
@@ -298,76 +294,51 @@ class IndianKanoonClient:
 
     def parse_judgment(self, doc: dict) -> dict | None:
         """
-        Parse an Indian Kanoon API response into our Judgment schema.
+        Parse an Indian Kanoon API response using JudgmentParser.
 
-        Extracts: case_name, court, date, citations, headnote, sections interpreted.
+        Returns a dict ready for store_judgment(), or None on failure.
         """
         try:
-            title = doc.get("title", "")
+            parsed = self.parser.parse_indian_kanoon_doc(doc)
             doc_id = str(doc.get("tid", ""))
 
-            # Parse case name from title
-            # Format: "Case Name on Date, Court"
-            case_name = title.split(" on ")[0].strip() if " on " in title else title
-
-            # Parse date
-            judgment_date = None
-            year = 0
-            date_str = doc.get("publishdate", "")
-            if date_str:
-                try:
-                    dt = datetime.strptime(date_str, "%Y-%m-%d")
-                    judgment_date = dt.date()
-                    year = dt.year
-                except ValueError:
-                    pass
-
-            if not year and doc.get("title"):
-                # Try to extract year from title
-                year_match = re.search(r"\b(19\d{2}|20\d{2})\b", title)
-                if year_match:
-                    year = int(year_match.group(1))
-
-            # Parse court
-            court_name = doc.get("docsource", "Supreme Court")
-            court_type = "SC" if "supreme" in court_name.lower() else "HC"
-
-            # Extract citations from document text
-            doc_text = doc.get("doc", "")
-            citation_scc = self._extract_citation(doc_text, r"\(\d{4}\)\s+\d+\s+SCC\s+\d+")
-            citation_air = self._extract_citation(doc_text, r"AIR\s+\d{4}\s+SC\s+\d+")
-
-            # Extract headnote (usually first few paragraphs)
-            headnote = doc.get("headline", "")
-            if not headnote and doc_text:
-                # Take first 1000 chars as headnote approximation
-                headnote = doc_text[:1000].strip()
-
             return {
-                "case_name": case_name[:500],
-                "court": court_name,
-                "court_type": court_type,
-                "judgment_date": judgment_date,
-                "year": year or datetime.now().year,
-                "citation_scc": citation_scc,
-                "citation_air": citation_air,
+                "case_name": parsed.case_name,
+                "court": parsed.court,
+                "court_type": parsed.court_type,
+                "judgment_date": parsed.judgment_date,
+                "year": parsed.year or datetime.now().year,
+                "citation_scc": parsed.citation_scc,
+                "citation_air": parsed.citation_air,
                 "indian_kanoon_id": doc_id,
-                "headnote": headnote,
-                "full_text": doc_text[:50000] if doc_text else None,
+                "headnote": parsed.headnote,
+                "facts": parsed.facts,
+                "ratio_decidendi": parsed.ratio_decidendi,
+                "sections_interpreted": parsed.sections_interpreted,
+                "full_text": parsed.full_text,
                 "source": "indian_kanoon",
-                "source_url": f"https://indiankanoon.org/doc/{doc_id}/",
+                "source_url": f"https://indiankanoon.org/doc/{doc_id}/" if doc_id else None,
             }
+        except ParseError as e:
+            logger.error("parse_judgment_error", error=str(e))
+            return None
         except Exception as e:
             logger.error("parse_judgment_error", error=str(e))
             return None
 
-    def _extract_citation(self, text: str, pattern: str) -> str | None:
-        """Extract a citation from text using regex."""
-        match = re.search(pattern, text)
-        return match.group(0) if match else None
-
     async def store_judgment(self, judgment_data: dict) -> None:
-        """Store a judgment in PostgreSQL with deduplication."""
+        """Store a judgment in PostgreSQL with validation and deduplication."""
+        # Validate before insertion
+        result = self.validator.validate_judgment(judgment_data)
+        if not result.is_valid:
+            logger.debug(
+                "judgment_validation_failed",
+                case=judgment_data.get("case_name"),
+                errors=result.errors,
+            )
+            self.stats["validation_skipped"] += 1
+            return
+
         async with async_session() as session:
             try:
                 from sqlalchemy import select
@@ -375,23 +346,25 @@ class IndianKanoonClient:
                 # Check for duplicate via indian_kanoon_id
                 ik_id = judgment_data.get("indian_kanoon_id")
                 if ik_id:
-                    stmt = select(Judgment).where(Judgment.indian_kanoon_id == ik_id)
-                    result = await session.execute(stmt)
-                    if result.scalar_one_or_none():
+                    if await self.validator.check_duplicate_judgment_by_ik_id(session, ik_id):
                         self.stats["judgments_updated"] += 1
                         return
 
                 # Check for duplicate via case name + year
-                stmt = select(Judgment).where(
-                    Judgment.case_name == judgment_data["case_name"],
-                    Judgment.year == judgment_data["year"],
-                )
-                result = await session.execute(stmt)
-                if result.scalar_one_or_none():
+                if await self.validator.check_duplicate_judgment(
+                    session, judgment_data["case_name"], judgment_data["year"]
+                ):
                     self.stats["judgments_updated"] += 1
                     return
 
-                # Create new judgment
+                # Parse date if string
+                jdate = judgment_data.get("judgment_date")
+                if isinstance(jdate, str):
+                    try:
+                        jdate = datetime.strptime(jdate, "%Y-%m-%d").date()
+                    except ValueError:
+                        jdate = None
+
                 new_judgment = Judgment(
                     id=uuid.uuid4(),
                     case_name=judgment_data["case_name"],
@@ -400,7 +373,7 @@ class IndianKanoonClient:
                     court_type=judgment_data.get("court_type", "SC"),
                     bench=judgment_data.get("bench"),
                     bench_size=judgment_data.get("bench_size"),
-                    judgment_date=judgment_data.get("judgment_date"),
+                    judgment_date=jdate,
                     year=judgment_data["year"],
                     citation_scc=judgment_data.get("citation_scc"),
                     citation_air=judgment_data.get("citation_air"),
@@ -487,16 +460,27 @@ async def seed_landmark_judgments() -> dict:
     """
     Seed the database with curated landmark SC judgments.
 
-    These are the most important cases every Indian legal AI must know.
-    Hand-verified metadata, ratio decidendi, and sections interpreted.
+    Uses DataValidator for pre-insert quality checks.
     """
     logger.info("seed_judgments_start", count=len(LANDMARK_JUDGMENTS))
-    stats = {"new": 0, "existing": 0}
+    stats = {"new": 0, "existing": 0, "validation_skipped": 0}
+    validator = DataValidator()
 
     async with async_session() as session:
         from sqlalchemy import select
 
         for jdata in LANDMARK_JUDGMENTS:
+            # Validate
+            result = validator.validate_judgment(jdata)
+            if not result.is_valid:
+                logger.warning(
+                    "seed_judgment_invalid",
+                    case=jdata.get("case_name"),
+                    errors=result.errors,
+                )
+                stats["validation_skipped"] += 1
+                continue
+
             # Check if already exists
             stmt = select(Judgment).where(
                 Judgment.case_name == jdata["case_name"],

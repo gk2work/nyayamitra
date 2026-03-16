@@ -1,0 +1,556 @@
+[
+    {
+        "id": "crim_01",
+        "query": "Can police arrest someone without a warrant?",
+        "domain": "criminal",
+        "relevant_sections": [
+            "CrPC/41",
+            "CrPC/41A"
+        ],
+        "relevant_cases": [
+            "Arnesh Kumar v. State of Bihar"
+        ],
+        "notes": "CrPC S.41 defines warrantless arrest power; S.41A requires notice instead of arrest where not necessary"
+    },
+    {
+        "id": "crim_02",
+        "query": "What is the punishment for murder in India?",
+        "domain": "criminal",
+        "relevant_sections": [
+            "IPC/302"
+        ],
+        "relevant_cases": [],
+        "notes": "IPC S.302 prescribes death or life imprisonment for murder"
+    },
+    {
+        "id": "crim_03",
+        "query": "How do I file an FIR at a police station?",
+        "domain": "criminal",
+        "relevant_sections": [
+            "CrPC/154"
+        ],
+        "relevant_cases": [
+            "Lalita Kumari v. Government of Uttar Pradesh"
+        ],
+        "notes": "CrPC S.154 mandates FIR registration; Lalita Kumari held it is mandatory for cognizable offences"
+    },
+    {
+        "id": "crim_04",
+        "query": "What is the law on dowry death?",
+        "domain": "criminal",
+        "relevant_sections": [
+            "IPC/304B",
+            "IPC/498A"
+        ],
+        "relevant_cases": [],
+        "notes": "IPC S.304B defines dowry death; S.498A covers cruelty by husband or relatives"
+    },
+    {
+        "id": "crim_05",
+        "query": "What are the guidelines to prevent misuse of Section 498A?",
+        "domain": "criminal",
+        "relevant_sections": [
+            "IPC/498A",
+            "CrPC/41"
+        ],
+        "relevant_cases": [
+            "Arnesh Kumar v. State of Bihar"
+        ],
+        "notes": "Arnesh Kumar guidelines restrict automatic arrests under 498A"
+    },
+    {
+        "id": "crim_06",
+        "query": "What happens if police refuse to file my FIR?",
+        "domain": "criminal",
+        "relevant_sections": [
+            "CrPC/154"
+        ],
+        "relevant_cases": [
+            "Lalita Kumari v. Government of Uttar Pradesh"
+        ],
+        "notes": "Registration is mandatory under S.154; Lalita Kumari established this as a legal obligation"
+    },
+    {
+        "id": "crim_07",
+        "query": "What is the penalty for theft under Indian law?",
+        "domain": "criminal",
+        "relevant_sections": [
+            "IPC/378",
+            "IPC/420"
+        ],
+        "relevant_cases": [],
+        "notes": "IPC S.378 defines theft; S.420 covers cheating (often charged alongside theft)"
+    },
+    {
+        "id": "crim_08",
+        "query": "Is adultery still a crime in India?",
+        "domain": "criminal",
+        "relevant_sections": [],
+        "relevant_cases": [
+            "Joseph Shine v. Union of India"
+        ],
+        "notes": "Joseph Shine struck down Section 497 IPC — adultery is no longer criminal"
+    },
+    {
+        "id": "crim_09",
+        "query": "What are my rights if I am arrested by the police?",
+        "domain": "criminal",
+        "relevant_sections": [
+            "CrPC/41",
+            "CrPC/41A",
+            "CrPC/436"
+        ],
+        "relevant_cases": [
+            "D.K. Basu v. State of West Bengal"
+        ],
+        "notes": "D.K. Basu laid down 11 guidelines for police during arrest; CrPC S.436 covers bail"
+    },
+    {
+        "id": "crim_10",
+        "query": "When can bail be granted in non-bailable offences?",
+        "domain": "criminal",
+        "relevant_sections": [
+            "CrPC/436",
+            "CrPC/437"
+        ],
+        "relevant_cases": [],
+        "notes": "S.436 covers bailable offences; S.437 covers non-bailable bail discretion"
+    },
+    {
+        "id": "crim_11",
+        "query": "What is punishment for sexual assault or rape?",
+        "domain": "criminal",
+        "relevant_sections": [
+            "IPC/376"
+        ],
+        "relevant_cases": [],
+        "notes": "IPC S.376 deals with punishment for rape"
+    },
+    {
+        "id": "crim_12",
+        "query": "Is Section 377 still valid for same-sex relations?",
+        "domain": "criminal",
+        "relevant_sections": [],
+        "relevant_cases": [
+            "Navtej Singh Johar v. Union of India"
+        ],
+        "notes": "Navtej Singh Johar struck down S.377 for consensual same-sex conduct"
+    },
+    {
+        "id": "prop_01",
+        "query": "What is the meaning of transfer of property in Indian law?",
+        "domain": "property",
+        "relevant_sections": [
+            "TPA/5"
+        ],
+        "relevant_cases": [],
+        "notes": "TPA S.5 defines transfer of property as an act by a living person conveying property"
+    },
+    {
+        "id": "prop_02",
+        "query": "What is the doctrine of lis pendens?",
+        "domain": "property",
+        "relevant_sections": [
+            "TPA/52"
+        ],
+        "relevant_cases": [],
+        "notes": "TPA S.52 codifies lis pendens — property cannot be transferred during pending suit"
+    },
+    {
+        "id": "prop_03",
+        "query": "What are my rights as a tenant and what notice period is required for termination of lease?",
+        "domain": "property",
+        "relevant_sections": [
+            "TPA/106"
+        ],
+        "relevant_cases": [],
+        "notes": "TPA S.106 provides for 15 days notice for month-to-month leases"
+    },
+    {
+        "id": "prop_04",
+        "query": "What is the legal definition of a contract in India?",
+        "domain": "property",
+        "relevant_sections": [
+            "Contract Act/2(h)",
+            "Contract Act/10"
+        ],
+        "relevant_cases": [],
+        "notes": "Contract Act S.2(h) defines contract; S.10 lists requirements for valid contracts"
+    },
+    {
+        "id": "prop_05",
+        "query": "How do I get compensation for breach of contract?",
+        "domain": "property",
+        "relevant_sections": [
+            "Contract Act/73"
+        ],
+        "relevant_cases": [],
+        "notes": "Contract Act S.73 provides for compensation for breach"
+    },
+    {
+        "id": "prop_06",
+        "query": "Do real estate builders need to register their project under RERA?",
+        "domain": "property",
+        "relevant_sections": [
+            "RERA/3",
+            "RERA/18"
+        ],
+        "relevant_cases": [],
+        "notes": "RERA S.3 mandates registration; S.18 provides remedies for delay"
+    },
+    {
+        "id": "prop_07",
+        "query": "What remedy do I have if my builder delays possession of my flat?",
+        "domain": "property",
+        "relevant_sections": [
+            "RERA/18"
+        ],
+        "relevant_cases": [],
+        "notes": "RERA S.18 allows return of amount with interest if promoter delays possession"
+    },
+    {
+        "id": "prop_08",
+        "query": "What is the legal definition of sale of immovable property?",
+        "domain": "property",
+        "relevant_sections": [
+            "TPA/54"
+        ],
+        "relevant_cases": [],
+        "notes": "TPA S.54 defines sale as transfer of ownership for a price"
+    },
+    {
+        "id": "fam_01",
+        "query": "On what grounds can I get a divorce under Hindu law?",
+        "domain": "family",
+        "relevant_sections": [
+            "HMA/13"
+        ],
+        "relevant_cases": [],
+        "notes": "HMA S.13 lists grounds for divorce including cruelty, desertion, conversion, etc."
+    },
+    {
+        "id": "fam_02",
+        "query": "Can I get maintenance from my husband during divorce proceedings?",
+        "domain": "family",
+        "relevant_sections": [
+            "HMA/24",
+            "CrPC/125"
+        ],
+        "relevant_cases": [
+            "Rajnesh v. Neha"
+        ],
+        "notes": "HMA S.24 provides interim maintenance; CrPC S.125 provides maintenance to wife"
+    },
+    {
+        "id": "fam_03",
+        "query": "What protection does the domestic violence law give me?",
+        "domain": "family",
+        "relevant_sections": [
+            "DV Act/3",
+            "DV Act/12"
+        ],
+        "relevant_cases": [],
+        "notes": "DV Act S.3 defines domestic violence; S.12 allows application for protection order"
+    },
+    {
+        "id": "fam_04",
+        "query": "Can people of different religions get married in India?",
+        "domain": "family",
+        "relevant_sections": [
+            "SMA/4"
+        ],
+        "relevant_cases": [],
+        "notes": "SMA S.4 provides conditions for inter-religious marriages"
+    },
+    {
+        "id": "fam_05",
+        "query": "How much maintenance can a wife claim under CrPC Section 125?",
+        "domain": "family",
+        "relevant_sections": [
+            "CrPC/125"
+        ],
+        "relevant_cases": [
+            "Rajnesh v. Neha"
+        ],
+        "notes": "CrPC S.125 provides maintenance; Rajnesh v. Neha gave guidelines for quantum"
+    },
+    {
+        "id": "fam_06",
+        "query": "What is the minimum age for marriage in India?",
+        "domain": "family",
+        "relevant_sections": [
+            "HMA/5",
+            "SMA/4"
+        ],
+        "relevant_cases": [],
+        "notes": "HMA S.5 and SMA S.4 prescribe minimum age: 21 for groom, 18 for bride"
+    },
+    {
+        "id": "fam_07",
+        "query": "What constitutes domestic violence under Indian law?",
+        "domain": "family",
+        "relevant_sections": [
+            "DV Act/3"
+        ],
+        "relevant_cases": [],
+        "notes": "DV Act S.3 defines physical, sexual, verbal, emotional, and economic abuse"
+    },
+    {
+        "id": "labor_01",
+        "query": "What is the legal definition of a strike under labour law?",
+        "domain": "labor",
+        "relevant_sections": [
+            "ID Act/2(k)"
+        ],
+        "relevant_cases": [],
+        "notes": "ID Act S.2(k) defines strike as cessation of work by workers acting in combination"
+    },
+    {
+        "id": "labor_02",
+        "query": "Can an employer terminate a worker without notice?",
+        "domain": "labor",
+        "relevant_sections": [
+            "ID Act/25F"
+        ],
+        "relevant_cases": [],
+        "notes": "ID Act S.25F requires notice and compensation before retrenchment"
+    },
+    {
+        "id": "labor_03",
+        "query": "What is the law against sexual harassment in the workplace?",
+        "domain": "labor",
+        "relevant_sections": [
+            "POSH/4",
+            "POSH/9"
+        ],
+        "relevant_cases": [
+            "Vishaka v. State of Rajasthan"
+        ],
+        "notes": "POSH S.4 mandates ICC; S.9 provides complaint procedure; Vishaka laid original guidelines"
+    },
+    {
+        "id": "labor_04",
+        "query": "What are the principles for determining fair wages for workers?",
+        "domain": "labor",
+        "relevant_sections": [],
+        "relevant_cases": [
+            "Workmen of Dimakuchi Tea Estate v. Dimakuchi Tea Estate"
+        ],
+        "notes": "Dimakuchi established principles for fair wage determination"
+    },
+    {
+        "id": "labor_05",
+        "query": "How do I file a complaint about sexual harassment at work?",
+        "domain": "labor",
+        "relevant_sections": [
+            "POSH/9"
+        ],
+        "relevant_cases": [
+            "Vishaka v. State of Rajasthan"
+        ],
+        "notes": "POSH S.9 prescribes written complaint within 3 months; Vishaka laid down the framework"
+    },
+    {
+        "id": "consumer_01",
+        "query": "Where do I file a consumer complaint in India?",
+        "domain": "consumer",
+        "relevant_sections": [
+            "CPA/34",
+            "CPA/35",
+            "CPA/38"
+        ],
+        "relevant_cases": [],
+        "notes": "CPA S.34 District (up to 1 crore), S.35 State (1-10 crore), S.38 manner of filing"
+    },
+    {
+        "id": "consumer_02",
+        "query": "What is the definition of consumer under the Consumer Protection Act?",
+        "domain": "consumer",
+        "relevant_sections": [
+            "CPA/2(7)"
+        ],
+        "relevant_cases": [],
+        "notes": "CPA S.2(7) defines consumer as buyer of goods or hirer of services"
+    },
+    {
+        "id": "consumer_03",
+        "query": "Is medical negligence covered under consumer protection law?",
+        "domain": "consumer",
+        "relevant_sections": [],
+        "relevant_cases": [
+            "Indian Medical Association v. V.P. Shantha"
+        ],
+        "notes": "V.P. Shantha held medical services fall within the ambit of the Consumer Protection Act"
+    },
+    {
+        "id": "consumer_04",
+        "query": "What is the maximum compensation I can claim from a district consumer court?",
+        "domain": "consumer",
+        "relevant_sections": [
+            "CPA/34"
+        ],
+        "relevant_cases": [],
+        "notes": "CPA S.34: District Commission has jurisdiction up to 1 crore rupees"
+    },
+    {
+        "id": "consumer_05",
+        "query": "What rights do consumers have against defective products?",
+        "domain": "consumer",
+        "relevant_sections": [
+            "CPA/2(7)",
+            "CPA/38"
+        ],
+        "relevant_cases": [
+            "Indian Medical Association v. V.P. Shantha"
+        ],
+        "notes": "CPA defines consumer rights; V.P. Shantha established broad applicability"
+    },
+    {
+        "id": "const_01",
+        "query": "What does the right to equality mean under the Indian Constitution?",
+        "domain": "constitutional",
+        "relevant_sections": [
+            "Constitution/14"
+        ],
+        "relevant_cases": [],
+        "notes": "Article 14 guarantees equality before law and equal protection of laws"
+    },
+    {
+        "id": "const_02",
+        "query": "What is the right to life and personal liberty?",
+        "domain": "constitutional",
+        "relevant_sections": [
+            "Constitution/21"
+        ],
+        "relevant_cases": [
+            "Maneka Gandhi v. Union of India"
+        ],
+        "notes": "Article 21 protects life and liberty; Maneka Gandhi expanded its scope"
+    },
+    {
+        "id": "const_03",
+        "query": "What is the scope of freedom of speech in India?",
+        "domain": "constitutional",
+        "relevant_sections": [
+            "Constitution/19"
+        ],
+        "relevant_cases": [
+            "Shreya Singhal v. Union of India"
+        ],
+        "notes": "Article 19(1)(a) guarantees speech; Shreya Singhal struck down S.66A IT Act for being overbroad"
+    },
+    {
+        "id": "const_04",
+        "query": "Is privacy a fundamental right in India?",
+        "domain": "constitutional",
+        "relevant_sections": [
+            "Constitution/21"
+        ],
+        "relevant_cases": [
+            "K.S. Puttaswamy v. Union of India"
+        ],
+        "notes": "Puttaswamy held right to privacy is a fundamental right under Article 21"
+    },
+    {
+        "id": "const_05",
+        "query": "How can I file a PIL in the Supreme Court?",
+        "domain": "constitutional",
+        "relevant_sections": [
+            "Constitution/32"
+        ],
+        "relevant_cases": [],
+        "notes": "Article 32 provides the right to move the Supreme Court for enforcement of fundamental rights"
+    },
+    {
+        "id": "const_06",
+        "query": "How can I get information from the government under RTI?",
+        "domain": "constitutional",
+        "relevant_sections": [
+            "RTI/4",
+            "RTI/6"
+        ],
+        "relevant_cases": [],
+        "notes": "RTI S.4 mandates proactive disclosure; S.6 prescribes how to make an RTI request"
+    },
+    {
+        "id": "const_07",
+        "query": "Can the government restrict free speech online?",
+        "domain": "constitutional",
+        "relevant_sections": [
+            "Constitution/19"
+        ],
+        "relevant_cases": [
+            "Shreya Singhal v. Union of India"
+        ],
+        "notes": "Shreya Singhal held that Section 66A IT Act was unconstitutional for restricting online speech"
+    },
+    {
+        "id": "const_08",
+        "query": "What is the right to education in India?",
+        "domain": "constitutional",
+        "relevant_sections": [
+            "Constitution/21A"
+        ],
+        "relevant_cases": [],
+        "notes": "Article 21A provides for free and compulsory education for children aged 6-14"
+    },
+    {
+        "id": "ip_01",
+        "query": "What is the meaning of copyright under Indian law?",
+        "domain": "ip",
+        "relevant_sections": [
+            "Copyright Act/14"
+        ],
+        "relevant_cases": [],
+        "notes": "Copyright Act S.14 defines the exclusive rights that constitute copyright"
+    },
+    {
+        "id": "ip_02",
+        "query": "What constitutes fair use or fair dealing under copyright law?",
+        "domain": "ip",
+        "relevant_sections": [
+            "Copyright Act/52"
+        ],
+        "relevant_cases": [
+            "Eastern Book Company v. D.B. Modak"
+        ],
+        "notes": "Copyright Act S.52 lists fair dealing exceptions; Eastern Book case addresses copyright in judgments"
+    },
+    {
+        "id": "ip_03",
+        "query": "Can I be prosecuted for posting something offensive on social media?",
+        "domain": "ip",
+        "relevant_sections": [
+            "IT Act/79"
+        ],
+        "relevant_cases": [
+            "Shreya Singhal v. Union of India"
+        ],
+        "notes": "S.66A was struck down; IT Act S.79 intermediary liability was read down by Shreya Singhal"
+    },
+    {
+        "id": "ip_04",
+        "query": "Are court judgments and orders protected by copyright?",
+        "domain": "ip",
+        "relevant_sections": [
+            "Copyright Act/14",
+            "Copyright Act/52"
+        ],
+        "relevant_cases": [
+            "Eastern Book Company v. D.B. Modak"
+        ],
+        "notes": "Eastern Book Company held no copyright in court judgments themselves"
+    },
+    {
+        "id": "ip_05",
+        "query": "What is the liability of internet intermediaries for user content?",
+        "domain": "ip",
+        "relevant_sections": [
+            "IT Act/79"
+        ],
+        "relevant_cases": [
+            "Shreya Singhal v. Union of India"
+        ],
+        "notes": "IT Act S.79 safe harbour read down by Shreya Singhal to require court order for takedown"
+    }
+]

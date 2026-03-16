@@ -127,7 +127,7 @@ class Settings(BaseSettings):
 
     # ─── Re-ranker ───────────────────────────────────────────────────────────
     RERANKER_MODEL_NAME: str = "cross-encoder/ms-marco-MiniLM-L-12-v2"
-    RERANKER_TOP_K: int = 15
+    RERANKER_TOP_K: int = 30
 
     # ─── Retrieval Configuration ─────────────────────────────────────────────
     RETRIEVAL_TOP_K_DENSE: int = 20

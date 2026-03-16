@@ -2,16 +2,20 @@
 NyayaMitra — Embedding & Indexing Pipeline.
 
 Takes chunked legal documents, embeds them using BGE-large,
-and indexes them into Qdrant for semantic retrieval.
+and indexes them into both Qdrant (dense/semantic) and
+Elasticsearch (sparse/BM25) for hybrid retrieval.
 
 Pipeline:
     1. Load chunks from the chunker
     2. Embed each chunk using sentence-transformers (BGE-large-en-v1.5)
     3. Upsert vectors + metadata into Qdrant collections
-    4. Mark indexed items in PostgreSQL
+    4. Bulk-index text + metadata into Elasticsearch indices
+    5. Mark indexed items in PostgreSQL (is_indexed=True, indexed_at=now)
 
 Usage:
     python -m data.embeddings.indexer
+    python -m data.embeddings.indexer --qdrant-only
+    python -m data.embeddings.indexer --es-only
 """
 
 from __future__ import annotations
@@ -19,6 +23,7 @@ from __future__ import annotations
 import asyncio
 import sys
 import time
+from datetime import datetime
 from pathlib import Path
 
 import structlog
@@ -30,7 +35,7 @@ from app.config import settings
 
 logger = structlog.get_logger()
 
-# Qdrant collection names
+# Collection/index names — shared across Qdrant and Elasticsearch
 COLLECTION_SECTIONS = "legal_sections"
 COLLECTION_JUDGMENTS = "legal_judgments"
 
@@ -243,32 +248,107 @@ class QdrantIndexer:
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
+# PostgreSQL is_indexed Marker
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+async def mark_indexed_in_db(chunks: list) -> int:
+    """
+    Mark sections and judgments as indexed in PostgreSQL.
+
+    Sets is_indexed=True and indexed_at=now() for each record
+    whose source_id appears in the indexed chunks.
+
+    Args:
+        chunks: List of LegalChunk objects that were successfully indexed.
+
+    Returns:
+        Number of records updated.
+    """
+    from sqlalchemy import update
+
+    from app.database import async_session
+    from app.models.legal import Section, Judgment
+
+    now = datetime.utcnow()
+    updated = 0
+
+    # Collect source IDs by type
+    section_ids = [c.source_id for c in chunks if c.source_type == "act" and c.source_id]
+    judgment_ids = [c.source_id for c in chunks if c.source_type == "judgment" and c.source_id]
+
+    # Deduplicate (multiple chunks can reference the same judgment)
+    section_ids = list(set(section_ids))
+    judgment_ids = list(set(judgment_ids))
+
+    async with async_session() as session:
+        # Mark sections
+        if section_ids:
+            stmt = (
+                update(Section)
+                .where(Section.id.in_(section_ids))
+                .values(is_indexed=True, indexed_at=now)
+            )
+            result = await session.execute(stmt)
+            updated += result.rowcount
+            logger.info("sections_marked_indexed", count=result.rowcount)
+
+        # Mark judgments
+        if judgment_ids:
+            stmt = (
+                update(Judgment)
+                .where(Judgment.id.in_(judgment_ids))
+                .values(is_indexed=True, indexed_at=now)
+            )
+            result = await session.execute(stmt)
+            updated += result.rowcount
+            logger.info("judgments_marked_indexed", count=result.rowcount)
+
+        await session.commit()
+
+    return updated
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
 # Main Indexing Pipeline
 # ═══════════════════════════════════════════════════════════════════════════════
 
 
-async def run_indexing_pipeline() -> dict:
+async def run_indexing_pipeline(
+    qdrant: bool = True,
+    elasticsearch: bool = True,
+) -> dict:
     """
     Full indexing pipeline:
-        1. Chunk all legal data
-        2. Embed chunks with BGE
-        3. Index into Qdrant
+        1. Chunk all legal data from PostgreSQL
+        2. Embed chunks with BGE-large-en-v1.5
+        3. Index into Qdrant (dense vectors)
+        4. Index into Elasticsearch (BM25 text)
+        5. Mark indexed records in PostgreSQL
 
-    Returns stats about the indexing run.
+    Args:
+        qdrant: Whether to index into Qdrant (default True).
+        elasticsearch: Whether to index into Elasticsearch (default True).
+
+    Returns:
+        Stats dict about the indexing run.
     """
     stats = {
         "total_chunks": 0,
         "section_chunks": 0,
         "judgment_chunks": 0,
-        "sections_indexed": 0,
-        "judgments_indexed": 0,
+        "qdrant_sections_indexed": 0,
+        "qdrant_judgments_indexed": 0,
+        "es_sections_indexed": 0,
+        "es_judgments_indexed": 0,
+        "db_records_marked": 0,
         "duration_seconds": 0,
     }
 
     start = time.time()
 
-    # Step 1: Chunk all data
-    logger.info("indexing_step_1", step="chunking")
+    # ── Step 1: Chunk all data ───────────────────────────────────────────
+    logger.info("indexing_step", step="chunking")
     from data.processors.chunker import chunk_all
 
     all_chunks = await chunk_all()
@@ -284,54 +364,105 @@ async def run_indexing_pipeline() -> dict:
     stats["section_chunks"] = len(section_chunks)
     stats["judgment_chunks"] = len(judgment_chunks)
 
-    # Step 2: Embed all chunks
-    logger.info("indexing_step_2", step="embedding", total=len(all_chunks))
-    embedder = LegalEmbedder()
-    embedder.load()
+    logger.info(
+        "chunks_ready",
+        total=len(all_chunks),
+        sections=len(section_chunks),
+        judgments=len(judgment_chunks),
+    )
 
-    # Embed sections
-    if section_chunks:
-        section_texts = [c.text for c in section_chunks]
-        logger.info("embedding_sections", count=len(section_texts))
-        section_embeddings = embedder.embed_documents(section_texts)
-    else:
-        section_embeddings = []
+    # ── Step 2: Embed all chunks ─────────────────────────────────────────
+    section_embeddings = []
+    judgment_embeddings = []
 
-    # Embed judgments
-    if judgment_chunks:
-        judgment_texts = [c.text for c in judgment_chunks]
-        logger.info("embedding_judgments", count=len(judgment_texts))
-        judgment_embeddings = embedder.embed_documents(judgment_texts)
-    else:
-        judgment_embeddings = []
+    if qdrant:
+        logger.info("indexing_step", step="embedding", total=len(all_chunks))
+        embedder = LegalEmbedder()
+        embedder.load()
 
-    # Step 3: Index into Qdrant
-    logger.info("indexing_step_3", step="qdrant_indexing")
-    indexer = QdrantIndexer()
-    await indexer.connect()
-    indexer.create_collections(dimension=embedder.dimension)
+        if section_chunks:
+            section_texts = [c.text for c in section_chunks]
+            logger.info("embedding_sections", count=len(section_texts))
+            section_embeddings = embedder.embed_documents(section_texts)
 
-    # Index sections
-    if section_chunks:
-        stats["sections_indexed"] = indexer.index_chunks(
-            COLLECTION_SECTIONS, section_chunks, section_embeddings
+        if judgment_chunks:
+            judgment_texts = [c.text for c in judgment_chunks]
+            logger.info("embedding_judgments", count=len(judgment_texts))
+            judgment_embeddings = embedder.embed_documents(judgment_texts)
+
+    # ── Step 3: Index into Qdrant (dense) ────────────────────────────────
+    if qdrant:
+        logger.info("indexing_step", step="qdrant_indexing")
+        qdrant_indexer = QdrantIndexer()
+        await qdrant_indexer.connect()
+        qdrant_indexer.create_collections(
+            dimension=embedder.dimension if qdrant else settings.EMBEDDING_DIMENSION
         )
 
-    # Index judgments
-    if judgment_chunks:
-        stats["judgments_indexed"] = indexer.index_chunks(
-            COLLECTION_JUDGMENTS, judgment_chunks, judgment_embeddings
-        )
+        if section_chunks:
+            stats["qdrant_sections_indexed"] = qdrant_indexer.index_chunks(
+                COLLECTION_SECTIONS, section_chunks, section_embeddings
+            )
+
+        if judgment_chunks:
+            stats["qdrant_judgments_indexed"] = qdrant_indexer.index_chunks(
+                COLLECTION_JUDGMENTS, judgment_chunks, judgment_embeddings
+            )
+
+        # Print Qdrant collection stats
+        for col_name in [COLLECTION_SECTIONS, COLLECTION_JUDGMENTS]:
+            try:
+                info = qdrant_indexer.get_collection_info(col_name)
+                logger.info("qdrant_collection_stats", **info)
+            except Exception:
+                pass
+
+    # ── Step 4: Index into Elasticsearch (BM25) ──────────────────────────
+    if elasticsearch:
+        logger.info("indexing_step", step="elasticsearch_indexing")
+        try:
+            from data.embeddings.es_indexer import ElasticsearchIndexer
+
+            es_indexer = ElasticsearchIndexer()
+            await es_indexer.connect()
+            await es_indexer.create_indices(recreate=True)
+
+            if section_chunks:
+                stats["es_sections_indexed"] = await es_indexer.index_chunks(
+                    COLLECTION_SECTIONS, section_chunks
+                )
+
+            if judgment_chunks:
+                stats["es_judgments_indexed"] = await es_indexer.index_chunks(
+                    COLLECTION_JUDGMENTS, judgment_chunks
+                )
+
+            # Print ES index stats
+            for idx_name in [COLLECTION_SECTIONS, COLLECTION_JUDGMENTS]:
+                try:
+                    idx_stats = await es_indexer.get_index_stats(idx_name)
+                    logger.info("es_index_stats", **idx_stats)
+                except Exception:
+                    pass
+
+            await es_indexer.close()
+
+        except Exception as e:
+            logger.error(
+                "elasticsearch_indexing_failed",
+                error=str(e),
+                message="Elasticsearch indexing failed but Qdrant indexing succeeded. Continuing.",
+            )
+
+    # ── Step 5: Mark indexed in PostgreSQL ────────────────────────────────
+    logger.info("indexing_step", step="mark_indexed_in_db")
+    try:
+        all_indexed_chunks = section_chunks + judgment_chunks
+        stats["db_records_marked"] = await mark_indexed_in_db(all_indexed_chunks)
+    except Exception as e:
+        logger.error("mark_indexed_failed", error=str(e))
 
     stats["duration_seconds"] = round(time.time() - start, 2)
-
-    # Print collection stats
-    for col_name in [COLLECTION_SECTIONS, COLLECTION_JUDGMENTS]:
-        try:
-            info = indexer.get_collection_info(col_name)
-            logger.info("collection_stats", **info)
-        except Exception:
-            pass
 
     logger.info("indexing_complete", **stats)
     return stats
@@ -344,20 +475,53 @@ async def run_indexing_pipeline() -> dict:
 
 async def main():
     """Run the indexing pipeline."""
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description="NyayaMitra — Embedding & Indexing Pipeline",
+    )
+    parser.add_argument(
+        "--qdrant-only",
+        action="store_true",
+        help="Only index into Qdrant (skip Elasticsearch)",
+    )
+    parser.add_argument(
+        "--es-only",
+        action="store_true",
+        help="Only index into Elasticsearch (skip Qdrant embedding)",
+    )
+    args = parser.parse_args()
+
+    # Determine which backends to index into
+    do_qdrant = True
+    do_es = True
+
+    if args.qdrant_only:
+        do_es = False
+    elif args.es_only:
+        do_qdrant = False
+
     print("\n" + "=" * 60)
     print("NyayaMitra — Embedding & Indexing Pipeline")
+    print(f"  Qdrant:        {'enabled' if do_qdrant else 'disabled'}")
+    print(f"  Elasticsearch: {'enabled' if do_es else 'disabled'}")
     print("=" * 60)
 
-    stats = await run_indexing_pipeline()
+    stats = await run_indexing_pipeline(qdrant=do_qdrant, elasticsearch=do_es)
 
     print(f"\n{'='*60}")
     print("Indexing Results:")
-    print(f"  Total chunks:      {stats['total_chunks']}")
-    print(f"  Section chunks:    {stats['section_chunks']}")
-    print(f"  Judgment chunks:   {stats['judgment_chunks']}")
-    print(f"  Sections indexed:  {stats['sections_indexed']}")
-    print(f"  Judgments indexed:  {stats['judgments_indexed']}")
-    print(f"  Duration:          {stats['duration_seconds']}s")
+    print(f"  Total chunks:           {stats['total_chunks']}")
+    print(f"  Section chunks:         {stats['section_chunks']}")
+    print(f"  Judgment chunks:        {stats['judgment_chunks']}")
+    if do_qdrant:
+        print(f"  Qdrant sections:        {stats['qdrant_sections_indexed']}")
+        print(f"  Qdrant judgments:        {stats['qdrant_judgments_indexed']}")
+    if do_es:
+        print(f"  ES sections:            {stats['es_sections_indexed']}")
+        print(f"  ES judgments:            {stats['es_judgments_indexed']}")
+    print(f"  DB records marked:      {stats['db_records_marked']}")
+    print(f"  Duration:               {stats['duration_seconds']}s")
     print(f"{'='*60}\n")
 
 

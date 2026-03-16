@@ -23,7 +23,9 @@ redis[hiredis]>=5.2.0
 qdrant-client>=1.12.0
 
 # ─── Search Engine (Elasticsearch) ──────────────────────────────────────────
-elasticsearch[async]>=8.17.0
+# Pin to 8.x to match Docker ES 8.13 — the 9.x client sends
+# Accept: compatible-with=9 headers which ES 8.x rejects.
+elasticsearch[async]>=8.13.0,<9.0.0
 
 # ─── Knowledge Graph (Neo4j) ────────────────────────────────────────────────
 neo4j>=5.27.0

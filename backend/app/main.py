@@ -63,7 +63,7 @@ async def lifespan(app: FastAPI):
         debug=settings.APP_DEBUG,
     )
 
-    # TODO (Sprint 2): Initialize PostgreSQL connection pool
+    # Initialize PostgreSQL connection pool
     from app.database import init_db, engine
 
     await init_db()
@@ -79,6 +79,11 @@ async def lifespan(app: FastAPI):
 
     # ── Shutdown ──
     logger.info("nyayamitra_shutting_down")
+
+    # Close retrieval service (Elasticsearch aiohttp connector, etc.)
+    from app.services.retrieval import close_retrieval_service
+
+    await close_retrieval_service()
 
     # Close database connection pool
     await engine.dispose()

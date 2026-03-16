@@ -8,6 +8,10 @@ This scraper targets the top Central Acts that form the backbone
 of Indian legal knowledge. Each act is parsed into individual sections
 for embedding and retrieval.
 
+Uses:
+    - ActParser (data.processors.act_parser) for HTML/text parsing
+    - DataValidator (data.processors.validator) for pre-insert validation
+
 Usage:
     python -m data.scrapers.india_code
 
@@ -30,7 +34,6 @@ from pathlib import Path
 
 import httpx
 import structlog
-from bs4 import BeautifulSoup
 
 # Add project root to path so we can import from backend
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
@@ -38,15 +41,18 @@ sys.path.insert(0, str(PROJECT_ROOT / "backend"))
 
 from app.config import settings
 from app.database import async_session
+from app.exceptions import FetchError, ParseError, ScraperError
 from app.models.legal import Act, IngestionLog, Section
 
+from data.processors.act_parser import ActParser
+from data.processors.validator import DataValidator
+
 logger = structlog.get_logger()
+
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # Priority Acts — The core legal corpus for Phase 1
 # ═══════════════════════════════════════════════════════════════════════════════
-# These 5 acts are the initial dataset for Sprint 2.
-# Sprint 7 expands to 100+ acts.
 
 PRIORITY_ACTS = [
     {
@@ -163,9 +169,10 @@ class IndiaCodeScraper:
 
     The India Code portal hosts all Central Acts. This scraper:
     1. Fetches the HTML page for each act
-    2. Parses it into sections using BeautifulSoup
-    3. Stores the act and its sections in PostgreSQL
-    4. Tracks ingestion state for incremental updates
+    2. Parses it into sections using ActParser
+    3. Validates data using DataValidator
+    4. Stores the act and its sections in PostgreSQL
+    5. Tracks ingestion state for incremental updates
     """
 
     def __init__(self):
@@ -174,11 +181,14 @@ class IndiaCodeScraper:
             period=settings.SCRAPER_RATE_LIMIT_PERIOD,
         )
         self.client: httpx.AsyncClient | None = None
+        self.parser = ActParser()
+        self.validator = DataValidator()
         self.stats = {
             "acts_processed": 0,
             "acts_new": 0,
             "acts_updated": 0,
             "sections_created": 0,
+            "validation_warnings": 0,
             "errors": 0,
         }
 
@@ -218,7 +228,6 @@ class IndiaCodeScraper:
                     attempt=attempt + 1,
                 )
                 if e.response.status_code == 429:
-                    # Rate limited — wait longer
                     wait = settings.SCRAPER_RETRY_BACKOFF ** (attempt + 2)
                     await asyncio.sleep(wait)
                 elif e.response.status_code >= 500:
@@ -240,181 +249,35 @@ class IndiaCodeScraper:
         self.stats["errors"] += 1
         return None
 
-    def parse_sections_from_html(self, html: str, act_name: str) -> list[dict]:
-        """
-        Parse an act's HTML page into individual sections.
-
-        This is a generic parser that handles the common India Code HTML structure.
-        Different acts may have slightly different formats, so this uses
-        multiple parsing strategies and falls back gracefully.
-
-        Returns a list of section dicts with keys:
-            section_number, title, text, chapter, part
-        """
-        soup = BeautifulSoup(html, "lxml")
-        sections = []
-        current_chapter = None
-        current_part = None
-
-        # Strategy 1: Look for section headers in common formats
-        # India Code uses various heading patterns:
-        #   "Section 302.", "302.", "Section 302 -", "S. 302"
-        section_pattern = re.compile(
-            r"(?:Section|S\.?)\s*(\d+[A-Za-z]*(?:\([^)]+\))?)\s*[-.:]\s*(.*)",
-            re.IGNORECASE,
-        )
-
-        # Try to find sections from structured elements
-        for element in soup.find_all(["p", "div", "h3", "h4", "h5", "tr"]):
-            text = element.get_text(strip=True)
-
-            if not text or len(text) < 5:
-                continue
-
-            # Detect chapter headings
-            chapter_match = re.match(
-                r"(?:CHAPTER|Chapter)\s+([IVXLCDM]+[A-Z]*|\d+[A-Z]*)\s*[-.:]\s*(.*)",
-                text,
-            )
-            if chapter_match:
-                current_chapter = f"Chapter {chapter_match.group(1)} - {chapter_match.group(2)}".strip()
-                continue
-
-            # Detect part headings
-            part_match = re.match(
-                r"(?:PART|Part)\s+([IVXLCDM]+[A-Z]*|\d+[A-Z]*)\s*[-.:]\s*(.*)",
-                text,
-            )
-            if part_match:
-                current_part = f"Part {part_match.group(1)} - {part_match.group(2)}".strip()
-                continue
-
-            # Detect sections
-            section_match = section_pattern.match(text)
-            if section_match:
-                section_num = section_match.group(1).strip()
-                rest = section_match.group(2).strip()
-
-                # Try to separate title from body
-                # Common pattern: "Section 302. Punishment for murder.— Whoever commits..."
-                title_body = re.split(r"[.—]\s*", rest, maxsplit=1)
-                title = title_body[0].strip() if title_body else ""
-                body = title_body[1].strip() if len(title_body) > 1 else rest
-
-                # Get the full text including following paragraphs
-                full_text = self._get_section_full_text(element, body)
-
-                sections.append({
-                    "section_number": section_num,
-                    "title": title[:500] if title else None,
-                    "text": full_text,
-                    "chapter": current_chapter,
-                    "part": current_part,
-                })
-
-        # Strategy 2: If structured parsing found nothing, try raw text extraction
-        if not sections:
-            sections = self._parse_sections_from_raw_text(soup, act_name)
-
-        logger.info(
-            "sections_parsed",
-            act=act_name,
-            num_sections=len(sections),
-            strategy="structured" if sections else "fallback",
-        )
-
-        return sections
-
-    def _get_section_full_text(self, element, initial_text: str) -> str:
-        """
-        Get the full text of a section by collecting following sibling elements
-        until the next section header is found.
-        """
-        texts = [initial_text] if initial_text else []
-
-        # Collect text from sibling elements
-        sibling = element.find_next_sibling()
-        section_pattern = re.compile(r"(?:Section|S\.?)\s*\d+", re.IGNORECASE)
-
-        count = 0
-        while sibling and count < 50:
-            sibling_text = sibling.get_text(strip=True)
-            if not sibling_text:
-                sibling = sibling.find_next_sibling()
-                count += 1
-                continue
-
-            # Stop if we hit the next section
-            if section_pattern.match(sibling_text):
-                break
-
-            # Stop if we hit a chapter/part heading
-            if re.match(r"(?:CHAPTER|PART)\s+[IVXLCDM\d]", sibling_text, re.IGNORECASE):
-                break
-
-            texts.append(sibling_text)
-            sibling = sibling.find_next_sibling()
-            count += 1
-
-        return "\n".join(texts).strip()
-
-    def _parse_sections_from_raw_text(self, soup: BeautifulSoup, act_name: str) -> list[dict]:
-        """
-        Fallback parser: extract sections from raw text when structured parsing fails.
-
-        Splits the full text on section number patterns.
-        """
-        full_text = soup.get_text(separator="\n")
-        sections = []
-
-        # Split on section patterns
-        parts = re.split(
-            r"\n\s*(?:Section|S\.?)\s+(\d+[A-Za-z]*(?:\([^)]+\))?)\s*[-.:]\s*",
-            full_text,
-            flags=re.IGNORECASE,
-        )
-
-        # parts will be: [preamble, sec_num_1, sec_text_1, sec_num_2, sec_text_2, ...]
-        for i in range(1, len(parts) - 1, 2):
-            section_num = parts[i].strip()
-            section_text = parts[i + 1].strip()
-
-            # Limit text length (some sections include garbage from page rendering)
-            if len(section_text) > 10000:
-                section_text = section_text[:10000] + "..."
-
-            if section_text and len(section_text) > 10:
-                # Try to extract title from first sentence
-                first_line = section_text.split("\n")[0]
-                title_match = re.match(r"^([^.—]+)[.—]", first_line)
-                title = title_match.group(1).strip()[:500] if title_match else None
-
-                sections.append({
-                    "section_number": section_num,
-                    "title": title,
-                    "text": section_text,
-                    "chapter": None,
-                    "part": None,
-                })
-
-        return sections
-
     async def store_act_and_sections(
         self,
         act_info: dict,
         sections_data: list[dict],
     ) -> None:
         """
-        Store an act and its sections in PostgreSQL.
+        Validate and store an act and its sections in PostgreSQL.
 
-        Uses upsert logic: if the act already exists (by name+year+jurisdiction),
-        update it. Otherwise create a new record.
+        Uses DataValidator before inserting and handles upsert logic.
         """
+        # Validate act
+        act_result = self.validator.validate_act(act_info)
+        if not act_result.is_valid:
+            logger.warning(
+                "act_validation_failed",
+                act=act_info.get("name"),
+                errors=act_result.errors,
+            )
+            self.stats["errors"] += 1
+            return
+
+        if act_result.warnings:
+            self.stats["validation_warnings"] += len(act_result.warnings)
+
         async with async_session() as session:
             try:
-                # Check if act already exists
                 from sqlalchemy import select
 
+                # Check if act already exists
                 stmt = select(Act).where(
                     Act.name == act_info["name"],
                     Act.year == act_info["year"],
@@ -424,14 +287,12 @@ class IndiaCodeScraper:
                 existing_act = result.scalar_one_or_none()
 
                 if existing_act:
-                    # Update existing act
                     existing_act.last_scraped_at = datetime.utcnow()
                     existing_act.updated_at = datetime.utcnow()
                     act_id = existing_act.id
                     self.stats["acts_updated"] += 1
                     logger.info("act_updated", name=act_info["name"])
                 else:
-                    # Create new act
                     new_act = Act(
                         id=uuid.uuid4(),
                         name=act_info["name"],
@@ -451,9 +312,20 @@ class IndiaCodeScraper:
                     self.stats["acts_new"] += 1
                     logger.info("act_created", name=act_info["name"], id=str(act_id))
 
-                # Store sections
+                # Store sections with validation
                 for sec_data in sections_data:
-                    # Check if section already exists
+                    sec_result = self.validator.validate_section(sec_data, act_id=act_id)
+                    if not sec_result.is_valid:
+                        logger.debug(
+                            "section_validation_failed",
+                            section=sec_data.get("section_number"),
+                            errors=sec_result.errors,
+                        )
+                        continue
+
+                    if sec_result.warnings:
+                        self.stats["validation_warnings"] += len(sec_result.warnings)
+
                     stmt = select(Section).where(
                         Section.act_id == act_id,
                         Section.section_number == sec_data["section_number"],
@@ -462,14 +334,12 @@ class IndiaCodeScraper:
                     existing_section = result.scalar_one_or_none()
 
                     if existing_section:
-                        # Update existing section
                         existing_section.text = sec_data["text"]
                         existing_section.title = sec_data.get("title")
                         existing_section.chapter = sec_data.get("chapter")
                         existing_section.part = sec_data.get("part")
                         existing_section.updated_at = datetime.utcnow()
                     else:
-                        # Create new section
                         new_section = Section(
                             id=uuid.uuid4(),
                             act_id=act_id,
@@ -498,7 +368,7 @@ class IndiaCodeScraper:
 
     async def scrape_act(self, act_info: dict) -> None:
         """
-        Scrape a single act: fetch HTML, parse sections, store in DB.
+        Scrape a single act: fetch HTML, parse with ActParser, validate, store.
         """
         url = act_info.get("url")
         if not url:
@@ -512,18 +382,38 @@ class IndiaCodeScraper:
             logger.error("scraper_fetch_failed", act=act_info["name"])
             return
 
-        sections = self.parse_sections_from_html(html, act_info["name"])
+        # Use ActParser instead of inline parsing
+        try:
+            parsed_sections = self.parser.parse_html(html, act_info["name"])
+        except ParseError as e:
+            logger.warning(
+                "act_parse_failed",
+                act=act_info["name"],
+                error=str(e),
+            )
+            parsed_sections = []
 
-        if sections:
-            await self.store_act_and_sections(act_info, sections)
+        # Convert ParsedSection objects to dicts for storage
+        sections_data = [
+            {
+                "section_number": s.section_number,
+                "title": s.title,
+                "text": s.text,
+                "chapter": s.chapter,
+                "part": s.part,
+            }
+            for s in parsed_sections
+        ]
+
+        if sections_data:
+            await self.store_act_and_sections(act_info, sections_data)
         else:
-            # Even if no sections parsed, store the act record
-            # so we know we attempted it
             logger.warning(
                 "scraper_no_sections_found",
                 act=act_info["name"],
                 html_length=len(html),
             )
+            # Store act record even without sections
             await self.store_act_and_sections(act_info, [])
 
     async def scrape_priority_acts(self) -> dict:
@@ -556,6 +446,14 @@ class IndiaCodeScraper:
         for act_info in PRIORITY_ACTS:
             try:
                 await self.scrape_act(act_info)
+            except ScraperError as e:
+                logger.error(
+                    "scrape_act_error",
+                    act=act_info["name"],
+                    error=str(e),
+                    details=e.details,
+                )
+                self.stats["errors"] += 1
             except Exception as e:
                 logger.error(
                     "scrape_act_error",
@@ -594,10 +492,6 @@ class IndiaCodeScraper:
 # ═══════════════════════════════════════════════════════════════════════════════
 # Seed Data — Manually curated sections for initial testing
 # ═══════════════════════════════════════════════════════════════════════════════
-# While the web scraper handles live fetching, we also provide seed data
-# for the most important sections. This ensures the system has accurate
-# data even if scraping encounters issues.
-
 
 SEED_SECTIONS_IPC = [
     {
@@ -682,11 +576,11 @@ async def seed_initial_data() -> dict:
     """
     Seed the database with manually curated sections for the most important acts.
 
-    This ensures the system has accurate, verified legal data for the core
-    acts even before the web scraper successfully fetches everything.
+    Uses DataValidator to check each record before insertion.
     """
     logger.info("seed_data_start")
-    stats = {"acts": 0, "sections": 0}
+    stats = {"acts": 0, "sections": 0, "validation_skipped": 0}
+    validator = DataValidator()
 
     seed_data = [
         {
@@ -717,7 +611,13 @@ async def seed_initial_data() -> dict:
         for data in seed_data:
             act_info = data["act_info"]
 
-            # Check if act exists
+            # Validate act
+            act_result = validator.validate_act(act_info)
+            if not act_result.is_valid:
+                logger.warning("seed_act_invalid", name=act_info["name"], errors=act_result.errors)
+                stats["validation_skipped"] += 1
+                continue
+
             from sqlalchemy import select
 
             stmt = select(Act).where(
@@ -748,8 +648,14 @@ async def seed_initial_data() -> dict:
                 stats["acts"] += 1
                 logger.info("seed_act_created", name=act_info["name"])
 
-            # Add sections
+            # Add sections with validation
             for sec in data["sections"]:
+                sec_result = validator.validate_section(sec, act_id=act_id)
+                if not sec_result.is_valid:
+                    logger.debug("seed_section_invalid", errors=sec_result.errors)
+                    stats["validation_skipped"] += 1
+                    continue
+
                 stmt = select(Section).where(
                     Section.act_id == act_id,
                     Section.section_number == sec["section_number"],
@@ -801,7 +707,6 @@ async def main():
     print(f"\nSeed data: {seed_stats['acts']} acts, {seed_stats['sections']} sections created")
 
     if args.scrape:
-        # Run the web scraper
         async with IndiaCodeScraper() as scraper:
             stats = await scraper.scrape_priority_acts()
             print(f"\nScraping complete: {json.dumps(stats, indent=2)}")
