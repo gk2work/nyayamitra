@@ -291,6 +291,12 @@ async def run_evaluation(
     print(f"Running evaluation: {len(gold_data)} queries, top_k={top_k}, mode={mode}")
     print("─" * 70)
 
+    # Warmup: run one throwaway query to prime caches, JIT, and
+    # connection pools. This eliminates the cold-start penalty
+    # (~1000ms) that would otherwise inflate the first query's latency.
+    await service.search(query="warmup query", top_k=1, use_reranker=(mode == "hybrid"))
+    print("  (warmup complete)")
+
     report = EvalReport(
         total_queries=len(gold_data),
         mode=mode,

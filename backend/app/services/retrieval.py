@@ -25,6 +25,7 @@ Usage:
 
 from __future__ import annotations
 
+import asyncio
 import time
 from dataclasses import dataclass, field
 
@@ -354,44 +355,72 @@ class RetrievalService:
         if self._es_available:
             es_filters = self._build_es_filters(filters)
             try:
-                sparse_sections = await self.es_client.search(
-                    COLLECTION_SECTIONS, query,
-                    top_k=settings.RETRIEVAL_TOP_K_SPARSE,
-                    filters=es_filters,
-                )
-                sparse_judgments = await self.es_client.search(
-                    COLLECTION_JUDGMENTS, query,
-                    top_k=settings.RETRIEVAL_TOP_K_SPARSE,
-                    filters=es_filters,
+                sparse_sections, sparse_judgments = await asyncio.gather(
+                    self.es_client.search(
+                        COLLECTION_SECTIONS, query,
+                        top_k=settings.RETRIEVAL_TOP_K_SPARSE,
+                        filters=es_filters,
+                    ),
+                    self.es_client.search(
+                        COLLECTION_JUDGMENTS, query,
+                        top_k=settings.RETRIEVAL_TOP_K_SPARSE,
+                        filters=es_filters,
+                    ),
                 )
                 sparse_results = sparse_sections + sparse_judgments
             except Exception as e:
                 logger.warning("es_search_failed_fallback", error=str(e))
 
-        # ── Step 3: Merge candidates for re-ranking ─────────────────────
-        # Instead of relying solely on RRF scores to select candidates,
-        # we take the UNION of all unique results from both backends.
-        # This prevents a result that one backend ranked highly from
-        # being dropped because the other backend ranked it poorly.
-        # The cross-encoder then makes the final quality decision.
+        # ── Step 3: Build candidate set ─────────────────────────────────
+        # When the cross-encoder is available, it is the quality arbiter.
+        # Dense (Qdrant) provides the best candidate pool for semantic
+        # re-ranking. ES (BM25) supplements by boosting candidates that
+        # match both semantically AND lexically — these get a source tag
+        # of "both" for transparency.
+        #
+        # When the reranker is NOT available, RRF fusion of dense+sparse
+        # provides the ranking signal instead.
+
         if sparse_results:
-            fused_results = reciprocal_rank_fusion(
-                dense_results, sparse_results,
-                k=settings.RETRIEVAL_RRF_K,
-            )
+            # Build a set of chunk_ids that ES also found (for tagging)
+            es_chunk_ids = {h.get("chunk_id", "") for h in sparse_results if h.get("chunk_id")}
+
+            # Tag dense results that also appeared in ES
+            for r in dense_results:
+                if r.chunk_id in es_chunk_ids:
+                    r.retrieval_source = "both"
+                else:
+                    r.retrieval_source = "dense"
+
+            if use_reranker and self._reranker_available:
+                # Reranker path: use dense results as candidates, but
+                # also inject ES-only results that dense missed (these
+                # are keyword matches the embedding model couldn't find).
+                # Cap ES-only injection to keep total candidates ~50
+                # for cross-encoder latency budget (~400ms on Apple Silicon).
+                dense_ids = {r.chunk_id for r in dense_results if r.chunk_id}
+                es_only = [
+                    _es_hit_to_result(h) for h in sparse_results
+                    if h.get("chunk_id") and h["chunk_id"] not in dense_ids
+                ][:5]  # top 5 ES-only results (already ranked by BM25)
+                for r in es_only:
+                    r.retrieval_source = "sparse"
+
+                candidates = dense_results + es_only
+            else:
+                # No reranker: use RRF fusion as the ranking signal
+                candidates = reciprocal_rank_fusion(
+                    dense_results, sparse_results,
+                    k=settings.RETRIEVAL_RRF_K,
+                )
         else:
-            fused_results = dense_results
-            fused_results.sort(key=lambda r: r.score, reverse=True)
-            for r in fused_results:
+            # Qdrant-only fallback
+            candidates = dense_results
+            candidates.sort(key=lambda r: r.score, reverse=True)
+            for r in candidates:
                 r.retrieval_source = "dense"
 
         # ── Step 4: Cross-encoder re-ranking ─────────────────────────────
-        # Feed ALL unique fused candidates to the reranker (typically
-        # 50-70 after deduplication). The cross-encoder is the quality
-        # arbiter — RRF scores are only used as tiebreakers when the
-        # reranker is disabled.
-        candidates = fused_results  # all unique candidates, not a top-K slice
-
         if use_reranker and self._reranker_available and candidates:
             try:
                 final_results = self.reranker.rerank(query, candidates, top_k=top_k)
@@ -409,7 +438,7 @@ class RetrievalService:
             domain=domain,
             dense_count=len(dense_results),
             sparse_count=len(sparse_results),
-            fused_count=len(fused_results),
+            candidates_count=len(candidates),
             final_count=len(final_results),
             top_score=round(final_results[0].score, 4) if final_results else 0,
             es_used=self._es_available and bool(sparse_results),
