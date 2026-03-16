@@ -1,24 +1,24 @@
 """
 NyayaMitra — Query Router (API Endpoint).
 
-This is the main endpoint users hit to ask legal questions.
-It orchestrates the full pipeline:
+Main endpoint for legal questions. Orchestrates the full pipeline:
 
-    User Query → Router Classification → Hybrid Retrieval → LLM Generation
-    → Citation Verification → Translation → Response
-
-For Sprint 1-4, we build this incrementally:
-    Sprint 1: Endpoint skeleton with mock response
-    Sprint 3: Plug in hybrid retrieval
-    Sprint 4: Plug in LLM generation
-    Sprint 5: Plug in query router + knowledge graph
-    Sprint 6: Plug in citation verification
+    User Query → Router Classification → Hybrid Retrieval → Context Assembly
+    → LLM Generation → Response Parsing → Citation Verification → Response
 
 Endpoints:
     POST /api/v1/query          Full legal query (JSON response)
-    POST /api/v1/query/stream   Streaming legal query (Server-Sent Events)
+    POST /api/v1/query/stream   Streaming legal query (real SSE from LLM)
+
+Sprint history:
+    Sprint 1: Endpoint skeleton with mock response
+    Sprint 3: Hybrid retrieval (Qdrant + ES + cross-encoder)
+    Sprint 4: Real LLM generation + streaming + session history + response parsing
+    Sprint 5: Query router (DistilBERT classifier) + knowledge graph
+    Sprint 6: Citation verification
 """
 
+import json
 import time
 import uuid
 
@@ -46,24 +46,31 @@ logger = structlog.get_logger()
 router = APIRouter(prefix="/api/v1")
 
 
+# ═══════════════════════════════════════════════════════════════════════════════
+# POST /api/v1/query — Full JSON Response
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
 @router.post("/query", response_model=QueryResponse)
 async def legal_query(request: QueryRequest) -> QueryResponse:
     """
     Process a legal query through the full NyayaMitra pipeline.
 
-    Pipeline stages:
-        1. Query Router — classify domain, jurisdiction, query type
-        2. Hybrid Retrieval — fetch relevant acts, judgments, procedures
-        3. Context Assembly — format retrieved chunks for LLM
+    Pipeline:
+        1. Session — load or create conversation session
+        2. Query Router — classify domain, jurisdiction, query type
+        3. Hybrid Retrieval — fetch relevant acts, judgments, procedures
         4. LLM Generation — generate structured legal response
-        5. Citation Verification — verify every citation is real
-        6. Translation — translate response if needed
-
-    Returns a structured legal response with citations, precedents,
-    and step-by-step procedure.
+        5. Response Parsing — extract citations from LLM output
+        6. Citation Verification — verify every citation is real
+        7. Translation — translate response if needed
+        8. Session — save messages to history
     """
     start_time = time.time()
+
+    # ── Stage 1: Session Management ──────────────────────────────────
     session_id = request.session_id or str(uuid.uuid4())
+    history = await _load_session_history(session_id)
 
     logger.info(
         "query_received",
@@ -72,10 +79,11 @@ async def legal_query(request: QueryRequest) -> QueryResponse:
         jurisdiction=request.jurisdiction,
         domain_hint=request.domain_hint.value if request.domain_hint else None,
         session_id=session_id,
+        history_turns=len(history),
     )
 
     try:
-        # ── Stage 1: Query Router ────────────────────────────────────────
+        # ── Stage 2: Query Router ────────────────────────────────────
         classification = await _classify_query(request)
         logger.info(
             "query_classified",
@@ -84,15 +92,14 @@ async def legal_query(request: QueryRequest) -> QueryResponse:
             confidence=classification.confidence,
         )
 
-        # ── Stage 2: Hybrid Retrieval ────────────────────────────────────
+        # ── Stage 3: Hybrid Retrieval ────────────────────────────────
         retrieved_context = await _retrieve_context(request, classification)
-        logger.info(
-            "context_retrieved",
-            num_chunks=len(retrieved_context),
-        )
+        logger.info("context_retrieved", num_chunks=len(retrieved_context))
 
-        # ── Stage 3: LLM Generation ─────────────────────────────────────
-        response = await _generate_response(request, classification, retrieved_context, session_id)
+        # ── Stage 4: LLM Generation + Response Parsing ──────────────
+        response = await _generate_response(
+            request, classification, retrieved_context, session_id, history
+        )
         logger.info(
             "response_generated",
             num_laws=len(response.applicable_law),
@@ -101,17 +108,16 @@ async def legal_query(request: QueryRequest) -> QueryResponse:
             confidence=response.confidence.value,
         )
 
-        # ── Stage 4: Citation Verification ───────────────────────────────
+        # ── Stage 5: Citation Verification ───────────────────────────
         if settings.CITATION_VERIFICATION_ENABLED:
             response = await _verify_citations(response)
-            logger.info(
-                "citations_verified",
-                sources_verified=response.sources_verified,
-            )
 
-        # ── Stage 5: Translation ─────────────────────────────────────────
+        # ── Stage 6: Translation ─────────────────────────────────────
         if request.language != Language.ENGLISH:
             response = await _translate_response(response, request.language)
+
+        # ── Stage 7: Save to Session ─────────────────────────────────
+        await _save_to_session(session_id, request.query, response.answer)
 
         duration_ms = round((time.time() - start_time) * 1000, 2)
         logger.info(
@@ -139,43 +145,187 @@ async def legal_query(request: QueryRequest) -> QueryResponse:
         )
 
 
+# ═══════════════════════════════════════════════════════════════════════════════
+# POST /api/v1/query/stream — Real SSE Streaming
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
 @router.post("/query/stream")
 async def legal_query_stream(request: QueryRequest):
     """
     Streaming legal query using Server-Sent Events (SSE).
 
-    The frontend uses this for real-time response display.
-    Response streams as JSON chunks separated by newlines.
+    Streams the LLM answer token-by-token, then sends structured
+    data (applicable_law, precedents, procedure) as final events.
 
-    TODO (Sprint 4): Implement actual streaming from vLLM.
-    Currently returns the full response as a single SSE event.
+    SSE event types:
+        text        — answer text chunk (streamed)
+        applicable_law — structured law citations (after streaming)
+        precedents  — structured case citations (after streaming)
+        procedure   — structured procedure steps (after streaming)
+        metadata    — confidence, jurisdiction notes, session_id
+        done        — signals end of stream
+        error       — error occurred during processing
     """
-    response = await legal_query(request)
+    start_time = time.time()
+    session_id = request.session_id or str(uuid.uuid4())
 
     async def event_generator():
-        """Generate SSE events from the response."""
-        import json
+        try:
+            # Load session history
+            history = await _load_session_history(session_id)
 
-        # Send the answer text in chunks (simulating streaming)
-        words = response.answer.split()
-        chunk_size = 5
-        for i in range(0, len(words), chunk_size):
-            chunk = " ".join(words[i : i + chunk_size])
-            event = json.dumps({"type": "text", "content": chunk})
-            yield f"data: {event}\n\n"
+            # Classify query
+            classification = await _classify_query(request)
 
-        # Send structured data at the end
-        law_data = json.dumps({"type": "applicable_law", "content": response.model_dump(include={"applicable_law"})}, default=str)
-        yield f"data: {law_data}\n\n"
+            # Retrieve context
+            retrieved_context = await _retrieve_context(request, classification)
 
-        prec_data = json.dumps({"type": "precedents", "content": response.model_dump(include={"precedents"})}, default=str)
-        yield f"data: {prec_data}\n\n"
+            # Build structured data from retrieval results
+            applicable_laws = _build_applicable_laws(retrieved_context)
+            precedents_list = _build_precedents(retrieved_context)
 
-        proc_data = json.dumps({"type": "procedure", "content": response.model_dump(include={"procedure"})}, default=str)
-        yield f"data: {proc_data}\n\n"
+            # Format context for LLM
+            from app.services.retrieval import get_retrieval_service
 
-        done_data = json.dumps({"type": "done", "response_id": response.response_id})
-        yield f"data: {done_data}\n\n"
+            retrieval_service = await get_retrieval_service()
+            formatted_context = retrieval_service.format_context_for_llm(
+                retrieved_context
+            )
+
+            # Stream LLM response
+            from app.services.llm_service import get_llm_service
+
+            llm_service = await get_llm_service()
+
+            full_answer = []
+            async for chunk in llm_service.generate_stream(
+                query=request.query,
+                context=formatted_context,
+                jurisdiction=classification.jurisdiction,
+                history=history,
+            ):
+                full_answer.append(chunk)
+                event = json.dumps({"type": "text", "content": chunk})
+                yield f"data: {event}\n\n"
+
+            # Parse the full answer for additional structured data
+            answer_text = "".join(full_answer)
+            from app.services.response_parser import (
+                parse_llm_response,
+                merge_parsed_with_retrieval,
+            )
+
+            parsed = parse_llm_response(answer_text)
+            merged = merge_parsed_with_retrieval(
+                parsed, applicable_laws, precedents_list
+            )
+
+            # Add any LLM-extracted citations not in retrieval
+            for law_dict in merged["new_laws"]:
+                applicable_laws.append(
+                    ApplicableLaw(
+                        act=law_dict["act"],
+                        section=law_dict["section"],
+                        text=law_dict.get("text", ""),
+                    )
+                )
+
+            for prec_dict in merged["new_precedents"]:
+                precedents_list.append(
+                    Precedent(
+                        case=prec_dict["case"],
+                        year=prec_dict.get("year", 2024),
+                        court=prec_dict.get("court", "Supreme Court"),
+                        citation=prec_dict.get("citation", ""),
+                        relevance=prec_dict.get("relevance", ""),
+                    )
+                )
+
+            # Extract procedure steps from parsed response
+            procedure_steps = []
+            for step_dict in parsed.get("procedure", []):
+                procedure_steps.append(
+                    ProcedureStep(
+                        step=step_dict["step"],
+                        action=step_dict["action"],
+                        details=step_dict.get("details", ""),
+                    )
+                )
+
+            # Send structured data events
+            law_data = json.dumps(
+                {
+                    "type": "applicable_law",
+                    "content": [l.model_dump() for l in applicable_laws],
+                },
+                default=str,
+            )
+            yield f"data: {law_data}\n\n"
+
+            prec_data = json.dumps(
+                {
+                    "type": "precedents",
+                    "content": [p.model_dump() for p in precedents_list],
+                },
+                default=str,
+            )
+            yield f"data: {prec_data}\n\n"
+
+            if procedure_steps:
+                proc_data = json.dumps(
+                    {
+                        "type": "procedure",
+                        "content": [s.model_dump() for s in procedure_steps],
+                    },
+                    default=str,
+                )
+                yield f"data: {proc_data}\n\n"
+
+            # Determine confidence
+            llm_used = bool(llm_service.provider)
+            if not applicable_laws and not precedents_list:
+                confidence = Confidence.LOW
+            elif llm_used:
+                confidence = Confidence.HIGH
+            else:
+                confidence = Confidence.MEDIUM
+
+            meta_data = json.dumps(
+                {
+                    "type": "metadata",
+                    "content": {
+                        "confidence": confidence.value,
+                        "jurisdiction_notes": (
+                            f"Jurisdiction: {classification.jurisdiction or 'Central Law'}. "
+                            "For state-specific variations, specify your state."
+                        ),
+                        "session_id": session_id,
+                    },
+                }
+            )
+            yield f"data: {meta_data}\n\n"
+
+            # Save to session
+            await _save_to_session(session_id, request.query, answer_text)
+
+            # Done
+            duration_ms = round((time.time() - start_time) * 1000, 2)
+            done_data = json.dumps(
+                {
+                    "type": "done",
+                    "response_id": str(uuid.uuid4()),
+                    "duration_ms": duration_ms,
+                }
+            )
+            yield f"data: {done_data}\n\n"
+
+        except Exception as e:
+            logger.error("stream_error", error=str(e))
+            error_data = json.dumps(
+                {"type": "error", "content": str(e) if settings.APP_DEBUG else "Internal error"}
+            )
+            yield f"data: {error_data}\n\n"
 
     return StreamingResponse(
         event_generator(),
@@ -183,6 +333,7 @@ async def legal_query_stream(request: QueryRequest):
         headers={
             "Cache-Control": "no-cache",
             "Connection": "keep-alive",
+            "X-Accel-Buffering": "no",
         },
     )
 
@@ -190,16 +341,37 @@ async def legal_query_stream(request: QueryRequest):
 # ═══════════════════════════════════════════════════════════════════════════════
 # Pipeline Stage Implementations
 # ═══════════════════════════════════════════════════════════════════════════════
-# Each stage is a separate async function. In Sprint 1, these return mock data.
-# They will be replaced with real implementations in subsequent sprints.
-# ═══════════════════════════════════════════════════════════════════════════════
+
+
+async def _load_session_history(session_id: str) -> list[dict]:
+    """Load conversation history from Redis session."""
+    try:
+        from app.services.session import get_session_manager
+
+        manager = await get_session_manager()
+        return await manager.get_history(session_id)
+    except Exception as e:
+        logger.debug("session_load_skipped", error=str(e))
+        return []
+
+
+async def _save_to_session(session_id: str, query: str, answer: str) -> None:
+    """Save the query and answer to the session history."""
+    try:
+        from app.services.session import get_session_manager
+
+        manager = await get_session_manager()
+        await manager.add_message(session_id, "user", query)
+        await manager.add_message(session_id, "assistant", answer)
+    except Exception as e:
+        logger.debug("session_save_skipped", error=str(e))
 
 
 async def _classify_query(request: QueryRequest) -> RouterClassification:
     """
-    Stage 1: Classify the query into domain, type, jurisdiction.
+    Stage 2: Classify the query into domain, type, jurisdiction.
 
-    Sprint 1: Uses domain_hint if provided, otherwise defaults to GENERAL.
+    Sprint 4: Uses domain_hint if provided, otherwise defaults to GENERAL.
     Sprint 5: Will use fine-tuned DistilBERT classifier.
     """
     # TODO (Sprint 5): Replace with actual router model
@@ -217,55 +389,51 @@ async def _retrieve_context(
     classification: RouterClassification,
 ) -> list:
     """
-    Stage 2: Retrieve relevant legal context from Qdrant.
+    Stage 3: Retrieve relevant legal context via hybrid search.
 
-    Sprint 3: Dense retrieval via Qdrant.
-    Sprint 3+: Will add Elasticsearch BM25 + RRF fusion.
-    Sprint 5: Will add Neo4j knowledge graph traversal.
+    Uses Qdrant (dense) + Elasticsearch (BM25) + cross-encoder re-ranking.
     """
     from app.services.retrieval import get_retrieval_service
 
     service = await get_retrieval_service()
 
+    domain = classification.domain.value
+    if domain == "general":
+        domain = None
+
     results = await service.search(
         query=request.query,
-        domain=classification.domain.value if classification.domain.value != "general" else None,
+        domain=domain,
         jurisdiction=classification.jurisdiction,
     )
 
     return results
 
 
-async def _generate_response(
-    request: QueryRequest,
-    classification: RouterClassification,
-    context: list,
-    session_id: str,
-) -> QueryResponse:
-    """
-    Stage 3: Generate a structured legal response using LLM + retrieved context.
-
-    Sprint 4: Uses LLM (vLLM/OpenAI) to synthesize natural language answer.
-    Falls back to context-only formatting if no LLM is available.
-    """
-    from app.services.retrieval import get_retrieval_service
-    from app.services.llm_service import get_llm_service
-
-    # Build applicable_law and precedents from retrieved context (for structured fields)
-    applicable_laws = []
+def _build_applicable_laws(context: list) -> list[ApplicableLaw]:
+    """Extract ApplicableLaw objects from retrieval results."""
+    laws = []
     for result in context:
         if result.source_type == "act" and result.section_number:
-            applicable_laws.append(
+            laws.append(
                 ApplicableLaw(
                     act=result.act_name or "Unknown Act",
                     section=result.section_number,
                     text=result.text[:500] if result.text else "",
-                    status=LegalStatus(result.status) if result.status in ["active", "repealed", "amended"] else LegalStatus.ACTIVE,
+                    status=(
+                        LegalStatus(result.status)
+                        if result.status in ["active", "repealed", "amended"]
+                        else LegalStatus.ACTIVE
+                    ),
                 )
             )
+    return laws
 
+
+def _build_precedents(context: list) -> list[Precedent]:
+    """Extract Precedent objects from retrieval results."""
     precedents = []
-    seen_cases = set()
+    seen_cases: set[str] = set()
     for result in context:
         if result.source_type == "judgment" and result.case_name:
             if result.case_name in seen_cases:
@@ -280,24 +448,89 @@ async def _generate_response(
                     relevance=result.text[:300] if result.text else "",
                 )
             )
+    return precedents
 
-    # Format context for the LLM
+
+async def _generate_response(
+    request: QueryRequest,
+    classification: RouterClassification,
+    context: list,
+    session_id: str,
+    history: list[dict] | None = None,
+) -> QueryResponse:
+    """
+    Stage 4: Generate the full legal response using LLM.
+
+    Steps:
+        1. Build structured data from retrieval results
+        2. Format context for the LLM prompt
+        3. Call LLM with conversation history
+        4. Parse LLM output for additional structured citations
+        5. Merge retrieval-based and LLM-extracted citations
+        6. Build QueryResponse
+    """
+    from app.services.retrieval import get_retrieval_service
+    from app.services.llm_service import get_llm_service
+    from app.services.response_parser import parse_llm_response, merge_parsed_with_retrieval
+
+    # Step 1: Build structured data from retrieval
+    applicable_laws = _build_applicable_laws(context)
+    precedents_list = _build_precedents(context)
+
+    # Step 2: Format context for LLM
     retrieval_service = await get_retrieval_service()
     formatted_context = retrieval_service.format_context_for_llm(context)
 
-    # Generate answer using LLM
+    # Step 3: Generate answer using LLM (with conversation history)
     llm_service = await get_llm_service()
     llm_result = await llm_service.generate_legal_response(
         query=request.query,
         context=formatted_context,
         jurisdiction=classification.jurisdiction,
+        history=history,
     )
 
     answer = llm_result.get("answer", "")
     llm_used = llm_result.get("llm_used", False)
 
+    # Step 4: Parse LLM output for additional citations
+    parsed = parse_llm_response(answer)
+    merged = merge_parsed_with_retrieval(parsed, applicable_laws, precedents_list)
+
+    # Step 5: Add LLM-extracted citations not already in retrieval
+    for law_dict in merged["new_laws"]:
+        applicable_laws.append(
+            ApplicableLaw(
+                act=law_dict["act"],
+                section=law_dict["section"],
+                text=law_dict.get("text", ""),
+            )
+        )
+
+    for prec_dict in merged["new_precedents"]:
+        precedents_list.append(
+            Precedent(
+                case=prec_dict["case"],
+                year=prec_dict.get("year", 2024),
+                court=prec_dict.get("court", "Supreme Court"),
+                citation=prec_dict.get("citation", ""),
+                relevance=prec_dict.get("relevance", ""),
+            )
+        )
+
+    # Extract procedure steps from parsed response
+    procedure_steps = []
+    for step_dict in parsed.get("procedure", []):
+        procedure_steps.append(
+            ProcedureStep(
+                step=step_dict["step"],
+                action=step_dict["action"],
+                details=step_dict.get("details", ""),
+            )
+        )
+
     # Determine confidence
-    if not applicable_laws and not precedents:
+    if not applicable_laws and not precedents_list:
         confidence = Confidence.LOW
     elif llm_used:
         confidence = Confidence.HIGH
@@ -307,8 +540,8 @@ async def _generate_response(
     return QueryResponse(
         answer=answer,
         applicable_law=applicable_laws,
-        precedents=precedents,
-        procedure=[],
+        precedents=precedents_list,
+        procedure=procedure_steps,
         jurisdiction_notes=(
             f"Jurisdiction: {classification.jurisdiction or 'Central Law (state not specified)'}. "
             "For state-specific variations, please specify your state."
@@ -322,16 +555,12 @@ async def _generate_response(
 
 async def _verify_citations(response: QueryResponse) -> QueryResponse:
     """
-    Stage 4: Verify all citations in the response.
+    Stage 5: Verify all citations in the response.
 
-    Sprint 1: Passes through without verification.
+    Sprint 4: Passes through without verification.
     Sprint 6: Will check every section number and case name against the database.
     """
     # TODO (Sprint 6): Implement citation verification
-    # - Check section numbers exist in acts DB
-    # - Check case names exist in judgments DB
-    # - Check if cited cases have been overruled
-    # - Regenerate if failure rate > CITATION_FAILURE_THRESHOLD
     return response
 
 
@@ -340,9 +569,9 @@ async def _translate_response(
     target_language: Language,
 ) -> QueryResponse:
     """
-    Stage 5: Translate the response to the user's preferred language.
+    Stage 6: Translate the response to the user's preferred language.
 
-    Sprint 1: Returns response unchanged.
+    Sprint 4: Returns response unchanged.
     Sprint 11: Will use IndicTrans2 for Hindi, Tamil, Telugu, Bengali, Marathi.
     """
     # TODO (Sprint 11): Implement translation via IndicTrans2

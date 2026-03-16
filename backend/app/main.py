@@ -4,8 +4,8 @@ NyayaMitra — FastAPI Application Entry Point.
 This is the main application file. It configures:
 - CORS middleware for frontend access
 - Request logging middleware
-- Health check endpoints
-- API router mounting
+- Health check, query, and session endpoints
+- Application lifespan (startup/shutdown)
 
 Run locally:
     uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload
@@ -24,9 +24,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app.config import settings
-from app.routers import health, query
+from app.routers import health, query, session
 
-# ─── Structured Logging Setup ────────────────────────────────────────────────
+# --- Structured Logging Setup ------------------------------------------------
 structlog.configure(
     processors=[
         structlog.contextvars.merge_contextvars,
@@ -45,16 +45,16 @@ structlog.configure(
 logger = structlog.get_logger()
 
 
-# ─── Application Lifespan ────────────────────────────────────────────────────
+# --- Application Lifespan ----------------------------------------------------
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """
     Startup and shutdown events.
 
-    Startup: Initialize database connections, load models, warm up caches.
-    Shutdown: Close connections gracefully.
+    Startup: Initialize database, warm up services.
+    Shutdown: Close all connections gracefully.
     """
-    # ── Startup ──
+    # -- Startup --
     logger.info(
         "nyayamitra_starting",
         app_name=settings.APP_NAME,
@@ -68,28 +68,49 @@ async def lifespan(app: FastAPI):
 
     await init_db()
 
-    # TODO (Sprint 3): Initialize Qdrant client
-    # TODO (Sprint 3): Initialize Elasticsearch client
+    # Initialize Redis session manager (non-fatal if Redis unavailable)
+    try:
+        from app.services.session import get_session_manager
+
+        await get_session_manager()
+        logger.info("session_manager_ready")
+    except Exception as e:
+        logger.warning("session_manager_init_skipped", error=str(e))
+
     # TODO (Sprint 5): Initialize Neo4j driver
-    # TODO (Sprint 4): Initialize Redis client
 
     logger.info("nyayamitra_ready", port=settings.BACKEND_PORT)
 
     yield
 
-    # ── Shutdown ──
+    # -- Shutdown --
     logger.info("nyayamitra_shutting_down")
 
-    # Close retrieval service (Elasticsearch aiohttp connector, etc.)
-    from app.services.retrieval import close_retrieval_service
+    # Close retrieval service (Elasticsearch aiohttp connector)
+    try:
+        from app.services.retrieval import close_retrieval_service
 
-    await close_retrieval_service()
+        await close_retrieval_service()
+    except Exception as e:
+        logger.warning("retrieval_close_error", error=str(e))
+
+    # Close session manager (Redis connection)
+    try:
+        from app.services.session import close_session_manager
+
+        await close_session_manager()
+    except Exception as e:
+        logger.warning("session_close_error", error=str(e))
 
     # Close database connection pool
     await engine.dispose()
 
+    logger.info("nyayamitra_stopped")
 
-# ─── Create FastAPI Application ──────────────────────────────────────────────
+    logger.info("nyayamitra_shutdown_complete")
+
+
+# --- Create FastAPI Application -----------------------------------------------
 app = FastAPI(
     title="NyayaMitra API",
     description="AI-Powered Legal Assistant for Indian Citizens",
@@ -100,7 +121,7 @@ app = FastAPI(
 )
 
 
-# ─── CORS Middleware ─────────────────────────────────────────────────────────
+# --- CORS Middleware ----------------------------------------------------------
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_origins_list,
@@ -110,7 +131,7 @@ app.add_middleware(
 )
 
 
-# ─── Request Logging Middleware ──────────────────────────────────────────────
+# --- Request Logging Middleware -----------------------------------------------
 @app.middleware("http")
 async def request_logging_middleware(request: Request, call_next):
     """Log every request with timing, method, path, and status code."""
@@ -161,23 +182,30 @@ async def request_logging_middleware(request: Request, call_next):
     return response
 
 
-# ─── Register Routers ────────────────────────────────────────────────────────
+# --- Register Routers ---------------------------------------------------------
 app.include_router(health.router, tags=["Health"])
 app.include_router(query.router, tags=["Query"])
+app.include_router(session.router, tags=["Sessions"])
 
 # TODO (Sprint 6): Mount feedback router
 # app.include_router(feedback.router, prefix="/api/v1", tags=["Feedback"])
 
 
-# ─── Root Endpoint ───────────────────────────────────────────────────────────
+# --- Root Endpoint ------------------------------------------------------------
 @app.get("/", tags=["Root"])
 async def root():
-    """Root endpoint — basic API info."""
+    """Root endpoint - basic API info."""
     return {
         "name": settings.APP_NAME,
         "version": settings.APP_VERSION,
         "description": "AI-Powered Legal Assistant for Indian Citizens",
         "docs": "/docs" if settings.APP_DEBUG else "disabled",
+        "endpoints": {
+            "query": "/api/v1/query",
+            "stream": "/api/v1/query/stream",
+            "sessions": "/api/v1/sessions",
+            "health": "/api/v1/health",
+        },
         "disclaimer": (
             "This is legal information, not legal advice. "
             "For case-specific advice, consult a qualified advocate."
