@@ -1,0 +1,39 @@
+{
+  "model_name": "distilbert-base-uncased",
+  "num_domains": 8,
+  "num_qtypes": 3,
+  "domain_labels": [
+    "criminal",
+    "property",
+    "family",
+    "constitutional",
+    "labor",
+    "consumer",
+    "ip",
+    "general"
+  ],
+  "qtype_labels": [
+    "rights",
+    "procedure",
+    "case_outcome"
+  ],
+  "domain_to_id": {
+    "criminal": 0,
+    "property": 1,
+    "family": 2,
+    "constitutional": 3,
+    "labor": 4,
+    "consumer": 5,
+    "ip": 6,
+    "general": 7
+  },
+  "qtype_to_id": {
+    "rights": 0,
+    "procedure": 1,
+    "case_outcome": 2
+  },
+  "best_epoch": 13,
+  "best_domain_acc": 0.7623762376237624,
+  "max_length": 128,
+  "training_samples": 403
+}

@@ -3,8 +3,8 @@ NyayaMitra — Query Router (API Endpoint).
 
 Main endpoint for legal questions. Orchestrates the full pipeline:
 
-    User Query → Router Classification → Hybrid Retrieval → Context Assembly
-    → LLM Generation → Response Parsing → Citation Verification → Response
+    User Query -> Router Classification -> Hybrid Retrieval -> Graph Enrichment
+    -> Context Assembly -> LLM Generation -> Response Parsing -> Citation Verification -> Response
 
 Endpoints:
     POST /api/v1/query          Full legal query (JSON response)
@@ -14,7 +14,7 @@ Sprint history:
     Sprint 1: Endpoint skeleton with mock response
     Sprint 3: Hybrid retrieval (Qdrant + ES + cross-encoder)
     Sprint 4: Real LLM generation + streaming + session history + response parsing
-    Sprint 5: Query router (DistilBERT classifier) + knowledge graph
+    Sprint 5: Query router (DistilBERT + keyword hybrid) + knowledge graph enrichment
     Sprint 6: Citation verification
 """
 
@@ -46,9 +46,22 @@ logger = structlog.get_logger()
 router = APIRouter(prefix="/api/v1")
 
 
-# ═══════════════════════════════════════════════════════════════════════════════
-# POST /api/v1/query — Full JSON Response
-# ═══════════════════════════════════════════════════════════════════════════════
+# Map router domain strings to LegalDomain enum
+_DOMAIN_MAP = {
+    "criminal": LegalDomain.CRIMINAL,
+    "property": LegalDomain.PROPERTY,
+    "family": LegalDomain.FAMILY,
+    "constitutional": LegalDomain.CONSTITUTIONAL,
+    "labor": LegalDomain.LABOR,
+    "consumer": LegalDomain.CONSUMER,
+    "ip": LegalDomain.IP,
+    "general": LegalDomain.GENERAL,
+}
+
+
+# =====================================================================
+# POST /api/v1/query -- Full JSON Response
+# =====================================================================
 
 
 @router.post("/query", response_model=QueryResponse)
@@ -57,18 +70,19 @@ async def legal_query(request: QueryRequest) -> QueryResponse:
     Process a legal query through the full NyayaMitra pipeline.
 
     Pipeline:
-        1. Session — load or create conversation session
-        2. Query Router — classify domain, jurisdiction, query type
-        3. Hybrid Retrieval — fetch relevant acts, judgments, procedures
-        4. LLM Generation — generate structured legal response
-        5. Response Parsing — extract citations from LLM output
-        6. Citation Verification — verify every citation is real
-        7. Translation — translate response if needed
-        8. Session — save messages to history
+        1. Session -- load or create conversation session
+        2. Query Router -- classify domain, jurisdiction, query type
+        3. Hybrid Retrieval -- fetch relevant acts, judgments
+        4. Graph Enrichment -- add interpreting judgments, principles
+        5. LLM Generation -- generate structured legal response
+        6. Response Parsing -- extract citations from LLM output
+        7. Citation Verification -- verify every citation is real
+        8. Translation -- translate response if needed
+        9. Session -- save messages to history
     """
     start_time = time.time()
 
-    # ── Stage 1: Session Management ──────────────────────────────────
+    # -- Stage 1: Session Management --
     session_id = request.session_id or str(uuid.uuid4())
     history = await _load_session_history(session_id)
 
@@ -83,7 +97,7 @@ async def legal_query(request: QueryRequest) -> QueryResponse:
     )
 
     try:
-        # ── Stage 2: Query Router ────────────────────────────────────
+        # -- Stage 2: Query Router --
         classification = await _classify_query(request)
         logger.info(
             "query_classified",
@@ -92,11 +106,14 @@ async def legal_query(request: QueryRequest) -> QueryResponse:
             confidence=classification.confidence,
         )
 
-        # ── Stage 3: Hybrid Retrieval ────────────────────────────────
+        # -- Stage 3: Hybrid Retrieval --
         retrieved_context = await _retrieve_context(request, classification)
         logger.info("context_retrieved", num_chunks=len(retrieved_context))
 
-        # ── Stage 4: LLM Generation + Response Parsing ──────────────
+        # -- Stage 4: Graph Enrichment --
+        retrieved_context = await _enrich_with_graph(retrieved_context)
+
+        # -- Stage 5: LLM Generation + Response Parsing --
         response = await _generate_response(
             request, classification, retrieved_context, session_id, history
         )
@@ -108,15 +125,15 @@ async def legal_query(request: QueryRequest) -> QueryResponse:
             confidence=response.confidence.value,
         )
 
-        # ── Stage 5: Citation Verification ───────────────────────────
+        # -- Stage 6: Citation Verification --
         if settings.CITATION_VERIFICATION_ENABLED:
             response = await _verify_citations(response)
 
-        # ── Stage 6: Translation ─────────────────────────────────────
+        # -- Stage 7: Translation --
         if request.language != Language.ENGLISH:
             response = await _translate_response(response, request.language)
 
-        # ── Stage 7: Save to Session ─────────────────────────────────
+        # -- Stage 8: Save to Session --
         await _save_to_session(session_id, request.query, response.answer)
 
         duration_ms = round((time.time() - start_time) * 1000, 2)
@@ -145,9 +162,9 @@ async def legal_query(request: QueryRequest) -> QueryResponse:
         )
 
 
-# ═══════════════════════════════════════════════════════════════════════════════
-# POST /api/v1/query/stream — Real SSE Streaming
-# ═══════════════════════════════════════════════════════════════════════════════
+# =====================================================================
+# POST /api/v1/query/stream -- Real SSE Streaming
+# =====================================================================
 
 
 @router.post("/query/stream")
@@ -159,13 +176,13 @@ async def legal_query_stream(request: QueryRequest):
     data (applicable_law, precedents, procedure) as final events.
 
     SSE event types:
-        text        — answer text chunk (streamed)
-        applicable_law — structured law citations (after streaming)
-        precedents  — structured case citations (after streaming)
-        procedure   — structured procedure steps (after streaming)
-        metadata    — confidence, jurisdiction notes, session_id
-        done        — signals end of stream
-        error       — error occurred during processing
+        text           -- answer text chunk (streamed)
+        applicable_law -- structured law citations (after streaming)
+        precedents     -- structured case citations (after streaming)
+        procedure      -- structured procedure steps (after streaming)
+        metadata       -- confidence, jurisdiction notes, session_id, router info
+        done           -- signals end of stream
+        error          -- error occurred during processing
     """
     start_time = time.time()
     session_id = request.session_id or str(uuid.uuid4())
@@ -181,17 +198,15 @@ async def legal_query_stream(request: QueryRequest):
             # Retrieve context
             retrieved_context = await _retrieve_context(request, classification)
 
+            # Graph enrichment
+            retrieved_context = await _enrich_with_graph(retrieved_context)
+
             # Build structured data from retrieval results
             applicable_laws = _build_applicable_laws(retrieved_context)
             precedents_list = _build_precedents(retrieved_context)
 
-            # Format context for LLM
-            from app.services.retrieval import get_retrieval_service
-
-            retrieval_service = await get_retrieval_service()
-            formatted_context = retrieval_service.format_context_for_llm(
-                retrieved_context
-            )
+            # Format context for LLM (retrieval + graph)
+            formatted_context = await _format_full_context(retrieved_context)
 
             # Stream LLM response
             from app.services.llm_service import get_llm_service
@@ -296,11 +311,14 @@ async def legal_query_stream(request: QueryRequest):
                     "type": "metadata",
                     "content": {
                         "confidence": confidence.value,
+                        "domain": classification.domain.value,
+                        "query_type": classification.query_type.value,
                         "jurisdiction_notes": (
                             f"Jurisdiction: {classification.jurisdiction or 'Central Law'}. "
                             "For state-specific variations, specify your state."
                         ),
                         "session_id": session_id,
+                        "router_confidence": classification.confidence,
                     },
                 }
             )
@@ -338,9 +356,9 @@ async def legal_query_stream(request: QueryRequest):
     )
 
 
-# ═══════════════════════════════════════════════════════════════════════════════
+# =====================================================================
 # Pipeline Stage Implementations
-# ═══════════════════════════════════════════════════════════════════════════════
+# =====================================================================
 
 
 async def _load_session_history(session_id: str) -> list[dict]:
@@ -371,17 +389,46 @@ async def _classify_query(request: QueryRequest) -> RouterClassification:
     """
     Stage 2: Classify the query into domain, type, jurisdiction.
 
-    Sprint 4: Uses domain_hint if provided, otherwise defaults to GENERAL.
-    Sprint 5: Will use fine-tuned DistilBERT classifier.
+    Uses the trained DistilBERT model with keyword fallback.
+    Falls back to domain_hint if provided.
     """
-    # TODO (Sprint 5): Replace with actual router model
-    return RouterClassification(
-        domain=request.domain_hint or LegalDomain.GENERAL,
-        query_type="general",
-        jurisdiction=request.jurisdiction,
-        language=request.language,
-        confidence=0.5 if request.domain_hint is None else 0.95,
-    )
+    try:
+        from app.services.query_router import get_query_router
+
+        router_service = await get_query_router()
+        result = router_service.classify(request.query)
+
+        # Map string domain to LegalDomain enum
+        domain_str = result.get("domain", "general")
+        domain = _DOMAIN_MAP.get(domain_str, LegalDomain.GENERAL)
+
+        # If user provided a domain_hint, prefer it over low-confidence router
+        if request.domain_hint and result.get("confidence", 0) < 0.8:
+            domain = request.domain_hint
+
+        # Use router-detected jurisdiction, unless user explicitly provided one
+        jurisdiction = request.jurisdiction or result.get("jurisdiction", "central")
+        if jurisdiction == "central":
+            jurisdiction = None  # None = no state filter in retrieval
+
+        return RouterClassification(
+            domain=domain,
+            query_type=result.get("query_type", "rights"),
+            jurisdiction=jurisdiction,
+            language=request.language,
+            confidence=result.get("confidence", 0.5),
+        )
+
+    except Exception as e:
+        logger.warning("router_fallback", error=str(e))
+        # Fallback: use domain_hint or default to GENERAL
+        return RouterClassification(
+            domain=request.domain_hint or LegalDomain.GENERAL,
+            query_type="general",
+            jurisdiction=request.jurisdiction,
+            language=request.language,
+            confidence=0.5 if request.domain_hint is None else 0.95,
+        )
 
 
 async def _retrieve_context(
@@ -408,6 +455,53 @@ async def _retrieve_context(
     )
 
     return results
+
+
+async def _enrich_with_graph(results: list) -> list:
+    """
+    Stage 4: Enrich retrieval results with knowledge graph context.
+
+    Adds interpreting judgments, legal principles, and related cases
+    to each retrieval result using the Neo4j knowledge graph.
+    Non-fatal if Neo4j is unavailable.
+    """
+    try:
+        from app.services.graph_service import get_graph_service
+
+        graph_service = await get_graph_service()
+        if graph_service.available:
+            results = await graph_service.enrich_results(results)
+    except Exception as e:
+        logger.debug("graph_enrichment_skipped", error=str(e))
+
+    return results
+
+
+async def _format_full_context(results: list) -> str:
+    """
+    Format retrieval results + graph context for the LLM prompt.
+
+    Combines the standard retrieval context with knowledge graph
+    enrichment context (interpreting judgments, legal principles).
+    """
+    from app.services.retrieval import get_retrieval_service
+
+    retrieval_service = await get_retrieval_service()
+    formatted = retrieval_service.format_context_for_llm(results)
+
+    # Append graph context if available
+    try:
+        from app.services.graph_service import get_graph_service
+
+        graph_service = await get_graph_service()
+        if graph_service.available:
+            graph_context = graph_service.format_graph_context_for_llm(results)
+            if graph_context:
+                formatted += graph_context
+    except Exception as e:
+        logger.debug("graph_context_format_skipped", error=str(e))
+
+    return formatted
 
 
 def _build_applicable_laws(context: list) -> list[ApplicableLaw]:
@@ -459,17 +553,16 @@ async def _generate_response(
     history: list[dict] | None = None,
 ) -> QueryResponse:
     """
-    Stage 4: Generate the full legal response using LLM.
+    Stage 5: Generate the full legal response using LLM.
 
     Steps:
         1. Build structured data from retrieval results
-        2. Format context for the LLM prompt
+        2. Format context for the LLM prompt (retrieval + graph)
         3. Call LLM with conversation history
         4. Parse LLM output for additional structured citations
         5. Merge retrieval-based and LLM-extracted citations
         6. Build QueryResponse
     """
-    from app.services.retrieval import get_retrieval_service
     from app.services.llm_service import get_llm_service
     from app.services.response_parser import parse_llm_response, merge_parsed_with_retrieval
 
@@ -477,9 +570,8 @@ async def _generate_response(
     applicable_laws = _build_applicable_laws(context)
     precedents_list = _build_precedents(context)
 
-    # Step 2: Format context for LLM
-    retrieval_service = await get_retrieval_service()
-    formatted_context = retrieval_service.format_context_for_llm(context)
+    # Step 2: Format context for LLM (includes graph enrichment)
+    formatted_context = await _format_full_context(context)
 
     # Step 3: Generate answer using LLM (with conversation history)
     llm_service = await get_llm_service()
@@ -544,6 +636,7 @@ async def _generate_response(
         procedure=procedure_steps,
         jurisdiction_notes=(
             f"Jurisdiction: {classification.jurisdiction or 'Central Law (state not specified)'}. "
+            f"Domain: {classification.domain.value}. "
             "For state-specific variations, please specify your state."
         ),
         confidence=confidence,
@@ -555,9 +648,9 @@ async def _generate_response(
 
 async def _verify_citations(response: QueryResponse) -> QueryResponse:
     """
-    Stage 5: Verify all citations in the response.
+    Stage 6: Verify all citations in the response.
 
-    Sprint 4: Passes through without verification.
+    Sprint 5: Passes through without verification.
     Sprint 6: Will check every section number and case name against the database.
     """
     # TODO (Sprint 6): Implement citation verification
@@ -569,9 +662,9 @@ async def _translate_response(
     target_language: Language,
 ) -> QueryResponse:
     """
-    Stage 6: Translate the response to the user's preferred language.
+    Stage 7: Translate the response to the user's preferred language.
 
-    Sprint 4: Returns response unchanged.
+    Sprint 5: Returns response unchanged.
     Sprint 11: Will use IndicTrans2 for Hindi, Tamil, Telugu, Bengali, Marathi.
     """
     # TODO (Sprint 11): Implement translation via IndicTrans2

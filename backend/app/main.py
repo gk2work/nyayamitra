@@ -77,7 +77,26 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.warning("session_manager_init_skipped", error=str(e))
 
-    # TODO (Sprint 5): Initialize Neo4j driver
+    # Initialize Neo4j graph service (non-fatal if unavailable)
+    try:
+        from app.services.graph_service import get_graph_service
+
+        graph_svc = await get_graph_service()
+        if graph_svc.available:
+            logger.info("graph_service_ready")
+        else:
+            logger.warning("graph_service_unavailable_at_startup")
+    except Exception as e:
+        logger.warning("graph_service_init_skipped", error=str(e))
+
+    # Pre-load query router model (non-fatal if model not trained yet)
+    try:
+        from app.services.query_router import get_query_router
+
+        await get_query_router()
+        logger.info("query_router_ready")
+    except Exception as e:
+        logger.warning("query_router_init_skipped", error=str(e))
 
     logger.info("nyayamitra_ready", port=settings.BACKEND_PORT)
 
@@ -93,6 +112,14 @@ async def lifespan(app: FastAPI):
         await close_retrieval_service()
     except Exception as e:
         logger.warning("retrieval_close_error", error=str(e))
+
+    # Close graph service (Neo4j driver)
+    try:
+        from app.services.graph_service import close_graph_service
+
+        await close_graph_service()
+    except Exception as e:
+        logger.warning("graph_close_error", error=str(e))
 
     # Close session manager (Redis connection)
     try:

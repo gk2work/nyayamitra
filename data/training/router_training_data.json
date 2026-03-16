@@ -1,0 +1,3026 @@
+[
+    {
+        "query": "Can police arrest me without a warrant?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the punishment for murder?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How do I file an FIR?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What happens if police refuse to file my FIR?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the law on dowry death?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are my rights if I am arrested?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Is adultery still a crime in India?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the penalty for theft?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is cheating under IPC Section 420?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is Section 498A about cruelty by husband?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "When can bail be granted in non-bailable offences?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is anticipatory bail?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to apply for anticipatory bail?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the punishment for rape?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Is Section 377 still valid for homosexuality?",
+        "domain": "criminal",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are the guidelines against misuse of 498A?",
+        "domain": "criminal",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is causing death by negligence?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can a woman be arrested at night?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How long can police keep someone without producing before magistrate?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the difference between cognizable and non-cognizable offence?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the procedure to file a criminal complaint?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is defamation under Indian law?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is criminal intimidation?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the punishment for kidnapping?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is rioting under IPC?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is criminal conspiracy?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the punishment for attempt to murder?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is culpable homicide not amounting to murder?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the charge for hit and run accident?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can I get bail if charged under NDPS Act?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the procedure after FIR is filed?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is a chargesheet?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What happens during police investigation?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are my rights during police interrogation?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can police search my house without a warrant?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the new Bharatiya Nyaya Sanhita?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How is BNS different from IPC?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What did the Supreme Court say about arrest guidelines?",
+        "domain": "criminal",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the D.K. Basu judgment about?",
+        "domain": "criminal",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What did Lalita Kumari case decide about FIR?",
+        "domain": "criminal",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the punishment for drunk driving?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Is cyberstalking a crime in India?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the punishment for forgery?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is abetment of suicide under Indian law?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can a juvenile be tried as an adult?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the penalty for drug possession?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are rights of an undertrial prisoner?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the process of recording confession?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is discharge in criminal proceedings?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the difference between summons and warrant case?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is a zero FIR?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can I file FIR online in Maharashtra?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "Maharashtra"
+    },
+    {
+        "query": "Where to file a criminal case in Delhi?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "Delhi"
+    },
+    {
+        "query": "What is the crime rate situation in UP?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "Uttar Pradesh"
+    },
+    {
+        "query": "Police complaint procedure in Karnataka",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "Karnataka"
+    },
+    {
+        "query": "What is the transfer of property defined as?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the doctrine of lis pendens?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What notice period is needed to end a lease?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is a valid contract under Indian law?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How do I get compensation for breach of contract?",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Do builders need RERA registration?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What remedy if builder delays flat possession?",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the legal definition of sale of property?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are my rights as a tenant?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can a landlord evict me without notice?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is immovable property?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How is stamp duty calculated?",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are the elements of a valid agreement?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the difference between sale and gift?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can a minor enter into a contract?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is an easement right?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is adverse possession?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to register a property in India?",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the process of property mutation?",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is a sale deed?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is a power of attorney for property?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is encumbrance certificate?",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to check if a property has legal disputes?",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the rent control act?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can NRI buy property in India?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the RERA complaint process?",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is benami property?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is specific performance of contract?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to evict a tenant in Maharashtra?",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "Maharashtra"
+    },
+    {
+        "query": "Property registration charges in Karnataka",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "Karnataka"
+    },
+    {
+        "query": "Stamp duty rates in Delhi",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "Delhi"
+    },
+    {
+        "query": "RERA registration in Tamil Nadu",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "Tamil Nadu"
+    },
+    {
+        "query": "Tenant rights in Bangalore",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "Karnataka"
+    },
+    {
+        "query": "Land acquisition rules in UP",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "Uttar Pradesh"
+    },
+    {
+        "query": "What are grounds for divorce under Hindu law?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can I get maintenance during divorce?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What protection does domestic violence law give?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can people of different religions marry?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How much maintenance can a wife claim under 125 CrPC?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the minimum age for marriage?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What constitutes domestic violence?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to file for mutual consent divorce?",
+        "domain": "family",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are child custody rights for mothers?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can a husband claim maintenance from wife?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the procedure for court marriage?",
+        "domain": "family",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Is dowry demand a criminal offence?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What rights does a woman have to husband's property?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to get a protection order under DV Act?",
+        "domain": "family",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the waiting period before remarriage?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the Hindu Succession Act?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are the inheritance rights of daughters?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How is Muslim divorce different from Hindu divorce?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is triple talaq law?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the Guardians and Wards Act?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to apply for child custody?",
+        "domain": "family",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is alimony in Indian law?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can a wife claim share in husband's ancestral property?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is restitution of conjugal rights?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is judicial separation?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to adopt a child in India?",
+        "domain": "family",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the process of legal guardianship?",
+        "domain": "family",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the Prohibition of Child Marriage Act?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Is live-in relationship legal in India?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are the grounds for annulment of marriage?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How is maintenance amount decided by courts?",
+        "domain": "family",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What did the Supreme Court say about equal property rights for daughters?",
+        "domain": "family",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Divorce procedure in Mumbai family court",
+        "domain": "family",
+        "query_type": "procedure",
+        "jurisdiction": "Maharashtra"
+    },
+    {
+        "query": "Family court fees in Delhi",
+        "domain": "family",
+        "query_type": "procedure",
+        "jurisdiction": "Delhi"
+    },
+    {
+        "query": "Maintenance laws for Muslim women",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is right to equality under Constitution?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the right to life and personal liberty?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is freedom of speech in India?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Is privacy a fundamental right?",
+        "domain": "constitutional",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to file a PIL in Supreme Court?",
+        "domain": "constitutional",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to get information under RTI?",
+        "domain": "constitutional",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can government restrict online speech?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the right to education?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are directive principles of state policy?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can fundamental rights be suspended in emergency?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is Article 370?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the right against exploitation?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How does judicial review work in India?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the difference between fundamental rights and DPSP?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to amend the Constitution?",
+        "domain": "constitutional",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is Article 21 about?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is Article 14?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is Article 19?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is Article 32?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the power of Supreme Court under Article 142?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the basic structure doctrine?",
+        "domain": "constitutional",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What did the Kesavananda Bharati case decide?",
+        "domain": "constitutional",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What did Puttaswamy judgment say about privacy?",
+        "domain": "constitutional",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the Maneka Gandhi case about?",
+        "domain": "constitutional",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is writ of habeas corpus?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is writ of mandamus?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the process to file writ petition in High Court?",
+        "domain": "constitutional",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is reservation under the Constitution?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the right to freedom of religion?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the right to constitutional remedies?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the separation of powers in India?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the procedure to impeach the President?",
+        "domain": "constitutional",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the role of the Election Commission?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are the qualifications to become President?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How does RTI work in Maharashtra?",
+        "domain": "constitutional",
+        "query_type": "procedure",
+        "jurisdiction": "Maharashtra"
+    },
+    {
+        "query": "PIL filing procedure in Delhi High Court",
+        "domain": "constitutional",
+        "query_type": "procedure",
+        "jurisdiction": "Delhi"
+    },
+    {
+        "query": "What is the Shreya Singhal case about?",
+        "domain": "constitutional",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the legal definition of a strike?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can an employer terminate a worker without notice?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the law against sexual harassment at workplace?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are fair wage principles?",
+        "domain": "labor",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to file a sexual harassment complaint at work?",
+        "domain": "labor",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the maximum working hours per week?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are overtime payment rules?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can employer deduct wages without consent?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to raise an industrial dispute?",
+        "domain": "labor",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are maternity leave entitlements?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are the rights of contract workers?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the Internal Complaints Committee?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the minimum wage in India?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the Factories Act about?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are employee rights regarding PF?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the ESI scheme?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the Payment of Gratuity Act?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can a woman work night shifts?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the Vishaka judgment about?",
+        "domain": "labor",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to file a complaint with the labor commissioner?",
+        "domain": "labor",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is unfair labor practice?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is a lockout?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is lay-off and retrenchment?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are the new labor codes of 2020?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can employer fire during probation period?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the process to register a trade union?",
+        "domain": "labor",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the Equal Remuneration Act?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is POSH Act compliance requirement?",
+        "domain": "labor",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Labor laws for IT companies in Bangalore",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "Karnataka"
+    },
+    {
+        "query": "Minimum wages in Maharashtra 2024",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "Maharashtra"
+    },
+    {
+        "query": "Labor court procedure in Delhi",
+        "domain": "labor",
+        "query_type": "procedure",
+        "jurisdiction": "Delhi"
+    },
+    {
+        "query": "Where do I file a consumer complaint?",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the definition of consumer under CPA 2019?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Is medical negligence covered under consumer law?",
+        "domain": "consumer",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the maximum claim in district consumer court?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What rights do consumers have against defective products?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How long to file a consumer complaint?",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can I file consumer complaint online?",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are unfair trade practices?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What compensation for deficient services?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can a builder be held liable under consumer protection?",
+        "domain": "consumer",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Difference between district state and national consumer commission?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can I claim refund for cancelled flight?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is product liability under CPA 2019?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is misleading advertisement?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is e-commerce consumer protection?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to get refund from online shopping?",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can I sue my bank under consumer law?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is deficiency of service?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is class action under consumer protection?",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the Central Consumer Protection Authority?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to complain about food adulteration?",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the penalty for misleading ads?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can insurance companies be sued under consumer law?",
+        "domain": "consumer",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the Indian Medical Association case about?",
+        "domain": "consumer",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are consumer rights in telecom services?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to file consumer complaint in Mumbai?",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "jurisdiction": "Maharashtra"
+    },
+    {
+        "query": "Consumer court fees in Delhi",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "jurisdiction": "Delhi"
+    },
+    {
+        "query": "What is copyright under Indian law?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What constitutes fair use under copyright?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can I be prosecuted for offensive social media posts?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Are court judgments protected by copyright?",
+        "domain": "ip",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is intermediary liability for user content?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to register a trademark?",
+        "domain": "ip",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the punishment for online fraud?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can someone use my photo without permission?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are data protection laws in India?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the penalty for software piracy?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the IT Act Section 66A controversy?",
+        "domain": "ip",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to file a patent in India?",
+        "domain": "ip",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the Digital Personal Data Protection Act?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is cyber defamation?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to report cybercrime in India?",
+        "domain": "ip",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the punishment for hacking?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can social media companies be held liable for user posts?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are safe harbour provisions for internet companies?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to send a copyright takedown notice?",
+        "domain": "ip",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is a design patent?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is geographical indication?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the Eastern Book Company case about?",
+        "domain": "ip",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What did Shreya Singhal case decide about 66A?",
+        "domain": "ip",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the IT intermediary guidelines 2021?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to protect trade secrets in India?",
+        "domain": "ip",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the CERT-In directive?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can a VPN be banned in India?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the right to be forgotten?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to register copyright for a book?",
+        "domain": "ip",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is passing off in trademark law?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Cybercrime reporting in Bangalore",
+        "domain": "ip",
+        "query_type": "procedure",
+        "jurisdiction": "Karnataka"
+    },
+    {
+        "query": "IP court procedure in Delhi",
+        "domain": "ip",
+        "query_type": "procedure",
+        "jurisdiction": "Delhi"
+    },
+    {
+        "query": "I got fired from my job what are my rights?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "My landlord is trying to evict me illegally",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "My husband is threatening me what should I do?",
+        "domain": "family",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Someone stole my phone what should I do?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "I bought a defective TV and the company refuses to replace it",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "My employer hasn't paid my salary for 3 months",
+        "domain": "labor",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can I record a phone call and use it as evidence?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "My neighbour is building on my property",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "I want to complain about a government officer",
+        "domain": "constitutional",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Someone copied my website design",
+        "domain": "ip",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "I am being harassed by a loan recovery agent",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "My builder is demanding extra money",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "I got injured in a car accident who is liable?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "My employer is making me work on holidays",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "I got a wrong medical diagnosis",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Someone is spreading fake news about me online",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "My child's school is charging excess fees",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "I want to change my child's school without spouse's consent",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Police are not taking action on my complaint",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can I challenge a government decision in court?",
+        "domain": "constitutional",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are my rights if government acquires my land?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How do I challenge an unfair transfer at work?",
+        "domain": "labor",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "My ex-husband is not paying child support",
+        "domain": "family",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can police check my phone without permission?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "I am being discriminated at work because of caste",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to challenge property tax assessment?",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are the steps to file for divorce in Mumbai?",
+        "domain": "family",
+        "query_type": "procedure",
+        "jurisdiction": "Maharashtra"
+    },
+    {
+        "query": "How to get a no objection certificate for property in Delhi?",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "Delhi"
+    },
+    {
+        "query": "Can I file consumer complaint for online shopping in Bangalore?",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "jurisdiction": "Karnataka"
+    },
+    {
+        "query": "What are tenant eviction rules in Kolkata?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "West Bengal"
+    },
+    {
+        "query": "Minimum wages for domestic workers in Tamil Nadu",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "Tamil Nadu"
+    },
+    {
+        "query": "How to register a company in Gujarat?",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "Gujarat"
+    },
+    {
+        "query": "FIR filing process in Hyderabad",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "Telangana"
+    },
+    {
+        "query": "RTI application process in Kerala",
+        "domain": "constitutional",
+        "query_type": "procedure",
+        "jurisdiction": "Kerala"
+    },
+    {
+        "query": "Property inheritance dispute in Punjab",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "Punjab"
+    },
+    {
+        "query": "Consumer court in Ahmedabad address",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "jurisdiction": "Gujarat"
+    },
+    {
+        "query": "Labor commissioner office in Chennai",
+        "domain": "labor",
+        "query_type": "procedure",
+        "jurisdiction": "Tamil Nadu"
+    },
+    {
+        "query": "Cyber police station in Pune",
+        "domain": "ip",
+        "query_type": "procedure",
+        "jurisdiction": "Maharashtra"
+    },
+    {
+        "query": "What is the law?",
+        "domain": "general",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Tell me about Indian legal system",
+        "domain": "general",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are the different types of courts in India?",
+        "domain": "general",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How does the Indian judiciary work?",
+        "domain": "general",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the difference between civil and criminal case?",
+        "domain": "general",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to find a good lawyer?",
+        "domain": "general",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is legal aid?",
+        "domain": "general",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to get free legal help?",
+        "domain": "general",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is an affidavit?",
+        "domain": "general",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is a notary?",
+        "domain": "general",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is limitation period?",
+        "domain": "general",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is res judicata?",
+        "domain": "general",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is contempt of court?",
+        "domain": "general",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can I represent myself in court?",
+        "domain": "general",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the appeals process?",
+        "domain": "general",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How long does a court case take in India?",
+        "domain": "general",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Hello",
+        "domain": "general",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Thank you for the information",
+        "domain": "general",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can you explain more?",
+        "domain": "general",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What did you just say about Section 302?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Kya police bina warrant ke arrest kar sakti hai?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Murder ka punishment kya hai India mein?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "FIR kaise file karte hain?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "My neighbour threatened to kill me what to do?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Is sending threatening WhatsApp messages a crime?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the punishment for chain snatching?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to get bail for my brother?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is difference between IPC and BNS?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can a 16 year old go to jail?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the punishment for road rage?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can I withdraw an FIR once filed?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What if someone files a false FIR against me?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Is marital rape a crime in India?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the punishment for acid attack?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can police detain me for more than 24 hours?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the meaning of bail bond?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to file a complaint about domestic violence?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can I record police conversation as evidence?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are rights of victim in criminal case?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Section 307 IPC attempt to murder punishment",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to transfer property to my son?",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the process of will registration?",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can I sell my share of ancestral property?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is joint ownership of property?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to settle a property dispute?",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is a gift deed?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can I buy agricultural land as non-farmer?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the process of property partition?",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to get property from deceased father without will?",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is occupancy rights?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Landlord not returning security deposit",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to get khata transferred?",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "Karnataka"
+    },
+    {
+        "query": "Builder not giving completion certificate",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is conveyance deed?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to check property encumbrance online?",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Divorce ke liye kya karna padta hai?",
+        "domain": "family",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How long does divorce take in India?",
+        "domain": "family",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can I get divorce if wife refuses?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is contested divorce?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "My wife left home what can I do?",
+        "domain": "family",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Domestic violence ke against complaint kaise kare?",
+        "domain": "family",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can father get child custody?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the process of khula in Muslim law?",
+        "domain": "family",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Rights of second wife in India",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Is second marriage legal without divorce?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How much alimony will I have to pay?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can grandparents get visitation rights?",
+        "domain": "family",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the process for inter-caste marriage?",
+        "domain": "family",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Husband not giving maintenance money",
+        "domain": "family",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can NRI file for divorce in Indian court?",
+        "domain": "family",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is secularism under Indian Constitution?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are fundamental duties?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can government take my property for public purpose?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the right to information?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "RTI mein kaise application likhein?",
+        "domain": "constitutional",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the 73rd amendment about panchayati raj?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can I challenge a law as unconstitutional?",
+        "domain": "constitutional",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the anti-defection law?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the CAA citizenship amendment?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is President's rule in a state?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How does federalism work in India?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the concurrent list?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the difference between High Court and Supreme Court?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How are High Court judges appointed?",
+        "domain": "constitutional",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is collegium system?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Company ne mujhe nikaal diya bina notice ke",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is wrongful termination?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How much notice period is required before termination?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "My company is not paying overtime",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can employer change my job location without consent?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the process to claim PF online?",
+        "domain": "labor",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to calculate gratuity amount?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Is 6 day work week legal in India?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the process of conciliation in industrial disputes?",
+        "domain": "labor",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "My employer is asking me to resign what should I do?",
+        "domain": "labor",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Gig worker rights in India",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the Shops and Establishments Act?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can company force me to sign a bond?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is workplace bullying under Indian law?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to form a workers union?",
+        "domain": "labor",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Online shopping mein fraud hua hai kya karun?",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Hospital charged me extra how to complain?",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "My car is having manufacturing defect",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Builder promised amenities but not providing them",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Bank charged hidden fees what to do?",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to complain against insurance company?",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the national consumer helpline number?",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can I get compensation for delayed flight?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is FSSAI and food safety standards?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Taxi app charged me wrong fare",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to complain about electricity billing?",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Refund not received for cancelled order on Amazon",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the consumer disputes redressal mechanism?",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Doctor prescribed unnecessary tests for money",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Education loan scam what are my options?",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Someone is using my brand name what to do?",
+        "domain": "ip",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to protect my mobile app idea?",
+        "domain": "ip",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is plagiarism under Indian law?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can I use YouTube music in my video?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Is AI generated content copyrightable?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the penalty for identity theft online?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to report a fake social media account?",
+        "domain": "ip",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is domain name squatting?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can I sue for revenge porn in India?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the process to get content removed from Google?",
+        "domain": "ip",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Is screen recording illegal in India?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Mere photo ko bina permission use kiya kya kar sakta hun?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is cyber insurance?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How long does trademark registration take?",
+        "domain": "ip",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is compulsory licensing of patents?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Mujhe lawyer chahiye kahan milega?",
+        "domain": "general",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the meaning of bail?",
+        "domain": "general",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to get legal aid for poor people?",
+        "domain": "general",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the fee for filing a case?",
+        "domain": "general",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is lok adalat?",
+        "domain": "general",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How does mediation work?",
+        "domain": "general",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is arbitration?",
+        "domain": "general",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to verify if a lawyer is genuine?",
+        "domain": "general",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the hierarchy of courts in India?",
+        "domain": "general",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What documents are needed to file a case?",
+        "domain": "general",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is stay order?",
+        "domain": "general",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "I need legal help urgently",
+        "domain": "general",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Kya aap meri madad kar sakte hain?",
+        "domain": "general",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Explain in simple Hindi",
+        "domain": "general",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the difference between civil and criminal court?",
+        "domain": "general",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Property registration process in Pune",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "Maharashtra"
+    },
+    {
+        "query": "Divorce lawyer fees in Chennai",
+        "domain": "family",
+        "query_type": "procedure",
+        "jurisdiction": "Tamil Nadu"
+    },
+    {
+        "query": "Cyber crime cell contact in Noida",
+        "domain": "ip",
+        "query_type": "procedure",
+        "jurisdiction": "Uttar Pradesh"
+    },
+    {
+        "query": "Labor court address in Jaipur",
+        "domain": "labor",
+        "query_type": "procedure",
+        "jurisdiction": "Rajasthan"
+    },
+    {
+        "query": "Consumer court address in Lucknow",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "jurisdiction": "Uttar Pradesh"
+    },
+    {
+        "query": "How to file PIL in Bombay High Court?",
+        "domain": "constitutional",
+        "query_type": "procedure",
+        "jurisdiction": "Maharashtra"
+    },
+    {
+        "query": "Police complaint number for Hyderabad",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "Telangana"
+    },
+    {
+        "query": "Rental agreement rules in Goa",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "Goa"
+    },
+    {
+        "query": "Marriage registration in Chandigarh",
+        "domain": "family",
+        "query_type": "procedure",
+        "jurisdiction": "Chandigarh"
+    },
+    {
+        "query": "Shop license rules in MP",
+        "domain": "labor",
+        "query_type": "procedure",
+        "jurisdiction": "Madhya Pradesh"
+    },
+    {
+        "query": "What did the Supreme Court decide about Aadhaar?",
+        "domain": "constitutional",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the Navtej Singh Johar judgment?",
+        "domain": "criminal",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What did Joseph Shine case decide about adultery?",
+        "domain": "criminal",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the Indra Sawhney case about reservation?",
+        "domain": "constitutional",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What did the court say in the Sabarimala case?",
+        "domain": "constitutional",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the Vodafone tax case about?",
+        "domain": "property",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What did the Supreme Court say about right to die?",
+        "domain": "constitutional",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the Vishaka guidelines case about?",
+        "domain": "labor",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What happened in the 2G spectrum case?",
+        "domain": "criminal",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the MC Mehta pollution case?",
+        "domain": "constitutional",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Padmanabhaswamy temple treasure case",
+        "domain": "property",
+        "query_type": "case_outcome",
+        "jurisdiction": "Kerala"
+    },
+    {
+        "query": "What did court decide in Ayodhya case?",
+        "domain": "constitutional",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Nirbhaya case judgment and punishment",
+        "domain": "criminal",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the landmark judgment on passive euthanasia?",
+        "domain": "constitutional",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Electoral bonds Supreme Court judgment",
+        "domain": "constitutional",
+        "query_type": "case_outcome",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Boss is forcing me to work on Sundays without extra pay",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Auto rickshaw driver hit my car and ran away",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "My brother took loan in my name without telling me",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can college cancel my admission after paying fees?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Neighbour is playing loud music at night",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to legally change my name in India?",
+        "domain": "general",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the process of succession certificate?",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can a company monitor my personal emails?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What happens if I bounce a cheque?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "NI Act Section 138 cheque bounce case",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Is betting legal in India?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are rules about CCTV cameras at workplace?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can a private hospital refuse emergency treatment?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the penalty for tax evasion?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to deal with illegal construction by neighbour?",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the Motor Vehicles Act about accident compensation?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can employer force non-compete after resignation?",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the process to get birth certificate corrected?",
+        "domain": "general",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "My flight was delayed by 8 hours what can I claim?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Society maintenance charges too high what to do?",
+        "domain": "property",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to report corruption in government office?",
+        "domain": "constitutional",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can school expel my child for not paying fees?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the process of legal heir certificate?",
+        "domain": "family",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "My company asking me to relocate to another city forcefully",
+        "domain": "labor",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are the penalties under GST law?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Is there a law against caste discrimination?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to file a complaint against a doctor?",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What rights do prisoners have in India?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can I get compensation for wrongful imprisonment?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is sedition law in India?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Is sting operation legal in India?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the process of whistleblowing?",
+        "domain": "constitutional",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to complain about noise pollution?",
+        "domain": "constitutional",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the Environment Protection Act?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can NGO file a case on behalf of poor people?",
+        "domain": "constitutional",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is consumer awareness?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How long to keep old legal documents?",
+        "domain": "general",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the limitation period for property cases?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can a tenant sublet the rented property?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What happens if I don't pay EMI for 3 months?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Is verbal agreement legally binding in India?",
+        "domain": "property",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "How to transfer vehicle ownership?",
+        "domain": "general",
+        "query_type": "procedure",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What is the punishment for bribery?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "Can I use drone legally in India?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    },
+    {
+        "query": "What are the rules about surveillance cameras?",
+        "domain": "ip",
+        "query_type": "rights",
+        "jurisdiction": "central"
+    }
+]
