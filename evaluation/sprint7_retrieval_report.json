@@ -1,0 +1,771 @@
+{
+  "mode": "hybrid",
+  "top_k": 10,
+  "total_queries": 50,
+  "recall_at_k": 0.2397,
+  "mrr": 0.3065,
+  "avg_latency_ms": 319.41,
+  "hit_rate": 0.44,
+  "queries_with_hit": 22,
+  "acceptance_criteria": {
+    "recall_pass": false,
+    "latency_pass": true,
+    "overall_pass": false
+  },
+  "per_domain": {
+    "criminal": {
+      "count": 9,
+      "recall_at_k": 0.3407,
+      "mrr": 0.588,
+      "avg_latency_ms": 283.18,
+      "hit_rate": 0.7778
+    },
+    "property": {
+      "count": 5,
+      "recall_at_k": 0.4,
+      "mrr": 0.65,
+      "avg_latency_ms": 298.69,
+      "hit_rate": 0.8
+    },
+    "family": {
+      "count": 6,
+      "recall_at_k": 0.3055,
+      "mrr": 0.4167,
+      "avg_latency_ms": 277.92,
+      "hit_rate": 0.5
+    },
+    "labour": {
+      "count": 6,
+      "recall_at_k": 0.1389,
+      "mrr": 0.1905,
+      "avg_latency_ms": 513.98,
+      "hit_rate": 0.3333
+    },
+    "consumer": {
+      "count": 4,
+      "recall_at_k": 0.25,
+      "mrr": 0.2083,
+      "avg_latency_ms": 548.19,
+      "hit_rate": 0.5
+    },
+    "constitutional": {
+      "count": 8,
+      "recall_at_k": 0.2812,
+      "mrr": 0.1637,
+      "avg_latency_ms": 244.23,
+      "hit_rate": 0.375
+    },
+    "ip": {
+      "count": 5,
+      "recall_at_k": 0.2,
+      "mrr": 0.2,
+      "avg_latency_ms": 217.12,
+      "hit_rate": 0.2
+    },
+    "corporate": {
+      "count": 4,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "avg_latency_ms": 271.22,
+      "hit_rate": 0.0
+    },
+    "environmental": {
+      "count": 2,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "avg_latency_ms": 313.85,
+      "hit_rate": 0.0
+    },
+    "taxation": {
+      "count": 1,
+      "recall_at_k": 0.0,
+      "mrr": 0.0,
+      "avg_latency_ms": 232.24,
+      "hit_rate": 0.0
+    }
+  },
+  "per_query": [
+    {
+      "query_id": "ret_crim_01",
+      "query": "Can police arrest me without a warrant?",
+      "domain": "criminal",
+      "recall": 0.4,
+      "reciprocal_rank": 1.0,
+      "latency_ms": 312.13,
+      "retrieved_relevant": [
+        "CrPC/41",
+        "CrPC/41A"
+      ],
+      "missed_relevant": [
+        "D.K. Basu v. State of West Bengal",
+        "BNSS/35",
+        "Arnesh Kumar v. State of Bihar"
+      ]
+    },
+    {
+      "query_id": "ret_crim_02",
+      "query": "How to file an FIR and what if police refuse?",
+      "domain": "criminal",
+      "recall": 0.25,
+      "reciprocal_rank": 1.0,
+      "latency_ms": 228.41,
+      "retrieved_relevant": [
+        "CrPC/154"
+      ],
+      "missed_relevant": [
+        "Lalita Kumari v. Govt. of UP",
+        "CrPC/155",
+        "CrPC/156"
+      ]
+    },
+    {
+      "query_id": "ret_crim_03",
+      "query": "What is the punishment for murder under IPC?",
+      "domain": "criminal",
+      "recall": 0.5,
+      "reciprocal_rank": 1.0,
+      "latency_ms": 286.79,
+      "retrieved_relevant": [
+        "IPC/302"
+      ],
+      "missed_relevant": [
+        "IPC/300"
+      ]
+    },
+    {
+      "query_id": "ret_crim_04",
+      "query": "What are the bail provisions for non-bailable offences?",
+      "domain": "criminal",
+      "recall": 0.6667,
+      "reciprocal_rank": 1.0,
+      "latency_ms": 224.58,
+      "retrieved_relevant": [
+        "CrPC/437",
+        "CrPC/438"
+      ],
+      "missed_relevant": [
+        "CrPC/439"
+      ]
+    },
+    {
+      "query_id": "ret_crim_05",
+      "query": "What is the NDPS Act procedure for search and seizure?",
+      "domain": "criminal",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 267.89,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "NDPS Act/50",
+        "NDPS Act/42",
+        "NDPS Act/43"
+      ]
+    },
+    {
+      "query_id": "ret_crim_06",
+      "query": "What are the guidelines for arrest under Section 498A IPC?",
+      "domain": "criminal",
+      "recall": 0.3333,
+      "reciprocal_rank": 0.125,
+      "latency_ms": 416.43,
+      "retrieved_relevant": [
+        "CrPC/41"
+      ],
+      "missed_relevant": [
+        "IPC/498A",
+        "Arnesh Kumar v. State of Bihar"
+      ]
+    },
+    {
+      "query_id": "ret_prop_01",
+      "query": "What is the definition of transfer of property?",
+      "domain": "property",
+      "recall": 0.5,
+      "reciprocal_rank": 1.0,
+      "latency_ms": 245.07,
+      "retrieved_relevant": [
+        "TPA/5"
+      ],
+      "missed_relevant": [
+        "TPA/6"
+      ]
+    },
+    {
+      "query_id": "ret_prop_02",
+      "query": "What is the process of registering a sale deed?",
+      "domain": "property",
+      "recall": 0.5,
+      "reciprocal_rank": 1.0,
+      "latency_ms": 384.69,
+      "retrieved_relevant": [
+        "TPA/54"
+      ],
+      "missed_relevant": [
+        "Registration Act/17"
+      ]
+    },
+    {
+      "query_id": "ret_prop_03",
+      "query": "What remedies does RERA provide for delayed possession by builder?",
+      "domain": "property",
+      "recall": 0.5,
+      "reciprocal_rank": 1.0,
+      "latency_ms": 269.45,
+      "retrieved_relevant": [
+        "RERA/18"
+      ],
+      "missed_relevant": [
+        "RERA/31"
+      ]
+    },
+    {
+      "query_id": "ret_prop_04",
+      "query": "How to evict a tenant who refuses to vacate?",
+      "domain": "property",
+      "recall": 0.5,
+      "reciprocal_rank": 0.25,
+      "latency_ms": 326.67,
+      "retrieved_relevant": [
+        "TPA/106"
+      ],
+      "missed_relevant": [
+        "TPA/111"
+      ]
+    },
+    {
+      "query_id": "ret_prop_05",
+      "query": "What is the law on limitation period for filing property suits?",
+      "domain": "property",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 267.58,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "Limitation Act/65",
+        "Limitation Act/64"
+      ]
+    },
+    {
+      "query_id": "ret_fam_01",
+      "query": "What are the grounds for divorce under Hindu Marriage Act?",
+      "domain": "family",
+      "recall": 1.0,
+      "reciprocal_rank": 1.0,
+      "latency_ms": 178.91,
+      "retrieved_relevant": [
+        "HMA/13",
+        "HMA/13B"
+      ],
+      "missed_relevant": []
+    },
+    {
+      "query_id": "ret_fam_02",
+      "query": "How to claim maintenance under Section 125 CrPC?",
+      "domain": "family",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 285.49,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "CrPC/125",
+        "CrPC/128"
+      ]
+    },
+    {
+      "query_id": "ret_fam_03",
+      "query": "What protection is available under the Domestic Violence Act?",
+      "domain": "family",
+      "recall": 0.5,
+      "reciprocal_rank": 0.5,
+      "latency_ms": 279.76,
+      "retrieved_relevant": [
+        "DV Act/19",
+        "DV Act/12"
+      ],
+      "missed_relevant": [
+        "DV Act/18",
+        "DV Act/20"
+      ]
+    },
+    {
+      "query_id": "ret_fam_04",
+      "query": "What are the rights of a Hindu daughter in ancestral property?",
+      "domain": "family",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 261.88,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "HSA/6",
+        "Vineeta Sharma v. Rakesh Sharma"
+      ]
+    },
+    {
+      "query_id": "ret_fam_05",
+      "query": "How to get a child custody order after divorce?",
+      "domain": "family",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 371.66,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "GWA/7",
+        "HMA/26"
+      ]
+    },
+    {
+      "query_id": "ret_lab_01",
+      "query": "What constitutes wrongful termination under Indian labour law?",
+      "domain": "labour",
+      "recall": 0.5,
+      "reciprocal_rank": 0.1429,
+      "latency_ms": 638.99,
+      "retrieved_relevant": [
+        "ID Act/25F"
+      ],
+      "missed_relevant": [
+        "ID Act/25G"
+      ]
+    },
+    {
+      "query_id": "ret_lab_02",
+      "query": "How to file a sexual harassment complaint at workplace under POSH Act?",
+      "domain": "labour",
+      "recall": 0.3333,
+      "reciprocal_rank": 1.0,
+      "latency_ms": 760.8,
+      "retrieved_relevant": [
+        "POSH Act/9"
+      ],
+      "missed_relevant": [
+        "POSH Act/11",
+        "Vishaka v. State of Rajasthan"
+      ]
+    },
+    {
+      "query_id": "ret_lab_03",
+      "query": "What is the minimum wages act and who does it cover?",
+      "domain": "labour",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 477.3,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "Minimum Wages Act/3",
+        "Minimum Wages Act/12"
+      ]
+    },
+    {
+      "query_id": "ret_lab_04",
+      "query": "What are the maternity leave entitlements in India?",
+      "domain": "labour",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 426.64,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "Maternity Benefit Act/5"
+      ]
+    },
+    {
+      "query_id": "ret_lab_05",
+      "query": "How to withdraw EPF / provident fund?",
+      "domain": "labour",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 492.6,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "EPF Act/7"
+      ]
+    },
+    {
+      "query_id": "ret_cons_01",
+      "query": "How to file a consumer complaint for a defective product?",
+      "domain": "consumer",
+      "recall": 0.6667,
+      "reciprocal_rank": 0.3333,
+      "latency_ms": 782.17,
+      "retrieved_relevant": [
+        "CPA/34",
+        "CPA/35"
+      ],
+      "missed_relevant": [
+        "CPA/2"
+      ]
+    },
+    {
+      "query_id": "ret_cons_02",
+      "query": "What is the jurisdiction of consumer commissions based on claim value?",
+      "domain": "consumer",
+      "recall": 0.3333,
+      "reciprocal_rank": 0.5,
+      "latency_ms": 481.84,
+      "retrieved_relevant": [
+        "CPA/34"
+      ],
+      "missed_relevant": [
+        "CPA/58",
+        "CPA/47"
+      ]
+    },
+    {
+      "query_id": "ret_cons_03",
+      "query": "Can I file a consumer complaint against a hospital for medical negligence?",
+      "domain": "consumer",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 615.03,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "Lucknow Development Authority v. M.K. Gupta",
+        "CPA/2"
+      ]
+    },
+    {
+      "query_id": "ret_cons_04",
+      "query": "What are the e-commerce rules for online shopping returns?",
+      "domain": "consumer",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 313.74,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "CPA/84",
+        "CPA/87"
+      ]
+    },
+    {
+      "query_id": "ret_const_01",
+      "query": "What is the right to privacy under the Indian Constitution?",
+      "domain": "constitutional",
+      "recall": 0.5,
+      "reciprocal_rank": 0.1667,
+      "latency_ms": 305.14,
+      "retrieved_relevant": [
+        "Constitution/21"
+      ],
+      "missed_relevant": [
+        "K.S. Puttaswamy v. Union of India"
+      ]
+    },
+    {
+      "query_id": "ret_const_02",
+      "query": "How to file an RTI application?",
+      "domain": "constitutional",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 182.78,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "RTI Act/6",
+        "RTI Act/7"
+      ]
+    },
+    {
+      "query_id": "ret_const_03",
+      "query": "What is the procedure to file a writ petition or PIL?",
+      "domain": "constitutional",
+      "recall": 1.0,
+      "reciprocal_rank": 0.1429,
+      "latency_ms": 284.47,
+      "retrieved_relevant": [
+        "Constitution/32",
+        "Constitution/226"
+      ],
+      "missed_relevant": []
+    },
+    {
+      "query_id": "ret_const_04",
+      "query": "What are fundamental rights under the Indian Constitution?",
+      "domain": "constitutional",
+      "recall": 0.75,
+      "reciprocal_rank": 1.0,
+      "latency_ms": 228.5,
+      "retrieved_relevant": [
+        "Constitution/19",
+        "Constitution/14",
+        "Constitution/21"
+      ],
+      "missed_relevant": [
+        "Maneka Gandhi v. Union of India"
+      ]
+    },
+    {
+      "query_id": "ret_const_05",
+      "query": "What are the time limits for filing different types of civil suits?",
+      "domain": "constitutional",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 265.59,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "Limitation Act/3"
+      ]
+    },
+    {
+      "query_id": "ret_ip_01",
+      "query": "What constitutes cybercrime under the IT Act?",
+      "domain": "ip",
+      "recall": 1.0,
+      "reciprocal_rank": 1.0,
+      "latency_ms": 172.0,
+      "retrieved_relevant": [
+        "IT Act/66",
+        "IT Act/43"
+      ],
+      "missed_relevant": []
+    },
+    {
+      "query_id": "ret_ip_02",
+      "query": "How to register a trademark in India?",
+      "domain": "ip",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 283.02,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "Trade Marks Act/18",
+        "Trade Marks Act/25"
+      ]
+    },
+    {
+      "query_id": "ret_ip_03",
+      "query": "What is the patent filing process in India?",
+      "domain": "ip",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 231.18,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "Patents Act/7",
+        "Patents Act/9"
+      ]
+    },
+    {
+      "query_id": "ret_ip_04",
+      "query": "What are the intermediary liability provisions under IT Act?",
+      "domain": "ip",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 144.51,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "IT Act/79"
+      ]
+    },
+    {
+      "query_id": "ret_ip_05",
+      "query": "What is the data protection law in India?",
+      "domain": "ip",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 254.91,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "DPDP Act/5",
+        "DPDP Act/4"
+      ]
+    },
+    {
+      "query_id": "ret_corp_01",
+      "query": "What is the procedure for cheque bounce case under Section 138?",
+      "domain": "corporate",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 281.13,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "NI Act/138",
+        "NI Act/142"
+      ]
+    },
+    {
+      "query_id": "ret_corp_02",
+      "query": "What is the insolvency resolution process under IBC?",
+      "domain": "corporate",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 235.96,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "IBC/9",
+        "IBC/7",
+        "IBC/12"
+      ]
+    },
+    {
+      "query_id": "ret_corp_03",
+      "query": "What are the duties of directors under the Companies Act?",
+      "domain": "corporate",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 289.0,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "Companies Act/166"
+      ]
+    },
+    {
+      "query_id": "ret_corp_04",
+      "query": "What are the SEBI regulations for insider trading?",
+      "domain": "corporate",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 278.78,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "SEBI Act/15G"
+      ]
+    },
+    {
+      "query_id": "ret_env_01",
+      "query": "How to file a complaint with the National Green Tribunal?",
+      "domain": "environmental",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 303.76,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "NGT Act/14",
+        "NGT Act/15"
+      ]
+    },
+    {
+      "query_id": "ret_env_02",
+      "query": "What are the penalties for water pollution under Indian law?",
+      "domain": "environmental",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 323.93,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "EPA/15",
+        "Water Act/24"
+      ]
+    },
+    {
+      "query_id": "ret_tax_01",
+      "query": "What is the income tax slab structure in India?",
+      "domain": "taxation",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 232.24,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "IT Act 1961/115BAC"
+      ]
+    },
+    {
+      "query_id": "ret_new_law_01",
+      "query": "What are the changes in the new criminal laws BNS BNSS BSA?",
+      "domain": "criminal",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 290.16,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "BSA/1",
+        "BNS/1",
+        "BNSS/1"
+      ]
+    },
+    {
+      "query_id": "ret_new_law_02",
+      "query": "What is the Code on Wages and who does it apply to?",
+      "domain": "labour",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 287.53,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "Wages Code/2",
+        "Wages Code/1"
+      ]
+    },
+    {
+      "query_id": "ret_proc_01",
+      "query": "What should I do if I am arrested? Step by step guide.",
+      "domain": "criminal",
+      "recall": 0.25,
+      "reciprocal_rank": 0.1667,
+      "latency_ms": 304.14,
+      "retrieved_relevant": [
+        "CrPC/41"
+      ],
+      "missed_relevant": [
+        "CrPC/57",
+        "D.K. Basu v. State of West Bengal",
+        "CrPC/50"
+      ]
+    },
+    {
+      "query_id": "ret_proc_02",
+      "query": "How to get free legal aid in India?",
+      "domain": "constitutional",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 200.16,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "LSA Act/12"
+      ]
+    },
+    {
+      "query_id": "ret_cross_01",
+      "query": "What is the Arbitration Act and when does it apply?",
+      "domain": "constitutional",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 275.45,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "Arbitration Act/8",
+        "Arbitration Act/7"
+      ]
+    },
+    {
+      "query_id": "ret_cross_02",
+      "query": "Can a woman inherit property equally as a man?",
+      "domain": "family",
+      "recall": 0.3333,
+      "reciprocal_rank": 1.0,
+      "latency_ms": 289.82,
+      "retrieved_relevant": [
+        "Constitution/14"
+      ],
+      "missed_relevant": [
+        "HSA/6",
+        "Vineeta Sharma v. Rakesh Sharma"
+      ]
+    },
+    {
+      "query_id": "ret_cross_03",
+      "query": "What legal action can I take for defamation on social media?",
+      "domain": "criminal",
+      "recall": 0.6667,
+      "reciprocal_rank": 1.0,
+      "latency_ms": 218.1,
+      "retrieved_relevant": [
+        "IPC/500",
+        "IT Act/66A"
+      ],
+      "missed_relevant": [
+        "IPC/499"
+      ]
+    },
+    {
+      "query_id": "ret_cross_04",
+      "query": "Is Section 377 IPC still applicable after the Supreme Court verdict?",
+      "domain": "constitutional",
+      "recall": 0.0,
+      "reciprocal_rank": 0.0,
+      "latency_ms": 211.74,
+      "retrieved_relevant": [],
+      "missed_relevant": [
+        "IPC/377",
+        "Navtej Singh Johar v. Union of India"
+      ]
+    }
+  ]
+}
