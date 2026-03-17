@@ -1,0 +1,2585 @@
+[
+    {
+        "id": "bench_crim_001",
+        "query": "Can police arrest someone without a warrant?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "CrPC/41",
+            "CrPC/41A"
+        ],
+        "expected_cases": [
+            "Arnesh Kumar v. State of Bihar"
+        ],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Must mention conditions under S.41(1)(b)"
+    },
+    {
+        "id": "bench_crim_002",
+        "query": "What is the punishment for murder in India?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "IPC/302"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Death or life imprisonment + fine"
+    },
+    {
+        "id": "bench_crim_003",
+        "query": "How do I file an FIR at a police station?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "expected_sections": [
+            "CrPC/154"
+        ],
+        "expected_cases": [
+            "Lalita Kumari v. Government of Uttar Pradesh"
+        ],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Step-by-step FIR filing process"
+    },
+    {
+        "id": "bench_crim_004",
+        "query": "What is the law on dowry death?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "IPC/304B",
+            "IPC/498A"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "S.304B defines dowry death presumption"
+    },
+    {
+        "id": "bench_crim_005",
+        "query": "What are my rights if I am arrested by police?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "CrPC/41",
+            "CrPC/50"
+        ],
+        "expected_cases": [
+            "D.K. Basu v. State of West Bengal"
+        ],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "11 guidelines from D.K. Basu"
+    },
+    {
+        "id": "bench_crim_006",
+        "query": "What happens if police refuse to register my FIR?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "expected_sections": [
+            "CrPC/154"
+        ],
+        "expected_cases": [
+            "Lalita Kumari v. Government of Uttar Pradesh"
+        ],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Mandatory registration per Lalita Kumari"
+    },
+    {
+        "id": "bench_crim_007",
+        "query": "What is the penalty for theft under Indian law?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "IPC/378",
+            "IPC/379"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Up to 3 years imprisonment"
+    },
+    {
+        "id": "bench_crim_008",
+        "query": "Is adultery still a crime in India?",
+        "domain": "criminal",
+        "query_type": "case_outcome",
+        "expected_sections": [
+            "IPC/497"
+        ],
+        "expected_cases": [
+            "Joseph Shine v. Union of India"
+        ],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Struck down by SC in 2018"
+    },
+    {
+        "id": "bench_crim_009",
+        "query": "When can bail be granted in non-bailable offences?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "expected_sections": [
+            "CrPC/437",
+            "CrPC/439"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Court discretion, seriousness of offence"
+    },
+    {
+        "id": "bench_crim_010",
+        "query": "What is anticipatory bail and how to apply?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "expected_sections": [
+            "CrPC/438"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Apply before arrest, before Sessions/HC"
+    },
+    {
+        "id": "bench_crim_011",
+        "query": "What is the punishment for cheating someone?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "IPC/420"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Up to 7 years imprisonment"
+    },
+    {
+        "id": "bench_crim_012",
+        "query": "What are the guidelines against misuse of Section 498A?",
+        "domain": "criminal",
+        "query_type": "case_outcome",
+        "expected_sections": [
+            "IPC/498A",
+            "CrPC/41"
+        ],
+        "expected_cases": [
+            "Arnesh Kumar v. State of Bihar"
+        ],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "9-point checklist before arrest"
+    },
+    {
+        "id": "bench_crim_013",
+        "query": "Can a woman be arrested at night?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "CrPC/46"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "S.46(4) restricts night arrest of women"
+    },
+    {
+        "id": "bench_crim_014",
+        "query": "How long can police keep someone in custody?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "CrPC/57",
+            "CrPC/167"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "24 hours max without magistrate"
+    },
+    {
+        "id": "bench_crim_015",
+        "query": "What is causing death by negligence?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "IPC/304A"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Up to 2 years imprisonment"
+    },
+    {
+        "id": "bench_crim_016",
+        "query": "What is criminal intimidation?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "IPC/503",
+            "IPC/506"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Threat to cause alarm"
+    },
+    {
+        "id": "bench_crim_017",
+        "query": "What is the punishment for kidnapping?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "IPC/363"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Up to 7 years imprisonment"
+    },
+    {
+        "id": "bench_crim_018",
+        "query": "What is the procedure after FIR is filed?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "expected_sections": [
+            "CrPC/154",
+            "CrPC/156"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Investigation, chargesheet within 60/90 days"
+    },
+    {
+        "id": "bench_crim_019",
+        "query": "Can I withdraw an FIR once filed?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "expected_sections": [
+            "CrPC/154"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Cannot withdraw, but quashing under 482"
+    },
+    {
+        "id": "bench_crim_020",
+        "query": "What is the punishment for defamation?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "IPC/499",
+            "IPC/500"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Simple imprisonment up to 2 years"
+    },
+    {
+        "id": "bench_crim_021",
+        "query": "What are rights of an arrested person?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "CrPC/41",
+            "CrPC/50"
+        ],
+        "expected_cases": [
+            "D.K. Basu v. State of West Bengal"
+        ],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Right to know grounds, right to lawyer"
+    },
+    {
+        "id": "bench_crim_022",
+        "query": "What is a zero FIR?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "CrPC/154"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "FIR at any police station regardless of jurisdiction"
+    },
+    {
+        "id": "bench_crim_023",
+        "query": "What is the punishment for attempt to murder?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "IPC/307"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Up to 10 years or life"
+    },
+    {
+        "id": "bench_crim_024",
+        "query": "What did the D.K. Basu judgment decide?",
+        "domain": "criminal",
+        "query_type": "case_outcome",
+        "expected_sections": [],
+        "expected_cases": [
+            "D.K. Basu v. State of West Bengal"
+        ],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "11 guidelines for arrest procedure"
+    },
+    {
+        "id": "bench_crim_025",
+        "query": "What is the punishment for acid attack?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "IPC/326A"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Minimum 10 years to life"
+    },
+    {
+        "id": "bench_crim_026",
+        "query": "What is criminal conspiracy under IPC?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "IPC/120A",
+            "IPC/120B"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Agreement to do illegal act"
+    },
+    {
+        "id": "bench_crim_027",
+        "query": "Can police search my house without warrant?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "CrPC/165"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Only with recorded reasons"
+    },
+    {
+        "id": "bench_crim_028",
+        "query": "What is abetment of suicide?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "IPC/306"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Up to 10 years imprisonment"
+    },
+    {
+        "id": "bench_crim_029",
+        "query": "What is the difference between cognizable and non-cognizable offences?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "CrPC/154",
+            "CrPC/155"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Cognizable = arrest without warrant"
+    },
+    {
+        "id": "bench_crim_030",
+        "query": "Is marital rape a crime in India?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "IPC/375",
+            "IPC/376"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Exception 2 to S.375 debated"
+    },
+    {
+        "id": "bench_crim_031",
+        "query": "What is the punishment for forgery?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "IPC/463",
+            "IPC/465"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Up to 2 years imprisonment"
+    },
+    {
+        "id": "bench_crim_032",
+        "query": "What happens during police investigation?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "expected_sections": [
+            "CrPC/156",
+            "CrPC/161"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Evidence collection, witness statements"
+    },
+    {
+        "id": "bench_crim_033",
+        "query": "What is the punishment for robbery?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "IPC/392",
+            "IPC/393"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Rigorous imprisonment up to 10 years"
+    },
+    {
+        "id": "bench_crim_034",
+        "query": "What is cheque bounce law in India?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "NI Act S.138, up to 2 years"
+    },
+    {
+        "id": "bench_crim_035",
+        "query": "What is the Lalita Kumari case about?",
+        "domain": "criminal",
+        "query_type": "case_outcome",
+        "expected_sections": [
+            "CrPC/154"
+        ],
+        "expected_cases": [
+            "Lalita Kumari v. Government of Uttar Pradesh"
+        ],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Mandatory FIR registration"
+    },
+    {
+        "id": "bench_crim_036",
+        "query": "Can a juvenile be tried as an adult?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "JJ Act 2015, 16-18 for heinous offences"
+    },
+    {
+        "id": "bench_crim_037",
+        "query": "What is the process of recording confession?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "expected_sections": [
+            "CrPC/164"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Before judicial magistrate only"
+    },
+    {
+        "id": "bench_crim_038",
+        "query": "What is culpable homicide not amounting to murder?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "IPC/299",
+            "IPC/304"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Distinction from S.300 murder"
+    },
+    {
+        "id": "bench_crim_039",
+        "query": "What are rights during police interrogation?",
+        "domain": "criminal",
+        "query_type": "rights",
+        "expected_sections": [
+            "CrPC/161"
+        ],
+        "expected_cases": [
+            "D.K. Basu v. State of West Bengal"
+        ],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Right to silence, no torture"
+    },
+    {
+        "id": "bench_crim_040",
+        "query": "My neighbour threatened to kill me what should I do?",
+        "domain": "criminal",
+        "query_type": "procedure",
+        "expected_sections": [
+            "IPC/506"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "File FIR under S.506 IPC"
+    },
+    {
+        "id": "bench_prop_001",
+        "query": "What is the definition of transfer of property?",
+        "domain": "property",
+        "query_type": "rights",
+        "expected_sections": [
+            "TPA/5"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "S.5 TPA definition"
+    },
+    {
+        "id": "bench_prop_002",
+        "query": "What is the doctrine of lis pendens?",
+        "domain": "property",
+        "query_type": "rights",
+        "expected_sections": [
+            "TPA/52"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Pending suit affects property"
+    },
+    {
+        "id": "bench_prop_003",
+        "query": "What notice period is needed to terminate a lease?",
+        "domain": "property",
+        "query_type": "rights",
+        "expected_sections": [
+            "TPA/106"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "15 days for monthly, 6 months for yearly"
+    },
+    {
+        "id": "bench_prop_004",
+        "query": "What is a valid contract under Indian law?",
+        "domain": "property",
+        "query_type": "rights",
+        "expected_sections": [
+            "Contract Act/10"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Free consent, competent parties, lawful object"
+    },
+    {
+        "id": "bench_prop_005",
+        "query": "How do I get compensation for breach of contract?",
+        "domain": "property",
+        "query_type": "procedure",
+        "expected_sections": [
+            "Contract Act/73"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Damages for loss naturally arising"
+    },
+    {
+        "id": "bench_prop_006",
+        "query": "Do builders need RERA registration?",
+        "domain": "property",
+        "query_type": "rights",
+        "expected_sections": [
+            "RERA/3"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Mandatory for projects >500sqm or 8 units"
+    },
+    {
+        "id": "bench_prop_007",
+        "query": "What remedy if builder delays flat possession?",
+        "domain": "property",
+        "query_type": "procedure",
+        "expected_sections": [
+            "RERA/18"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Interest + compensation from RERA authority"
+    },
+    {
+        "id": "bench_prop_008",
+        "query": "What is the legal definition of sale?",
+        "domain": "property",
+        "query_type": "rights",
+        "expected_sections": [
+            "TPA/54"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Transfer of ownership for a price"
+    },
+    {
+        "id": "bench_prop_009",
+        "query": "Can a landlord evict me without notice?",
+        "domain": "property",
+        "query_type": "rights",
+        "expected_sections": [
+            "TPA/106"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "No, notice required per TPA"
+    },
+    {
+        "id": "bench_prop_010",
+        "query": "What are my rights as a tenant?",
+        "domain": "property",
+        "query_type": "rights",
+        "expected_sections": [
+            "TPA/108"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Right to peaceful enjoyment"
+    },
+    {
+        "id": "bench_prop_011",
+        "query": "Can a minor enter into a contract?",
+        "domain": "property",
+        "query_type": "rights",
+        "expected_sections": [
+            "Contract Act/10",
+            "Contract Act/11"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Agreement by minor is void ab initio"
+    },
+    {
+        "id": "bench_prop_012",
+        "query": "What is adverse possession?",
+        "domain": "property",
+        "query_type": "rights",
+        "expected_sections": [
+            "TPA/52"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "12 years continuous possession for private land"
+    },
+    {
+        "id": "bench_prop_013",
+        "query": "How to register a property in India?",
+        "domain": "property",
+        "query_type": "procedure",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Registration Act, sub-registrar office"
+    },
+    {
+        "id": "bench_prop_014",
+        "query": "What is a sale deed?",
+        "domain": "property",
+        "query_type": "rights",
+        "expected_sections": [
+            "TPA/54"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Document transferring ownership"
+    },
+    {
+        "id": "bench_prop_015",
+        "query": "What is a gift of property?",
+        "domain": "property",
+        "query_type": "rights",
+        "expected_sections": [
+            "TPA/122"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Voluntary transfer without consideration"
+    },
+    {
+        "id": "bench_prop_016",
+        "query": "What is the RERA complaint process?",
+        "domain": "property",
+        "query_type": "procedure",
+        "expected_sections": [
+            "RERA/31"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "File with RERA authority, adjudicating officer"
+    },
+    {
+        "id": "bench_prop_017",
+        "query": "What is specific performance of contract?",
+        "domain": "property",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Court order to perform contractual obligation"
+    },
+    {
+        "id": "bench_prop_018",
+        "query": "What is benami property?",
+        "domain": "property",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Property held in fictitious name"
+    },
+    {
+        "id": "bench_prop_019",
+        "query": "What is a power of attorney for property?",
+        "domain": "property",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Authorization to act on behalf"
+    },
+    {
+        "id": "bench_prop_020",
+        "query": "Can NRI buy property in India?",
+        "domain": "property",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Yes, residential and commercial under FEMA"
+    },
+    {
+        "id": "bench_prop_021",
+        "query": "What is easement right?",
+        "domain": "property",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Right to use another's land for specific purpose"
+    },
+    {
+        "id": "bench_prop_022",
+        "query": "What is the process of property mutation?",
+        "domain": "property",
+        "query_type": "procedure",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Update revenue records after transfer"
+    },
+    {
+        "id": "bench_prop_023",
+        "query": "How to check if a property has legal disputes?",
+        "domain": "property",
+        "query_type": "procedure",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Encumbrance certificate, title search"
+    },
+    {
+        "id": "bench_prop_024",
+        "query": "What is the rent control act?",
+        "domain": "property",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "State-specific rent regulation"
+    },
+    {
+        "id": "bench_prop_025",
+        "query": "What happens if tenant doesn't pay rent?",
+        "domain": "property",
+        "query_type": "rights",
+        "expected_sections": [
+            "TPA/111"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Grounds for eviction after notice"
+    },
+    {
+        "id": "bench_prop_026",
+        "query": "How to transfer property to my son?",
+        "domain": "property",
+        "query_type": "procedure",
+        "expected_sections": [
+            "TPA/122"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Gift deed or will"
+    },
+    {
+        "id": "bench_prop_027",
+        "query": "Landlord not returning security deposit",
+        "domain": "property",
+        "query_type": "procedure",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Legal notice, then civil suit"
+    },
+    {
+        "id": "bench_prop_028",
+        "query": "What is stamp duty on property?",
+        "domain": "property",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "State-specific rates on property transactions"
+    },
+    {
+        "id": "bench_prop_029",
+        "query": "Builder demanding extra money beyond agreement",
+        "domain": "property",
+        "query_type": "rights",
+        "expected_sections": [
+            "RERA/13"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Cannot deviate from registered agreement"
+    },
+    {
+        "id": "bench_prop_030",
+        "query": "What is the limitation period for property cases?",
+        "domain": "property",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "3-12 years depending on type"
+    },
+    {
+        "id": "bench_fam_001",
+        "query": "What are grounds for divorce under Hindu law?",
+        "domain": "family",
+        "query_type": "rights",
+        "expected_sections": [
+            "HMA/13"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Cruelty, adultery, desertion, conversion, mental disorder"
+    },
+    {
+        "id": "bench_fam_002",
+        "query": "Can I get maintenance during divorce proceedings?",
+        "domain": "family",
+        "query_type": "rights",
+        "expected_sections": [
+            "HMA/24",
+            "CrPC/125"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Interim maintenance under S.24 HMA"
+    },
+    {
+        "id": "bench_fam_003",
+        "query": "What protection does domestic violence law provide?",
+        "domain": "family",
+        "query_type": "rights",
+        "expected_sections": [
+            "DV Act/3",
+            "DV Act/12"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Protection order, residence order, monetary relief"
+    },
+    {
+        "id": "bench_fam_004",
+        "query": "Can people of different religions marry in India?",
+        "domain": "family",
+        "query_type": "rights",
+        "expected_sections": [
+            "SMA/4"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Special Marriage Act for inter-faith"
+    },
+    {
+        "id": "bench_fam_005",
+        "query": "How much maintenance can a wife claim?",
+        "domain": "family",
+        "query_type": "rights",
+        "expected_sections": [
+            "CrPC/125"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Magistrate decides based on income"
+    },
+    {
+        "id": "bench_fam_006",
+        "query": "What is the minimum age for marriage?",
+        "domain": "family",
+        "query_type": "rights",
+        "expected_sections": [
+            "HMA/5"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "21 for male, 18 for female"
+    },
+    {
+        "id": "bench_fam_007",
+        "query": "What constitutes domestic violence?",
+        "domain": "family",
+        "query_type": "rights",
+        "expected_sections": [
+            "DV Act/3"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Physical, sexual, verbal, emotional, economic abuse"
+    },
+    {
+        "id": "bench_fam_008",
+        "query": "How to file for mutual consent divorce?",
+        "domain": "family",
+        "query_type": "procedure",
+        "expected_sections": [
+            "HMA/13B"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Two petitions with 6-month cooling period"
+    },
+    {
+        "id": "bench_fam_009",
+        "query": "What are child custody rights for mothers?",
+        "domain": "family",
+        "query_type": "rights",
+        "expected_sections": [
+            "HMA/26"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Welfare of child is paramount"
+    },
+    {
+        "id": "bench_fam_010",
+        "query": "Can a husband claim maintenance from wife?",
+        "domain": "family",
+        "query_type": "rights",
+        "expected_sections": [
+            "CrPC/125"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "S.125 is gender-neutral in some interpretations"
+    },
+    {
+        "id": "bench_fam_011",
+        "query": "What is the procedure for court marriage?",
+        "domain": "family",
+        "query_type": "procedure",
+        "expected_sections": [
+            "SMA/5",
+            "SMA/6"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "30-day notice, 3 witnesses"
+    },
+    {
+        "id": "bench_fam_012",
+        "query": "Is dowry demand a criminal offence?",
+        "domain": "family",
+        "query_type": "rights",
+        "expected_sections": [
+            "IPC/498A"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Dowry Prohibition Act + S.498A IPC"
+    },
+    {
+        "id": "bench_fam_013",
+        "query": "What rights does a woman have to husband's property?",
+        "domain": "family",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Hindu Succession Act after 2005 amendment"
+    },
+    {
+        "id": "bench_fam_014",
+        "query": "How to get a protection order under DV Act?",
+        "domain": "family",
+        "query_type": "procedure",
+        "expected_sections": [
+            "DV Act/12",
+            "DV Act/18"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Apply before Magistrate"
+    },
+    {
+        "id": "bench_fam_015",
+        "query": "What is the waiting period before remarriage?",
+        "domain": "family",
+        "query_type": "rights",
+        "expected_sections": [
+            "HMA/15"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "After appeal period or final decree"
+    },
+    {
+        "id": "bench_fam_016",
+        "query": "What are inheritance rights of daughters?",
+        "domain": "family",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Equal coparcenary rights after 2005 amendment"
+    },
+    {
+        "id": "bench_fam_017",
+        "query": "What is triple talaq law?",
+        "domain": "family",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Criminalized by 2019 Act"
+    },
+    {
+        "id": "bench_fam_018",
+        "query": "How to adopt a child in India?",
+        "domain": "family",
+        "query_type": "procedure",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "CARA process, JJ Act provisions"
+    },
+    {
+        "id": "bench_fam_019",
+        "query": "Is live-in relationship legal in India?",
+        "domain": "family",
+        "query_type": "rights",
+        "expected_sections": [
+            "DV Act/2"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Not illegal, some rights under DV Act"
+    },
+    {
+        "id": "bench_fam_020",
+        "query": "What is restitution of conjugal rights?",
+        "domain": "family",
+        "query_type": "rights",
+        "expected_sections": [
+            "HMA/9"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Court order to resume cohabitation"
+    },
+    {
+        "id": "bench_fam_021",
+        "query": "Can father get child custody?",
+        "domain": "family",
+        "query_type": "rights",
+        "expected_sections": [
+            "HMA/26"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Yes, based on child welfare principle"
+    },
+    {
+        "id": "bench_fam_022",
+        "query": "What is alimony in Indian law?",
+        "domain": "family",
+        "query_type": "rights",
+        "expected_sections": [
+            "HMA/25",
+            "CrPC/125"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Permanent or one-time payment after divorce"
+    },
+    {
+        "id": "bench_fam_023",
+        "query": "Can NRI file for divorce in Indian court?",
+        "domain": "family",
+        "query_type": "procedure",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Yes, where marriage was solemnized"
+    },
+    {
+        "id": "bench_fam_024",
+        "query": "My husband is threatening me what should I do?",
+        "domain": "family",
+        "query_type": "procedure",
+        "expected_sections": [
+            "DV Act/12",
+            "IPC/498A"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "File DV complaint + FIR"
+    },
+    {
+        "id": "bench_fam_025",
+        "query": "What is judicial separation?",
+        "domain": "family",
+        "query_type": "rights",
+        "expected_sections": [
+            "HMA/10"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Legal separation without divorce"
+    },
+    {
+        "id": "bench_fam_026",
+        "query": "How long does divorce take in India?",
+        "domain": "family",
+        "query_type": "procedure",
+        "expected_sections": [
+            "HMA/13B"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "6 months mutual, 1-5 years contested"
+    },
+    {
+        "id": "bench_fam_027",
+        "query": "Can grandparents get visitation rights?",
+        "domain": "family",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Court discretion, welfare of child"
+    },
+    {
+        "id": "bench_fam_028",
+        "query": "What is the Prohibition of Child Marriage Act?",
+        "domain": "family",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Marriage below legal age is voidable"
+    },
+    {
+        "id": "bench_fam_029",
+        "query": "Husband not paying maintenance money ordered by court",
+        "domain": "family",
+        "query_type": "procedure",
+        "expected_sections": [
+            "CrPC/125"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Execution petition, imprisonment up to 1 month"
+    },
+    {
+        "id": "bench_fam_030",
+        "query": "What is the process of legal heir certificate?",
+        "domain": "family",
+        "query_type": "procedure",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Apply at Tehsildar/Revenue office"
+    },
+    {
+        "id": "bench_const_001",
+        "query": "What is the right to equality?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "expected_sections": [
+            "Constitution/14"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Article 14 - equality before law"
+    },
+    {
+        "id": "bench_const_002",
+        "query": "What is the right to life and personal liberty?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "expected_sections": [
+            "Constitution/21"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Article 21 expanded interpretation"
+    },
+    {
+        "id": "bench_const_003",
+        "query": "What is freedom of speech in India?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "expected_sections": [
+            "Constitution/19"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Article 19(1)(a) with reasonable restrictions"
+    },
+    {
+        "id": "bench_const_004",
+        "query": "Is privacy a fundamental right?",
+        "domain": "constitutional",
+        "query_type": "case_outcome",
+        "expected_sections": [
+            "Constitution/21"
+        ],
+        "expected_cases": [
+            "Justice K.S. Puttaswamy v. Union of India"
+        ],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "9-judge bench held yes in 2017"
+    },
+    {
+        "id": "bench_const_005",
+        "query": "How to file a PIL in Supreme Court?",
+        "domain": "constitutional",
+        "query_type": "procedure",
+        "expected_sections": [
+            "Constitution/32"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Under Article 32 for fundamental rights"
+    },
+    {
+        "id": "bench_const_006",
+        "query": "How to get information under RTI?",
+        "domain": "constitutional",
+        "query_type": "procedure",
+        "expected_sections": [
+            "RTI/6"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Rs.10 application to PIO"
+    },
+    {
+        "id": "bench_const_007",
+        "query": "Can government restrict online speech?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "expected_sections": [
+            "Constitution/19"
+        ],
+        "expected_cases": [
+            "Shreya Singhal v. Union of India"
+        ],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Reasonable restrictions under 19(2)"
+    },
+    {
+        "id": "bench_const_008",
+        "query": "What is the right to education?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "expected_sections": [
+            "Constitution/21A"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Free and compulsory for 6-14 years"
+    },
+    {
+        "id": "bench_const_009",
+        "query": "What are directive principles of state policy?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "expected_sections": [
+            "Constitution/36",
+            "Constitution/37"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Part IV, not justiciable but fundamental in governance"
+    },
+    {
+        "id": "bench_const_010",
+        "query": "Can fundamental rights be suspended in emergency?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "expected_sections": [
+            "Constitution/352",
+            "Constitution/359"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Yes except Art 20 and 21 (after 44th amendment)"
+    },
+    {
+        "id": "bench_const_011",
+        "query": "What is the basic structure doctrine?",
+        "domain": "constitutional",
+        "query_type": "case_outcome",
+        "expected_sections": [],
+        "expected_cases": [
+            "Kesavananda Bharati v. State of Kerala"
+        ],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Parliament cannot alter basic structure"
+    },
+    {
+        "id": "bench_const_012",
+        "query": "What is the right against exploitation?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "expected_sections": [
+            "Constitution/23",
+            "Constitution/24"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Prohibition of traffic, forced labor, child labor"
+    },
+    {
+        "id": "bench_const_013",
+        "query": "How does judicial review work in India?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "expected_sections": [
+            "Constitution/13",
+            "Constitution/32"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Courts can strike down unconstitutional laws"
+    },
+    {
+        "id": "bench_const_014",
+        "query": "What is writ of habeas corpus?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "expected_sections": [
+            "Constitution/32",
+            "Constitution/226"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Produce the detained person before court"
+    },
+    {
+        "id": "bench_const_015",
+        "query": "What is writ of mandamus?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "expected_sections": [
+            "Constitution/32",
+            "Constitution/226"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Order to perform public duty"
+    },
+    {
+        "id": "bench_const_016",
+        "query": "What is the Maneka Gandhi case about?",
+        "domain": "constitutional",
+        "query_type": "case_outcome",
+        "expected_sections": [
+            "Constitution/21"
+        ],
+        "expected_cases": [
+            "Maneka Gandhi v. Union of India"
+        ],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Expanded Article 21 to include due process"
+    },
+    {
+        "id": "bench_const_017",
+        "query": "What is reservation under the Constitution?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "expected_sections": [
+            "Constitution/15",
+            "Constitution/16"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Special provisions for SC/ST/OBC"
+    },
+    {
+        "id": "bench_const_018",
+        "query": "What is the right to freedom of religion?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "expected_sections": [
+            "Constitution/25",
+            "Constitution/26"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Freedom of conscience and free profession"
+    },
+    {
+        "id": "bench_const_019",
+        "query": "What is the procedure to amend the Constitution?",
+        "domain": "constitutional",
+        "query_type": "procedure",
+        "expected_sections": [
+            "Constitution/368"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Simple majority, special majority, or ratification"
+    },
+    {
+        "id": "bench_const_020",
+        "query": "What is the separation of powers in India?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Legislature, executive, judiciary"
+    },
+    {
+        "id": "bench_const_021",
+        "query": "What did Kesavananda Bharati case decide?",
+        "domain": "constitutional",
+        "query_type": "case_outcome",
+        "expected_sections": [
+            "Constitution/368"
+        ],
+        "expected_cases": [
+            "Kesavananda Bharati v. State of Kerala"
+        ],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Basic structure cannot be amended"
+    },
+    {
+        "id": "bench_const_022",
+        "query": "What did Puttaswamy judgment say about privacy?",
+        "domain": "constitutional",
+        "query_type": "case_outcome",
+        "expected_sections": [
+            "Constitution/21"
+        ],
+        "expected_cases": [
+            "Justice K.S. Puttaswamy v. Union of India"
+        ],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Privacy is intrinsic to life and liberty"
+    },
+    {
+        "id": "bench_const_023",
+        "query": "How to file writ petition in High Court?",
+        "domain": "constitutional",
+        "query_type": "procedure",
+        "expected_sections": [
+            "Constitution/226"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Under Article 226 for any right"
+    },
+    {
+        "id": "bench_const_024",
+        "query": "What is Article 370?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "expected_sections": [
+            "Constitution/370"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Special status for J&K, abrogated 2019"
+    },
+    {
+        "id": "bench_const_025",
+        "query": "What is the Shreya Singhal case about?",
+        "domain": "constitutional",
+        "query_type": "case_outcome",
+        "expected_sections": [],
+        "expected_cases": [
+            "Shreya Singhal v. Union of India"
+        ],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Struck down S.66A IT Act"
+    },
+    {
+        "id": "bench_const_026",
+        "query": "Can I challenge a government decision in court?",
+        "domain": "constitutional",
+        "query_type": "procedure",
+        "expected_sections": [
+            "Constitution/226"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Judicial review of administrative action"
+    },
+    {
+        "id": "bench_const_027",
+        "query": "What are fundamental duties?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "expected_sections": [
+            "Constitution/51A"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Part IVA, 11 duties of citizens"
+    },
+    {
+        "id": "bench_const_028",
+        "query": "What is the role of the Election Commission?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "expected_sections": [
+            "Constitution/324"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Superintendence of elections"
+    },
+    {
+        "id": "bench_const_029",
+        "query": "Is there a law against caste discrimination?",
+        "domain": "constitutional",
+        "query_type": "rights",
+        "expected_sections": [
+            "Constitution/15",
+            "Constitution/17"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Prohibition of discrimination + SC/ST Atrocities Act"
+    },
+    {
+        "id": "bench_const_030",
+        "query": "How to report corruption in government?",
+        "domain": "constitutional",
+        "query_type": "procedure",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Prevention of Corruption Act, CVC, Lokpal"
+    },
+    {
+        "id": "bench_labor_001",
+        "query": "What is the legal definition of a strike?",
+        "domain": "labor",
+        "query_type": "rights",
+        "expected_sections": [
+            "ID Act/2"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Cessation of work by employees"
+    },
+    {
+        "id": "bench_labor_002",
+        "query": "Can employer terminate without notice?",
+        "domain": "labor",
+        "query_type": "rights",
+        "expected_sections": [
+            "ID Act/25F"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "1 month notice or pay required"
+    },
+    {
+        "id": "bench_labor_003",
+        "query": "What is the law against sexual harassment at workplace?",
+        "domain": "labor",
+        "query_type": "rights",
+        "expected_sections": [
+            "POSH/2",
+            "POSH/3"
+        ],
+        "expected_cases": [
+            "Vishaka v. State of Rajasthan"
+        ],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "POSH Act 2013 + Vishaka guidelines"
+    },
+    {
+        "id": "bench_labor_004",
+        "query": "How to file a sexual harassment complaint at work?",
+        "domain": "labor",
+        "query_type": "procedure",
+        "expected_sections": [
+            "POSH/9"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Written complaint to ICC within 3 months"
+    },
+    {
+        "id": "bench_labor_005",
+        "query": "What is the maximum working hours per week?",
+        "domain": "labor",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "48 hours per week under Factories Act"
+    },
+    {
+        "id": "bench_labor_006",
+        "query": "What are overtime payment rules?",
+        "domain": "labor",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Double wages for overtime"
+    },
+    {
+        "id": "bench_labor_007",
+        "query": "Can employer deduct wages without consent?",
+        "domain": "labor",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Only authorized deductions under Payment of Wages Act"
+    },
+    {
+        "id": "bench_labor_008",
+        "query": "How to raise an industrial dispute?",
+        "domain": "labor",
+        "query_type": "procedure",
+        "expected_sections": [
+            "ID Act/2A",
+            "ID Act/10"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Conciliation officer, then labour court/tribunal"
+    },
+    {
+        "id": "bench_labor_009",
+        "query": "What are maternity leave entitlements?",
+        "domain": "labor",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "26 weeks under Maternity Benefit Act"
+    },
+    {
+        "id": "bench_labor_010",
+        "query": "What are the rights of contract workers?",
+        "domain": "labor",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "CLRA Act 1970 protections"
+    },
+    {
+        "id": "bench_labor_011",
+        "query": "What is the Internal Complaints Committee?",
+        "domain": "labor",
+        "query_type": "rights",
+        "expected_sections": [
+            "POSH/4"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Mandatory for 10+ employees"
+    },
+    {
+        "id": "bench_labor_012",
+        "query": "What is the Vishaka judgment about?",
+        "domain": "labor",
+        "query_type": "case_outcome",
+        "expected_sections": [],
+        "expected_cases": [
+            "Vishaka v. State of Rajasthan"
+        ],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Guidelines on workplace sexual harassment"
+    },
+    {
+        "id": "bench_labor_013",
+        "query": "What is wrongful termination?",
+        "domain": "labor",
+        "query_type": "rights",
+        "expected_sections": [
+            "ID Act/25F",
+            "ID Act/25G"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Without following due process"
+    },
+    {
+        "id": "bench_labor_014",
+        "query": "What is the Payment of Gratuity Act?",
+        "domain": "labor",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "After 5 years continuous service"
+    },
+    {
+        "id": "bench_labor_015",
+        "query": "What is minimum wage in India?",
+        "domain": "labor",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Varies by state and skill level"
+    },
+    {
+        "id": "bench_labor_016",
+        "query": "How to file complaint with labor commissioner?",
+        "domain": "labor",
+        "query_type": "procedure",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Written complaint with employment details"
+    },
+    {
+        "id": "bench_labor_017",
+        "query": "My employer hasn't paid my salary for 3 months",
+        "domain": "labor",
+        "query_type": "procedure",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Payment of Wages Act, labor commissioner"
+    },
+    {
+        "id": "bench_labor_018",
+        "query": "What is unfair labor practice?",
+        "domain": "labor",
+        "query_type": "rights",
+        "expected_sections": [
+            "ID Act/25T"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Fifth Schedule of ID Act lists practices"
+    },
+    {
+        "id": "bench_labor_019",
+        "query": "What is lay-off and retrenchment?",
+        "domain": "labor",
+        "query_type": "rights",
+        "expected_sections": [
+            "ID Act/25C",
+            "ID Act/25F"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Lay-off is temporary, retrenchment is permanent"
+    },
+    {
+        "id": "bench_labor_020",
+        "query": "Can employer force non-compete clause after resignation?",
+        "domain": "labor",
+        "query_type": "rights",
+        "expected_sections": [
+            "Contract Act/27"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "S.27 makes restraint of trade void"
+    },
+    {
+        "id": "bench_labor_021",
+        "query": "What is the process to register a trade union?",
+        "domain": "labor",
+        "query_type": "procedure",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Trade Unions Act 1926, minimum 7 members"
+    },
+    {
+        "id": "bench_labor_022",
+        "query": "Can company force me to sign a bond?",
+        "domain": "labor",
+        "query_type": "rights",
+        "expected_sections": [
+            "Contract Act/27"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Must be reasonable, unconscionable bonds void"
+    },
+    {
+        "id": "bench_labor_023",
+        "query": "What is POSH Act compliance requirement?",
+        "domain": "labor",
+        "query_type": "procedure",
+        "expected_sections": [
+            "POSH/4",
+            "POSH/19"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "ICC constitution, annual report, awareness programs"
+    },
+    {
+        "id": "bench_labor_024",
+        "query": "Boss is forcing me to work on Sundays without extra pay",
+        "domain": "labor",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Violation of weekly rest provisions"
+    },
+    {
+        "id": "bench_labor_025",
+        "query": "What are gig worker rights in India?",
+        "domain": "labor",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Code on Social Security 2020 provisions"
+    },
+    {
+        "id": "bench_cons_001",
+        "query": "Where do I file a consumer complaint?",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "expected_sections": [
+            "CPA/34",
+            "CPA/35"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "District, State, or National Commission based on value"
+    },
+    {
+        "id": "bench_cons_002",
+        "query": "What is the definition of consumer under CPA 2019?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "expected_sections": [
+            "CPA/2"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Buys goods/avails services for consideration"
+    },
+    {
+        "id": "bench_cons_003",
+        "query": "Is medical negligence covered under consumer law?",
+        "domain": "consumer",
+        "query_type": "case_outcome",
+        "expected_sections": [
+            "CPA/2"
+        ],
+        "expected_cases": [
+            "Indian Medical Association v. V.P. Shantha"
+        ],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Medical services are consumer services"
+    },
+    {
+        "id": "bench_cons_004",
+        "query": "What is the maximum claim in district consumer court?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "expected_sections": [
+            "CPA/34"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Up to Rs.1 crore under CPA 2019"
+    },
+    {
+        "id": "bench_cons_005",
+        "query": "What rights do consumers have against defective products?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "expected_sections": [
+            "CPA/2",
+            "CPA/84"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Replacement, refund, compensation"
+    },
+    {
+        "id": "bench_cons_006",
+        "query": "How long to file a consumer complaint?",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "expected_sections": [
+            "CPA/69"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Within 2 years of cause of action"
+    },
+    {
+        "id": "bench_cons_007",
+        "query": "Can I file consumer complaint online?",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "E-filing on edaakhil.nic.in"
+    },
+    {
+        "id": "bench_cons_008",
+        "query": "What are unfair trade practices?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "expected_sections": [
+            "CPA/2"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "False representation, misleading advertising"
+    },
+    {
+        "id": "bench_cons_009",
+        "query": "What compensation for deficient services?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "expected_sections": [
+            "CPA/39"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Refund, compensation, punitive damages"
+    },
+    {
+        "id": "bench_cons_010",
+        "query": "Can a builder be held liable under consumer protection?",
+        "domain": "consumer",
+        "query_type": "case_outcome",
+        "expected_sections": [
+            "CPA/2"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Yes, housing is a consumer service"
+    },
+    {
+        "id": "bench_cons_011",
+        "query": "Difference between district state and national consumer commission?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "expected_sections": [
+            "CPA/34",
+            "CPA/47",
+            "CPA/58"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Based on claim value"
+    },
+    {
+        "id": "bench_cons_012",
+        "query": "Can I claim refund for cancelled flight?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "DGCA rules + consumer complaint"
+    },
+    {
+        "id": "bench_cons_013",
+        "query": "What is product liability under CPA 2019?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "expected_sections": [
+            "CPA/82",
+            "CPA/84"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Manufacturer and seller both liable"
+    },
+    {
+        "id": "bench_cons_014",
+        "query": "I bought a defective TV and company refuses to replace",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "expected_sections": [
+            "CPA/2"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Consumer complaint for defective goods"
+    },
+    {
+        "id": "bench_cons_015",
+        "query": "What is misleading advertisement?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "expected_sections": [
+            "CPA/2"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "False claims about product/service"
+    },
+    {
+        "id": "bench_cons_016",
+        "query": "Hospital charged me extra how to complain?",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Consumer forum + medical council"
+    },
+    {
+        "id": "bench_cons_017",
+        "query": "What is the Central Consumer Protection Authority?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "expected_sections": [
+            "CPA/10"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Regulator for consumer rights protection"
+    },
+    {
+        "id": "bench_cons_018",
+        "query": "Can insurance company be sued under consumer law?",
+        "domain": "consumer",
+        "query_type": "case_outcome",
+        "expected_sections": [
+            "CPA/2"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Yes, insurance is a service"
+    },
+    {
+        "id": "bench_cons_019",
+        "query": "Refund not received for cancelled online order",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "E-commerce rules + consumer complaint"
+    },
+    {
+        "id": "bench_cons_020",
+        "query": "What is the consumer disputes redressal mechanism?",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "expected_sections": [
+            "CPA/28"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Three-tier commission structure"
+    },
+    {
+        "id": "bench_cons_021",
+        "query": "How to complain about food adulteration?",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "FSSAI + consumer complaint"
+    },
+    {
+        "id": "bench_cons_022",
+        "query": "Bank charged hidden fees what to do?",
+        "domain": "consumer",
+        "query_type": "procedure",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Banking ombudsman + consumer forum"
+    },
+    {
+        "id": "bench_cons_023",
+        "query": "Can school expel my child for not paying fees?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Education is a service, unfair practice"
+    },
+    {
+        "id": "bench_cons_024",
+        "query": "What is e-commerce consumer protection?",
+        "domain": "consumer",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "E-Commerce Rules 2020 + CPA 2019"
+    },
+    {
+        "id": "bench_cons_025",
+        "query": "Doctor prescribed unnecessary tests for money",
+        "domain": "consumer",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [
+            "Indian Medical Association v. V.P. Shantha"
+        ],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Medical negligence + deficiency of service"
+    },
+    {
+        "id": "bench_ip_001",
+        "query": "What is copyright under Indian law?",
+        "domain": "ip",
+        "query_type": "rights",
+        "expected_sections": [
+            "Copyright Act/14"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Exclusive rights of copyright holder"
+    },
+    {
+        "id": "bench_ip_002",
+        "query": "What constitutes fair use under copyright?",
+        "domain": "ip",
+        "query_type": "rights",
+        "expected_sections": [
+            "Copyright Act/52"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Fair dealing for research, review, criticism"
+    },
+    {
+        "id": "bench_ip_003",
+        "query": "Can I be prosecuted for offensive social media posts?",
+        "domain": "ip",
+        "query_type": "rights",
+        "expected_sections": [
+            "IT Act/79"
+        ],
+        "expected_cases": [
+            "Shreya Singhal v. Union of India"
+        ],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "S.66A struck down, S.69A remains"
+    },
+    {
+        "id": "bench_ip_004",
+        "query": "Are court judgments protected by copyright?",
+        "domain": "ip",
+        "query_type": "case_outcome",
+        "expected_sections": [
+            "Copyright Act/52"
+        ],
+        "expected_cases": [
+            "Eastern Book Company v. D.B. Modak"
+        ],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Judgments are public domain, headnotes may not be"
+    },
+    {
+        "id": "bench_ip_005",
+        "query": "What is intermediary liability for user content?",
+        "domain": "ip",
+        "query_type": "rights",
+        "expected_sections": [
+            "IT Act/79"
+        ],
+        "expected_cases": [
+            "Shreya Singhal v. Union of India"
+        ],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Safe harbour if due diligence followed"
+    },
+    {
+        "id": "bench_ip_006",
+        "query": "How to register a trademark in India?",
+        "domain": "ip",
+        "query_type": "procedure",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Application to Trademark Registry, examination, publication"
+    },
+    {
+        "id": "bench_ip_007",
+        "query": "What is the punishment for online fraud?",
+        "domain": "ip",
+        "query_type": "rights",
+        "expected_sections": [
+            "IT Act/66"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Up to 3 years imprisonment + fine"
+    },
+    {
+        "id": "bench_ip_008",
+        "query": "Can someone use my photo without permission?",
+        "domain": "ip",
+        "query_type": "rights",
+        "expected_sections": [
+            "Copyright Act/14",
+            "IT Act/66E"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Violation of privacy + copyright"
+    },
+    {
+        "id": "bench_ip_009",
+        "query": "What are data protection laws in India?",
+        "domain": "ip",
+        "query_type": "rights",
+        "expected_sections": [
+            "IT Act/43A"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "DPDP Act 2023 + IT Act provisions"
+    },
+    {
+        "id": "bench_ip_010",
+        "query": "What is the penalty for software piracy?",
+        "domain": "ip",
+        "query_type": "rights",
+        "expected_sections": [
+            "Copyright Act/63"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "6 months to 3 years imprisonment"
+    },
+    {
+        "id": "bench_ip_011",
+        "query": "What is the IT Act Section 66A controversy?",
+        "domain": "ip",
+        "query_type": "case_outcome",
+        "expected_sections": [],
+        "expected_cases": [
+            "Shreya Singhal v. Union of India"
+        ],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Struck down as unconstitutional in 2015"
+    },
+    {
+        "id": "bench_ip_012",
+        "query": "How to file a patent in India?",
+        "domain": "ip",
+        "query_type": "procedure",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Application to Patent Office, examination, grant"
+    },
+    {
+        "id": "bench_ip_013",
+        "query": "How to report cybercrime in India?",
+        "domain": "ip",
+        "query_type": "procedure",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "cybercrime.gov.in or local cyber cell"
+    },
+    {
+        "id": "bench_ip_014",
+        "query": "What is the punishment for hacking?",
+        "domain": "ip",
+        "query_type": "rights",
+        "expected_sections": [
+            "IT Act/66"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "S.66 IT Act, up to 3 years"
+    },
+    {
+        "id": "bench_ip_015",
+        "query": "What are safe harbour provisions for internet companies?",
+        "domain": "ip",
+        "query_type": "rights",
+        "expected_sections": [
+            "IT Act/79"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "No liability if guidelines followed"
+    },
+    {
+        "id": "bench_ip_016",
+        "query": "How to send a copyright takedown notice?",
+        "domain": "ip",
+        "query_type": "procedure",
+        "expected_sections": [
+            "Copyright Act/52"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "DMCA-style notice to intermediary"
+    },
+    {
+        "id": "bench_ip_017",
+        "query": "Is AI generated content copyrightable?",
+        "domain": "ip",
+        "query_type": "rights",
+        "expected_sections": [
+            "Copyright Act/2"
+        ],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Requires human authorship, evolving area"
+    },
+    {
+        "id": "bench_ip_018",
+        "query": "What is the right to be forgotten?",
+        "domain": "ip",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "DPDP Act provisions, evolving jurisprudence"
+    },
+    {
+        "id": "bench_ip_019",
+        "query": "What is domain name squatting?",
+        "domain": "ip",
+        "query_type": "rights",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": false,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Registering domain in bad faith, WIPO dispute resolution"
+    },
+    {
+        "id": "bench_ip_020",
+        "query": "Someone is using my brand name what to do?",
+        "domain": "ip",
+        "query_type": "procedure",
+        "expected_sections": [],
+        "expected_cases": [],
+        "expected_has_procedure": true,
+        "expected_has_disclaimer": true,
+        "quality_notes": "Trademark infringement suit + cease and desist"
+    }
+]

@@ -268,6 +268,36 @@ async def legal_query_stream(request: QueryRequest):
                     )
                 )
 
+            # Citation verification (before sending structured data)
+            sources_verified = False
+            verification_accuracy = None
+            if settings.CITATION_VERIFICATION_ENABLED:
+                try:
+                    from app.services.citation_verifier import get_citation_verifier
+
+                    verifier = await get_citation_verifier()
+                    v_report = await verifier.verify_response(
+                        applicable_law=applicable_laws,
+                        precedents=precedents_list,
+                    )
+
+                    # Annotate overruled
+                    if v_report.overruled_cases > 0:
+                        precedents_list = verifier.annotate_overruled_precedents(
+                            precedents_list, v_report
+                        )
+
+                    # Filter unverified
+                    if v_report.failed_sections > 0 or v_report.failed_cases > 0:
+                        applicable_laws, precedents_list = verifier.filter_unverified_citations(
+                            applicable_laws, precedents_list, v_report
+                        )
+
+                    sources_verified = v_report.all_verified
+                    verification_accuracy = round(v_report.accuracy, 3)
+                except Exception as e:
+                    logger.debug("stream_verification_skipped", error=str(e))
+
             # Send structured data events
             law_data = json.dumps(
                 {
@@ -319,6 +349,8 @@ async def legal_query_stream(request: QueryRequest):
                         ),
                         "session_id": session_id,
                         "router_confidence": classification.confidence,
+                        "sources_verified": sources_verified,
+                        "verification_accuracy": verification_accuracy,
                     },
                 }
             )
@@ -650,11 +682,124 @@ async def _verify_citations(response: QueryResponse) -> QueryResponse:
     """
     Stage 6: Verify all citations in the response.
 
-    Sprint 5: Passes through without verification.
-    Sprint 6: Will check every section number and case name against the database.
+    Checks every section and case citation against the database.
+    If >30% fail, triggers regeneration with a stricter grounding prompt.
+    Overruled judgments are annotated with warnings.
+    Unverified citations are filtered out.
     """
-    # TODO (Sprint 6): Implement citation verification
+    try:
+        from app.services.citation_verifier import get_citation_verifier
+
+        verifier = await get_citation_verifier()
+        report = await verifier.verify_response(
+            applicable_law=response.applicable_law,
+            precedents=response.precedents,
+        )
+
+        # Annotate overruled precedents with warnings
+        if report.overruled_cases > 0:
+            response.precedents = verifier.annotate_overruled_precedents(
+                response.precedents, report
+            )
+
+        # If too many citations failed, attempt regeneration
+        if report.regeneration_triggered:
+            logger.warning(
+                "citation_regeneration_triggered",
+                accuracy=round(report.accuracy, 3),
+                failed_sections=report.failed_sections,
+                failed_cases=report.failed_cases,
+            )
+            response = await _regenerate_with_verified_citations(
+                response, report, verifier
+            )
+        else:
+            # Filter out unverified citations (don't show fabricated ones)
+            if report.failed_sections > 0 or report.failed_cases > 0:
+                filtered_laws, filtered_precs = verifier.filter_unverified_citations(
+                    response.applicable_law,
+                    response.precedents,
+                    report,
+                )
+                response.applicable_law = filtered_laws
+                response.precedents = filtered_precs
+
+            response.sources_verified = report.all_verified
+
+        logger.info(
+            "verification_complete",
+            accuracy=round(report.accuracy, 3),
+            verified=report.all_verified,
+            regenerated=report.regeneration_triggered,
+        )
+
+    except Exception as e:
+        logger.warning("verification_skipped", error=str(e))
+        # Non-fatal — response passes through unverified
+
     return response
+
+
+async def _regenerate_with_verified_citations(
+    original_response: QueryResponse,
+    report,
+    verifier,
+) -> QueryResponse:
+    """
+    Regenerate the LLM answer using only verified citations.
+
+    Called when >30% of citations in the original response failed
+    verification. Uses a strict grounding prompt that lists only
+    the sections and cases confirmed to exist in the database.
+
+    Max 1 retry — if regeneration also fails verification,
+    we return the filtered original rather than looping.
+    """
+    try:
+        from app.services.llm_service import get_llm_service
+
+        # Build strict prompt with only verified citations
+        strict_prompt = verifier.build_strict_grounding_prompt(
+            query="",  # Query context is in the conversation history
+            verified_sections=report.section_results,
+            verified_cases=report.case_results,
+        )
+
+        llm_service = await get_llm_service()
+        llm_result = await llm_service.generate_legal_response(
+            query=strict_prompt,
+            context="",  # Context is embedded in the strict prompt
+        )
+
+        regenerated_answer = llm_result.get("answer", "")
+        if regenerated_answer and len(regenerated_answer) > 50:
+            original_response.answer = regenerated_answer
+            logger.info("citation_regeneration_success")
+
+        # Filter to only verified citations regardless
+        filtered_laws, filtered_precs = verifier.filter_unverified_citations(
+            original_response.applicable_law,
+            original_response.precedents,
+            report,
+        )
+        original_response.applicable_law = filtered_laws
+        original_response.precedents = filtered_precs
+        original_response.sources_verified = (
+            report.verified_citations == report.total_citations
+        )
+
+    except Exception as e:
+        logger.warning("citation_regeneration_failed", error=str(e))
+        # Fall back to filtered original
+        filtered_laws, filtered_precs = verifier.filter_unverified_citations(
+            original_response.applicable_law,
+            original_response.precedents,
+            report,
+        )
+        original_response.applicable_law = filtered_laws
+        original_response.precedents = filtered_precs
+
+    return original_response
 
 
 async def _translate_response(

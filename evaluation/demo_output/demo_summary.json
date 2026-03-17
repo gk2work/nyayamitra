@@ -1,0 +1,137 @@
+[
+  {
+    "id": "demo_crim_01",
+    "title": "Arrest Without Warrant",
+    "status": "OK",
+    "laws": 8,
+    "precedents": 2,
+    "procedure": 0,
+    "latency_ms": 15537.69
+  },
+  {
+    "id": "demo_crim_02",
+    "title": "FIR Filing Procedure",
+    "status": "OK",
+    "laws": 4,
+    "precedents": 1,
+    "procedure": 0,
+    "latency_ms": 1011.13
+  },
+  {
+    "id": "demo_crim_03",
+    "title": "Bail in Non-Bailable Offence",
+    "status": "OK",
+    "laws": 10,
+    "precedents": 0,
+    "procedure": 0,
+    "latency_ms": 1149.1
+  },
+  {
+    "id": "demo_crim_04",
+    "title": "498A Misuse Guidelines",
+    "status": "OK",
+    "laws": 4,
+    "precedents": 2,
+    "procedure": 0,
+    "latency_ms": 868.23
+  },
+  {
+    "id": "demo_crim_05",
+    "title": "Punishment for Murder",
+    "status": "OK",
+    "laws": 10,
+    "precedents": 0,
+    "procedure": 0,
+    "latency_ms": 1001.13
+  },
+  {
+    "id": "demo_prop_01",
+    "title": "Tenant Rights",
+    "status": "OK",
+    "laws": 6,
+    "precedents": 2,
+    "procedure": 0,
+    "latency_ms": 971.28
+  },
+  {
+    "id": "demo_prop_02",
+    "title": "Builder Delay Compensation",
+    "status": "OK",
+    "laws": 7,
+    "precedents": 2,
+    "procedure": 0,
+    "latency_ms": 1074.35
+  },
+  {
+    "id": "demo_prop_03",
+    "title": "Property Sale Process",
+    "status": "OK",
+    "laws": 4,
+    "precedents": 3,
+    "procedure": 0,
+    "latency_ms": 1019.83
+  },
+  {
+    "id": "demo_prop_04",
+    "title": "Lease Termination Notice",
+    "status": "OK",
+    "laws": 8,
+    "precedents": 1,
+    "procedure": 0,
+    "latency_ms": 1685.6
+  },
+  {
+    "id": "demo_prop_05",
+    "title": "Breach of Contract",
+    "status": "OK",
+    "laws": 10,
+    "precedents": 0,
+    "procedure": 0,
+    "latency_ms": 1650.04
+  },
+  {
+    "id": "demo_cons_01",
+    "title": "Defective Product Complaint",
+    "status": "OK",
+    "laws": 10,
+    "precedents": 0,
+    "procedure": 0,
+    "latency_ms": 1424.75
+  },
+  {
+    "id": "demo_cons_02",
+    "title": "Medical Negligence",
+    "status": "OK",
+    "laws": 5,
+    "precedents": 1,
+    "procedure": 0,
+    "latency_ms": 1004.72
+  },
+  {
+    "id": "demo_cons_03",
+    "title": "Online Shopping Refund",
+    "status": "OK",
+    "laws": 6,
+    "precedents": 1,
+    "procedure": 0,
+    "latency_ms": 932.09
+  },
+  {
+    "id": "demo_cons_04",
+    "title": "Misleading Advertisement",
+    "status": "OK",
+    "laws": 4,
+    "precedents": 1,
+    "procedure": 0,
+    "latency_ms": 918.65
+  },
+  {
+    "id": "demo_cons_05",
+    "title": "Consumer Court Guide",
+    "status": "OK",
+    "laws": 9,
+    "precedents": 1,
+    "procedure": 0,
+    "latency_ms": 725.5
+  }
+]

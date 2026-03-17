@@ -16,7 +16,7 @@ from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-# Project root: two levels up from this file (backend/app/config.py → nyayamitra/)
+# Project root: two levels up from this file (backend/app/config.py -> nyayamitra/)
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 
 
@@ -30,20 +30,20 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    # ─── Application ─────────────────────────────────────────────────────────
+    # --- Application ----------------------------------------------------------
     APP_NAME: str = "nyayamitra"
     APP_ENV: str = "development"
     APP_DEBUG: bool = True
     APP_VERSION: str = "0.1.0"
     APP_SECRET_KEY: str = "change-this-to-a-random-secret-key-in-production"
 
-    # ─── Backend (FastAPI) ───────────────────────────────────────────────────
+    # --- Backend (FastAPI) ----------------------------------------------------
     BACKEND_HOST: str = "0.0.0.0"
     BACKEND_PORT: int = 8080
     BACKEND_WORKERS: int = 1
     BACKEND_LOG_LEVEL: str = "INFO"
 
-    # ─── PostgreSQL ──────────────────────────────────────────────────────────
+    # --- PostgreSQL -----------------------------------------------------------
     POSTGRES_HOST: str = "localhost"
     POSTGRES_PORT: int = 5432
     POSTGRES_DB: str = "nyayamitra"
@@ -66,7 +66,7 @@ class Settings(BaseSettings):
             f"@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
         )
 
-    # ─── Redis ───────────────────────────────────────────────────────────────
+    # --- Redis ----------------------------------------------------------------
     REDIS_HOST: str = "localhost"
     REDIS_PORT: int = 6379
     REDIS_PASSWORD: str = ""
@@ -79,13 +79,16 @@ class Settings(BaseSettings):
             return f"redis://:{self.REDIS_PASSWORD}@{self.REDIS_HOST}:{self.REDIS_PORT}/{self.REDIS_DB}"
         return f"redis://{self.REDIS_HOST}:{self.REDIS_PORT}/{self.REDIS_DB}"
 
-    # ─── Qdrant (Vector Database) ────────────────────────────────────────────
+    # --- Session Management ---------------------------------------------------
+    SESSION_TTL_HOURS: int = 24
+
+    # --- Qdrant (Vector Database) ---------------------------------------------
     QDRANT_HOST: str = "localhost"
     QDRANT_PORT: int = 6333
     QDRANT_GRPC_PORT: int = 6334
     QDRANT_API_KEY: str = ""
 
-    # ─── Elasticsearch ───────────────────────────────────────────────────────
+    # --- Elasticsearch --------------------------------------------------------
     ELASTICSEARCH_HOST: str = "localhost"
     ELASTICSEARCH_PORT: int = 9200
     ELASTICSEARCH_USER: str = "elastic"
@@ -96,7 +99,7 @@ class Settings(BaseSettings):
         """Elasticsearch connection URL."""
         return f"http://{self.ELASTICSEARCH_HOST}:{self.ELASTICSEARCH_PORT}"
 
-    # ─── Neo4j (Knowledge Graph) ─────────────────────────────────────────────
+    # --- Neo4j (Knowledge Graph) ----------------------------------------------
     NEO4J_HOST: str = "localhost"
     NEO4J_BOLT_PORT: int = 7687
     NEO4J_HTTP_PORT: int = 7474
@@ -108,7 +111,7 @@ class Settings(BaseSettings):
         """Neo4j Bolt connection URI."""
         return f"bolt://{self.NEO4J_HOST}:{self.NEO4J_BOLT_PORT}"
 
-    # ─── LLM Inference (vLLM) ────────────────────────────────────────────────
+    # --- LLM Inference (vLLM) -------------------------------------------------
     VLLM_HOST: str = "localhost"
     VLLM_PORT: int = 8000
     VLLM_MODEL_NAME: str = "meta-llama/Llama-3.1-8B-Instruct"
@@ -120,38 +123,44 @@ class Settings(BaseSettings):
         """vLLM OpenAI-compatible API URL."""
         return f"http://{self.VLLM_HOST}:{self.VLLM_PORT}/v1"
 
-    # ─── Embedding Model ─────────────────────────────────────────────────────
-    EMBEDDING_MODEL_NAME: str = "BAAI/bge-large-en-v1.5"
-    EMBEDDING_DIMENSION: int = 1024
-    EMBEDDING_BATCH_SIZE: int = 32
-
-    # ─── Re-ranker ───────────────────────────────────────────────────────────
-    RERANKER_MODEL_NAME: str = "cross-encoder/ms-marco-MiniLM-L-12-v2"
-    RERANKER_TOP_K: int = 30
-
-    # ─── Retrieval Configuration ─────────────────────────────────────────────
-    RETRIEVAL_TOP_K_DENSE: int = 20
-    RETRIEVAL_TOP_K_SPARSE: int = 20
-    RETRIEVAL_RRF_K: int = 60
-    RETRIEVAL_FINAL_TOP_K: int = 10
-
-    # ─── Query Router ────────────────────────────────────────────────────────
-    ROUTER_MODEL_PATH: str = "models/router/query_router"
-    ROUTER_CONFIDENCE_THRESHOLD: float = 0.7
-
-    # ─── Citation Verifier ───────────────────────────────────────────────────
-    CITATION_VERIFICATION_ENABLED: bool = True
-    CITATION_FAILURE_THRESHOLD: float = 0.3
-
-    # ─── LLM Provider ───────────────────────────────────────────────────────
+    # --- LLM Providers --------------------------------------------------------
+    # OpenAI
     OPENAI_API_KEY: str = ""
     OPENAI_MODEL: str = "gpt-4o-mini"
+
+    # Anthropic
+    ANTHROPIC_API_KEY: str = ""
+    ANTHROPIC_MODEL: str = "claude-sonnet-4-20250514"
+
     # Generic OpenAI-compatible endpoint (Groq, Together, etc.)
     LLM_API_URL: str = ""
     LLM_API_KEY: str = ""
     LLM_MODEL_NAME: str = ""
 
-    # ─── Data Ingestion ──────────────────────────────────────────────────────
+    # --- Embedding Model ------------------------------------------------------
+    EMBEDDING_MODEL_NAME: str = "BAAI/bge-large-en-v1.5"
+    EMBEDDING_DIMENSION: int = 1024
+    EMBEDDING_BATCH_SIZE: int = 32
+
+    # --- Re-ranker ------------------------------------------------------------
+    RERANKER_MODEL_NAME: str = "cross-encoder/ms-marco-MiniLM-L-12-v2"
+    RERANKER_TOP_K: int = 30
+
+    # --- Retrieval Configuration ----------------------------------------------
+    RETRIEVAL_TOP_K_DENSE: int = 15
+    RETRIEVAL_TOP_K_SPARSE: int = 5
+    RETRIEVAL_RRF_K: int = 60
+    RETRIEVAL_FINAL_TOP_K: int = 10
+
+    # --- Query Router ---------------------------------------------------------
+    ROUTER_MODEL_PATH: str = "models/router"
+    ROUTER_CONFIDENCE_THRESHOLD: float = 0.7
+
+    # --- Citation Verifier ----------------------------------------------------
+    CITATION_VERIFICATION_ENABLED: bool = True
+    CITATION_FAILURE_THRESHOLD: float = 0.3
+
+    # --- Data Ingestion -------------------------------------------------------
     INDIAN_KANOON_API_URL: str = "https://api.indiankanoon.org"
     INDIAN_KANOON_API_TOKEN: str = ""
     SCRAPER_RATE_LIMIT_REQUESTS: int = 10
@@ -159,7 +168,7 @@ class Settings(BaseSettings):
     SCRAPER_RETRY_MAX: int = 3
     SCRAPER_RETRY_BACKOFF: float = 2.0
 
-    # ─── Security ────────────────────────────────────────────────────────────
+    # --- Security -------------------------------------------------------------
     CORS_ALLOWED_ORIGINS: str = "http://localhost:3000,http://127.0.0.1:3000"
     RATE_LIMIT_REQUESTS: int = 100
     RATE_LIMIT_PERIOD: int = 60
@@ -182,5 +191,5 @@ def get_settings() -> Settings:
     return Settings()
 
 
-# Convenience alias — import this directly
+# Convenience alias -- import this directly
 settings = get_settings()

@@ -98,7 +98,27 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.warning("query_router_init_skipped", error=str(e))
 
-    logger.info("nyayamitra_ready", port=settings.BACKEND_PORT)
+    # Pre-load citation verifier cache (non-fatal if DB unavailable)
+    if settings.CITATION_VERIFICATION_ENABLED:
+        try:
+            from app.services.citation_verifier import get_citation_verifier
+
+            verifier = await get_citation_verifier()
+            logger.info(
+                "citation_verifier_ready",
+                acts_cached=len(verifier._act_cache),
+                cases_cached=len(verifier._case_cache),
+            )
+        except Exception as e:
+            logger.warning("citation_verifier_init_skipped", error=str(e))
+    else:
+        logger.info("citation_verification_disabled")
+
+    logger.info(
+        "nyayamitra_ready",
+        port=settings.BACKEND_PORT,
+        verification=settings.CITATION_VERIFICATION_ENABLED,
+    )
 
     yield
 
