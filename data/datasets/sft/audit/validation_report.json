@@ -1,0 +1,15 @@
+{
+  "total": 509,
+  "valid": 471,
+  "invalid": 20,
+  "warnings_only": 427,
+  "valid_rate": 0.9253,
+  "duplicates_removed": 18,
+  "top_errors": {
+    "instruction_too_short": 20
+  },
+  "top_warnings": {
+    "unverified_sections": 444
+  },
+  "duration_seconds": 0.97
+}

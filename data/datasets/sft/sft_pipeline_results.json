@@ -1,0 +1,10 @@
+{
+  "audit-sample": {
+    "validated_pairs": 471,
+    "sample_size": 30,
+    "sample_pct": 6.4,
+    "output": "/Users/gautamthakur/Downloads/nyayamitra/data/datasets/sft/audit/audit_sample.jsonl",
+    "duration_seconds": 0.01
+  },
+  "_total_duration_seconds": 0.01
+}

@@ -1,0 +1,180 @@
+{
+  "total_pairs": 471,
+  "splits": {
+    "train": {
+      "count": 411,
+      "by_domain": {
+        "labour": 37,
+        "constitutional": 63,
+        "criminal": 81,
+        "family": 62,
+        "consumer": 47,
+        "corporate": 16,
+        "ip": 17,
+        "property": 64,
+        "environmental": 13,
+        "labor": 11
+      },
+      "by_source": {
+        "nalsa": 309,
+        "headnote": 102
+      },
+      "by_query_type": {
+        "section_explanation": 97,
+        "rights": 79,
+        "procedure": 189,
+        "case_outcome": 46
+      },
+      "balance": {
+        "total": 411,
+        "domains": {
+          "criminal": {
+            "count": 81,
+            "pct": 19.7
+          },
+          "property": {
+            "count": 64,
+            "pct": 15.6
+          },
+          "family": {
+            "count": 62,
+            "pct": 15.1
+          },
+          "labour": {
+            "count": 37,
+            "pct": 9.0
+          },
+          "consumer": {
+            "count": 47,
+            "pct": 11.4
+          },
+          "constitutional": {
+            "count": 63,
+            "pct": 15.3
+          },
+          "ip": {
+            "count": 17,
+            "pct": 4.1
+          }
+        },
+        "issues": [
+          "ip underrepresented: 4.1% (min 5.0%)"
+        ]
+      }
+    },
+    "val": {
+      "count": 31,
+      "by_domain": {
+        "constitutional": 5,
+        "family": 12,
+        "criminal": 10,
+        "ip": 4
+      },
+      "by_source": {
+        "headnote": 19,
+        "nalsa": 12
+      },
+      "by_query_type": {
+        "rights": 8,
+        "procedure": 8,
+        "section_explanation": 7,
+        "case_outcome": 8
+      },
+      "balance": {
+        "total": 31,
+        "domains": {
+          "criminal": {
+            "count": 10,
+            "pct": 32.3
+          },
+          "property": {
+            "count": 0,
+            "pct": 0.0
+          },
+          "family": {
+            "count": 12,
+            "pct": 38.7
+          },
+          "labour": {
+            "count": 0,
+            "pct": 0.0
+          },
+          "consumer": {
+            "count": 0,
+            "pct": 0.0
+          },
+          "constitutional": {
+            "count": 5,
+            "pct": 16.1
+          },
+          "ip": {
+            "count": 4,
+            "pct": 12.9
+          }
+        },
+        "issues": [
+          "property has zero pairs",
+          "labour has zero pairs",
+          "consumer has zero pairs"
+        ]
+      }
+    },
+    "test": {
+      "count": 29,
+      "by_domain": {
+        "criminal": 11,
+        "consumer": 5,
+        "property": 5,
+        "constitutional": 8
+      },
+      "by_source": {
+        "nalsa": 19,
+        "headnote": 10
+      },
+      "by_query_type": {
+        "procedure": 13,
+        "case_outcome": 4,
+        "rights": 5,
+        "section_explanation": 7
+      },
+      "balance": {
+        "total": 29,
+        "domains": {
+          "criminal": {
+            "count": 11,
+            "pct": 37.9
+          },
+          "property": {
+            "count": 5,
+            "pct": 17.2
+          },
+          "family": {
+            "count": 0,
+            "pct": 0.0
+          },
+          "labour": {
+            "count": 0,
+            "pct": 0.0
+          },
+          "consumer": {
+            "count": 5,
+            "pct": 17.2
+          },
+          "constitutional": {
+            "count": 8,
+            "pct": 27.6
+          },
+          "ip": {
+            "count": 0,
+            "pct": 0.0
+          }
+        },
+        "issues": [
+          "family has zero pairs",
+          "labour has zero pairs",
+          "ip has zero pairs"
+        ]
+      }
+    }
+  }
+}
